@@ -23,7 +23,7 @@ export async function GET(
     }
 
     // Transform services to include vendor info
-    const transformedServices = dashboard.services.map(service => ({
+    const transformedServices = dashboard.services.map((service: any) => ({
       id: service.id,
       service: service.serviceName,
       vendorName: service.vendor.businessName,

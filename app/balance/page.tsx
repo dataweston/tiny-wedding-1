@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, Suspense } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -75,9 +75,9 @@ function BalancePaymentContent() {
     )
   }
 
-  const balanceAmount = booking.packageType === 'FAST'
+  const balanceAmount = booking.isFastPackage
     ? 4000
-    : booking.dashboard?.totalCost || 0
+    : Number(booking.clientDashboard?.totalCost || 0)
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-rose-50 to-white py-12 px-4 sm:px-6 lg:px-8">

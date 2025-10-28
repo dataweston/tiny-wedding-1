@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     const booking = await prisma.booking.findUnique({
       where: { id: bookingId },
       include: {
-        dashboard: true
+        clientDashboard: true
       }
     })
 
@@ -27,9 +27,9 @@ export async function POST(request: Request) {
     }
 
     // Calculate balance amount
-    const balanceAmount = booking.packageType === 'FAST'
+    const balanceAmount = booking.isFastPackage
       ? 4000
-      : booking.dashboard?.totalCost || 0
+      : Number(booking.clientDashboard?.totalCost || 0)
 
     // Process payment with Square
     const payment = await client.payments.create({
@@ -52,9 +52,9 @@ export async function POST(request: Request) {
     })
 
     // Update dashboard if exists
-    if (booking.dashboard) {
+    if (booking.clientDashboard) {
       await prisma.clientDashboard.update({
-        where: { id: booking.dashboard.id },
+        where: { id: booking.clientDashboard.id },
         data: {
           status: 'FINALIZED'
         }

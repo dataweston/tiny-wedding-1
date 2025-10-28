@@ -21,7 +21,7 @@ export async function GET(request: Request) {
 
     // Get last message for each vendor
     const conversations = await Promise.all(
-      dashboardServices.map(async (service) => {
+      dashboardServices.map(async (service: any) => {
         const lastMessage = await prisma.message.findFirst({
           where: {
             dashboardId,

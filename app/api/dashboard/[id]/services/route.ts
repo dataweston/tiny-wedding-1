@@ -24,7 +24,7 @@ export async function POST(
       where: { dashboardId: params.id }
     })
 
-    const totalCost = services.reduce((sum, s) => sum + Number(s.cost), 0)
+    const totalCost = services.reduce((sum: number, s: any) => sum + Number(s.cost), 0)
 
     // Update dashboard total
     await prisma.clientDashboard.update({

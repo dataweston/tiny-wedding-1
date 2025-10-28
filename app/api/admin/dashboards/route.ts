@@ -27,7 +27,7 @@ export async function GET() {
       }
     })
 
-    const transformedDashboards = dashboards.map(dashboard => ({
+    const transformedDashboards = dashboards.map((dashboard: any) => ({
       id: dashboard.id,
       client: dashboard.client,
       booking: dashboard.booking,
