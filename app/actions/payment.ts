@@ -19,17 +19,17 @@ export async function processDeposit(data: {
 }) {
   try {
     // Create payment
-    const payment = await client.paymentsApi.createPayment({
+    const payment = await client.payments.create({
       sourceId: data.sourceId,
+      idempotencyKey: crypto.randomUUID(),
       amountMoney: {
         amount: BigInt(100000), // $1000 in cents
         currency: 'USD'
       },
-      locationId: process.env.SQUARE_LOCATION_ID!,
-      idempotencyKey: crypto.randomUUID()
+      locationId: process.env.SQUARE_LOCATION_ID!
     })
 
-    if (!payment.result.payment) {
+    if (!payment.payment) {
       throw new Error('Payment failed')
     }
 
@@ -57,7 +57,7 @@ export async function processDeposit(data: {
         totalCost: data.packageType === 'fast' ? 5000 : 0,
         depositPaid: true,
         depositAmount: 1000,
-        depositPaymentId: payment.result.payment.id,
+        depositPaymentId: payment.payment.id!,
         balanceAmount: data.packageType === 'fast' ? 4000 : 0,
         status: 'DEPOSIT_PAID'
       }
@@ -66,7 +66,7 @@ export async function processDeposit(data: {
     return {
       success: true,
       bookingId: booking.id,
-      paymentId: payment.result.payment.id
+      paymentId: payment.payment.id
     }
   } catch (error) {
     console.error('Payment processing error:', error)

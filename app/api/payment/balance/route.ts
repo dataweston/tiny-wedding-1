@@ -32,13 +32,14 @@ export async function POST(request: Request) {
       : booking.dashboard?.totalCost || 0
 
     // Process payment with Square
-    const { result } = await client.paymentsApi.createPayment({
+    const payment = await client.payments.create({
       sourceId: token,
       idempotencyKey: randomUUID(),
       amountMoney: {
         amount: BigInt(balanceAmount * 100),
         currency: 'USD'
-      }
+      },
+      locationId: process.env.SQUARE_LOCATION_ID
     })
 
     // Update booking status
@@ -62,7 +63,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      paymentId: result.payment?.id
+      paymentId: payment.payment?.id
     })
   } catch (error: any) {
     console.error('Balance payment error:', error)
