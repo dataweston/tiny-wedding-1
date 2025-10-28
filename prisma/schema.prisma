@@ -1,0 +1,178 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  CLIENT
+  VENDOR
+  ADMIN
+}
+
+enum BookingStatus {
+  PENDING_DEPOSIT
+  DEPOSIT_PAID
+  BALANCE_PAID
+  CANCELLED
+}
+
+enum DashboardStatus {
+  BUILDING
+  SUBMITTED
+  APPROVED
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  fullName  String   @map("full_name")
+  role      UserRole @default(CLIENT)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  bookings         Booking[]
+  clientDashboards ClientDashboard[]
+  vendor           Vendor?
+  sentMessages     Message[]         @relation("SentMessages")
+  receivedMessages Message[]         @relation("ReceivedMessages")
+
+  @@map("users")
+}
+
+model Vendor {
+  id            String   @id @default(uuid())
+  userId        String   @unique @map("user_id")
+  businessName  String   @map("business_name")
+  category      String   @map("service_category")
+  description   String
+  basePrice     Decimal  @map("base_price") @db.Decimal(10, 2)
+  contactEmail  String   @map("contact_email")
+  contactPhone  String   @map("contact_phone")
+  website       String?
+  isActive      Boolean  @default(true) @map("is_active")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  user             User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  packageServices  PackageService[]
+  dashboardServices DashboardService[]
+
+  @@map("vendors")
+}
+
+model Package {
+  id             String   @id @default(uuid())
+  name           String
+  description    String
+  price          Decimal  @db.Decimal(10, 2)
+  depositAmount  Decimal  @default(1000) @map("deposit_amount") @db.Decimal(10, 2)
+  isFastPackage  Boolean  @default(false) @map("is_fast_package")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  services         PackageService[]
+  bookings         Booking[]
+  clientDashboards ClientDashboard[]
+
+  @@map("packages")
+}
+
+model PackageService {
+  id                 String  @id @default(uuid())
+  packageId          String  @map("package_id")
+  serviceName        String  @map("service_name")
+  serviceDescription String  @map("service_description")
+  vendorId           String? @map("vendor_id")
+
+  package Package  @relation(fields: [packageId], references: [id], onDelete: Cascade)
+  vendor  Vendor?  @relation(fields: [vendorId], references: [id])
+
+  @@map("package_services")
+}
+
+model Booking {
+  id                 String        @id @default(uuid())
+  clientId           String        @map("client_id")
+  eventDate          DateTime      @unique @map("event_date") @db.Date
+  packageId          String?       @map("package_id")
+  isFastPackage      Boolean       @default(false) @map("is_fast_package")
+  totalCost          Decimal       @map("total_cost") @db.Decimal(10, 2)
+  depositPaid        Boolean       @default(false) @map("deposit_paid")
+  depositAmount      Decimal       @default(1000) @map("deposit_amount") @db.Decimal(10, 2)
+  depositPaymentId   String?       @map("deposit_payment_id")
+  balancePaid        Boolean       @default(false) @map("balance_paid")
+  balanceAmount      Decimal       @map("balance_amount") @db.Decimal(10, 2)
+  balancePaymentId   String?       @map("balance_payment_id")
+  status             BookingStatus @default(PENDING_DEPOSIT)
+  createdAt          DateTime      @default(now()) @map("created_at")
+  updatedAt          DateTime      @updatedAt @map("updated_at")
+
+  client          User              @relation(fields: [clientId], references: [id])
+  package         Package?          @relation(fields: [packageId], references: [id])
+  clientDashboard ClientDashboard?
+
+  @@index([eventDate])
+  @@index([clientId])
+  @@index([status])
+  @@map("bookings")
+}
+
+model ClientDashboard {
+  id                 String          @id @default(uuid())
+  bookingId          String          @unique @map("booking_id")
+  clientId           String          @map("client_id")
+  packageId          String?         @map("package_id")
+  totalCost          Decimal         @default(0) @map("total_cost") @db.Decimal(10, 2)
+  status             DashboardStatus @default(BUILDING)
+  questionnaireData  Json?           @map("questionnaire_data")
+  createdAt          DateTime        @default(now()) @map("created_at")
+  updatedAt          DateTime        @updatedAt @map("updated_at")
+
+  booking  Booking               @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  client   User                  @relation(fields: [clientId], references: [id])
+  package  Package?              @relation(fields: [packageId], references: [id])
+  services DashboardService[]
+  messages Message[]
+
+  @@map("client_dashboards")
+}
+
+model DashboardService {
+  id                 String   @id @default(uuid())
+  dashboardId        String   @map("dashboard_id")
+  vendorId           String   @map("vendor_id")
+  serviceName        String   @map("service_name")
+  serviceDescription String   @map("service_description")
+  cost               Decimal  @db.Decimal(10, 2)
+  isSelected         Boolean  @default(true) @map("is_selected")
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+
+  dashboard ClientDashboard @relation(fields: [dashboardId], references: [id], onDelete: Cascade)
+  vendor    Vendor          @relation(fields: [vendorId], references: [id])
+
+  @@map("dashboard_services")
+}
+
+model Message {
+  id          String   @id @default(uuid())
+  dashboardId String   @map("dashboard_id")
+  senderId    String   @map("sender_id")
+  recipientId String   @map("recipient_id")
+  content     String
+  isRead      Boolean  @default(false) @map("is_read")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  dashboard ClientDashboard @relation(fields: [dashboardId], references: [id], onDelete: Cascade)
+  sender    User            @relation("SentMessages", fields: [senderId], references: [id])
+  recipient User            @relation("ReceivedMessages", fields: [recipientId], references: [id])
+
+  @@index([dashboardId])
+  @@index([senderId])
+  @@index([recipientId])
+  @@map("messages")
+}
