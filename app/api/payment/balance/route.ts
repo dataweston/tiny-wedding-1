@@ -56,7 +56,7 @@ export async function POST(request: Request) {
       await prisma.clientDashboard.update({
         where: { id: booking.clientDashboard.id },
         data: {
-          status: 'FINALIZED'
+          status: 'APPROVED'
         }
       })
     }
