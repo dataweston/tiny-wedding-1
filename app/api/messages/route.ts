@@ -11,15 +11,28 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: 'Missing parameters' }, { status: 400 })
     }
 
+    // Get vendor's userId
+    const vendor = await prisma.vendor.findUnique({
+      where: { id: vendorId },
+      select: { userId: true }
+    })
+
+    if (!vendor) {
+      return NextResponse.json({ error: 'Vendor not found' }, { status: 404 })
+    }
+
     const messages = await prisma.message.findMany({
       where: {
         dashboardId,
-        vendorId
+        OR: [
+          { senderId: vendor.userId },
+          { recipientId: vendor.userId }
+        ]
       },
       include: {
         sender: {
           select: {
-            name: true,
+            fullName: true,
             role: true
           }
         }
@@ -49,11 +62,21 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Dashboard not found' }, { status: 404 })
     }
 
+    // Get vendor's userId
+    const vendor = await prisma.vendor.findUnique({
+      where: { id: vendorId },
+      select: { userId: true }
+    })
+
+    if (!vendor) {
+      return NextResponse.json({ error: 'Vendor not found' }, { status: 404 })
+    }
+
     const message = await prisma.message.create({
       data: {
         dashboardId,
-        vendorId,
         senderId: dashboard.clientId,
+        recipientId: vendor.userId,
         content
       }
     })
