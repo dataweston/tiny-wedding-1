@@ -44,6 +44,8 @@ interface Vendor {
   basePrice: number
 }
 
+export const dynamic = 'force-dynamic'
+
 export default function AdminPage() {
   const [bookings, setBookings] = useState<Booking[]>([])
   const [dashboards, setDashboards] = useState<Dashboard[]>([])

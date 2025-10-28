@@ -250,3 +250,5 @@ export default function MessagesPage() {
     </Suspense>
   )
 }
+
+export const dynamic = 'force-dynamic'
