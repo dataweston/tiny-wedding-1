@@ -25,9 +25,9 @@ export async function GET(
     // Transform services to include vendor info
     const transformedServices = dashboard.services.map(service => ({
       id: service.id,
-      service: service.service,
-      vendorName: service.vendor.companyName,
-      description: service.description || '',
+      service: service.serviceName,
+      vendorName: service.vendor.businessName,
+      description: service.serviceDescription || '',
       cost: service.cost
     }))
 
@@ -35,7 +35,7 @@ export async function GET(
       id: dashboard.id,
       booking: {
         eventDate: dashboard.booking.eventDate,
-        packageType: dashboard.booking.packageType
+        isFastPackage: dashboard.booking.isFastPackage
       },
       questionnaireData: dashboard.questionnaireData,
       totalCost: dashboard.totalCost,
