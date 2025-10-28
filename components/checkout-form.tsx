@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { User, Mail, Wallet } from 'iconoir-react'
 import { processDeposit } from '@/app/actions/payment'
 
 interface CheckoutFormProps {
@@ -23,14 +24,21 @@ export function CheckoutForm({ packageType, eventDate, onSuccess }: CheckoutForm
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Payment Information</CardTitle>
-        <CardDescription>
+        <CardTitle className="flex items-center gap-2">
+          <Wallet className="h-5 w-5 text-rose-500" />
+          Payment Information
+        </CardTitle>
+        <CardDescription className="flex items-center gap-2 text-gray-600">
+          <Wallet className="h-4 w-4 text-amber-500" />
           Secure $1,000 deposit to hold your date
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="name">Full Name</Label>
+          <Label htmlFor="name" className="flex items-center gap-2">
+            <User className="h-4 w-4 text-rose-500" />
+            Full Name
+          </Label>
           <Input
             id="name"
             value={clientName}
@@ -41,7 +49,10 @@ export function CheckoutForm({ packageType, eventDate, onSuccess }: CheckoutForm
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email" className="flex items-center gap-2">
+            <Mail className="h-4 w-4 text-rose-500" />
+            Email
+          </Label>
           <Input
             id="email"
             type="email"

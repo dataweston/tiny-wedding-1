@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { NavArrowLeft, NavArrowRight } from 'iconoir-react'
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, addMonths, subMonths, startOfWeek, endOfWeek, isBefore, startOfDay } from 'date-fns'
 
 interface AvailabilityCalendarProps {
@@ -84,7 +84,7 @@ export function AvailabilityCalendar({ onSelectDate, selectedDate }: Availabilit
           size="icon"
           onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}
         >
-          <ChevronLeft className="w-4 h-4" />
+          <NavArrowLeft className="w-4 h-4" />
         </Button>
         <h2 className="text-xl font-semibold">
           {format(currentMonth, 'MMMM yyyy')}
@@ -94,7 +94,7 @@ export function AvailabilityCalendar({ onSelectDate, selectedDate }: Availabilit
           size="icon"
           onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}
         >
-          <ChevronRight className="w-4 h-4" />
+          <NavArrowRight className="w-4 h-4" />
         </Button>
       </div>
 

@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { DollarSign, Loader2 } from 'lucide-react'
+import { DollarCircle, ShieldLoading } from 'iconoir-react'
 import { PaymentForm, CreditCard } from 'react-square-web-payments-sdk'
 
 function BalancePaymentContent() {
@@ -58,7 +58,7 @@ function BalancePaymentContent() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-rose-500" />
+        <ShieldLoading className="w-8 h-8 animate-spin text-rose-500" />
       </div>
     )
   }
@@ -134,12 +134,12 @@ function BalancePaymentContent() {
                 >
                   {processing ? (
                     <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      <ShieldLoading className="w-4 h-4 mr-2 animate-spin" />
                       Processing...
                     </>
                   ) : (
                     <>
-                      <DollarSign className="w-4 h-4 mr-2" />
+                      <DollarCircle className="w-4 h-4 mr-2" />
                       Pay ${balanceAmount.toLocaleString()}
                     </>
                   )}
@@ -155,7 +155,7 @@ function BalancePaymentContent() {
 
 export default function BalancePaymentPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin" /></div>}>
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><ShieldLoading className="w-8 h-8 animate-spin" /></div>}>
       <BalancePaymentContent />
     </Suspense>
   )

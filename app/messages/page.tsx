@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Send, ArrowLeft, Loader2 } from 'lucide-react'
+import { Send, ArrowLeft, ShieldLoading } from 'iconoir-react'
 import { format } from 'date-fns'
 import { supabase } from '@/lib/supabase/client'
 
@@ -118,7 +118,7 @@ function MessagesContent() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-rose-500" />
+        <ShieldLoading className="w-8 h-8 animate-spin text-rose-500" />
       </div>
     )
   }
@@ -245,7 +245,7 @@ function MessagesContent() {
 
 export default function MessagesPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin" /></div>}>
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><ShieldLoading className="w-8 h-8 animate-spin" /></div>}>
       <MessagesContent />
     </Suspense>
   )

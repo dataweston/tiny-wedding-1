@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { CheckoutForm } from '@/components/checkout-form'
 import { formatCurrency, formatDate } from '@/lib/utils'
-import { Check } from 'lucide-react'
+import { Check, ArrowLeft } from 'iconoir-react'
 
 function CheckoutContent() {
   const searchParams = useSearchParams()
@@ -124,8 +124,9 @@ function CheckoutContent() {
 
         <div className="mt-8 text-center">
           <Link href={`/calendar?package=${packageType}`}>
-            <Button variant="ghost">
-              ← Back to Calendar
+            <Button variant="ghost" className="inline-flex items-center gap-2">
+              <ArrowLeft className="h-4 w-4" />
+              Back to Calendar
             </Button>
           </Link>
         </div>

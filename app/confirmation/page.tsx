@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { formatCurrency, formatDate } from '@/lib/utils'
-import { Check, Download, Mail } from 'lucide-react'
+import { Check, Download, Mail } from 'iconoir-react'
 
 interface Booking {
   id: string

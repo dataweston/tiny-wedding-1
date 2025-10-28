@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { BeehiveIcon } from '@/components/icons/beehive'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Heart, Users, Camera, Flower2, UtensilsCrossed, Wine, Sparkles, Check } from 'lucide-react'
+import { Group, Camera, Flower, OrganicFood, GlassHalf, Spark, Check } from 'iconoir-react'
 
 export default function Home() {
   return (
@@ -9,7 +10,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative bg-gradient-to-b from-rose-50 to-white py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
-          <Heart className="w-16 h-16 mx-auto mb-6 text-rose-500" />
+          <BeehiveIcon className="w-16 h-16 mx-auto mb-6 text-rose-500" />
           <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 mb-6">
             Tiny Weddings
           </h1>
@@ -38,7 +39,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card>
               <CardHeader>
-                <Sparkles className="w-10 h-10 mb-2 text-rose-500" />
+                <Spark className="w-10 h-10 mb-2 text-rose-500" />
                 <CardTitle>Event Design</CardTitle>
                 <CardDescription>Professional coordination by Soup Sisters</CardDescription>
               </CardHeader>
@@ -46,7 +47,7 @@ export default function Home() {
             
             <Card>
               <CardHeader>
-                <Users className="w-10 h-10 mb-2 text-rose-500" />
+                <Group className="w-10 h-10 mb-2 text-rose-500" />
                 <CardTitle>Exclusive Venue</CardTitle>
                 <CardDescription>Private use of Tiny Diner space</CardDescription>
               </CardHeader>
@@ -54,7 +55,7 @@ export default function Home() {
             
             <Card>
               <CardHeader>
-                <UtensilsCrossed className="w-10 h-10 mb-2 text-rose-500" />
+                <OrganicFood className="w-10 h-10 mb-2 text-rose-500" />
                 <CardTitle>Catering</CardTitle>
                 <CardDescription>Seasonal hors d&apos;oeuvres by Local Effort</CardDescription>
               </CardHeader>
@@ -62,7 +63,7 @@ export default function Home() {
             
             <Card>
               <CardHeader>
-                <Wine className="w-10 h-10 mb-2 text-rose-500" />
+                <GlassHalf className="w-10 h-10 mb-2 text-rose-500" />
                 <CardTitle>Bar Service</CardTitle>
                 <CardDescription>Curated drinks & pro bartender</CardDescription>
               </CardHeader>
@@ -70,7 +71,7 @@ export default function Home() {
             
             <Card>
               <CardHeader>
-                <Flower2 className="w-10 h-10 mb-2 text-rose-500" />
+                <Flower className="w-10 h-10 mb-2 text-rose-500" />
                 <CardTitle>Florals</CardTitle>
                 <CardDescription>Seasonal ceremony design & bouquet</CardDescription>
               </CardHeader>
@@ -78,7 +79,7 @@ export default function Home() {
             
             <Card>
               <CardHeader>
-                <Heart className="w-10 h-10 mb-2 text-rose-500" />
+                <BeehiveIcon className="w-10 h-10 mb-2 text-rose-500" />
                 <CardTitle>Officiant</CardTitle>
                 <CardDescription>Licensed officiant services</CardDescription>
               </CardHeader>
@@ -103,26 +104,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-rose-50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4">Meet Soup Sisters</h2>
-          <p className="text-xl text-gray-600 text-center mb-12 max-w-2xl mx-auto">
-            Your dedicated event coordinators and design team
-          </p>
-          
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-lg text-gray-700 mb-6">
-              Soup Sisters brings years of event planning expertise and creative design to every Tiny Wedding. 
-              We handle all the details so you can focus on what matters—celebrating your love with the people who mean the most.
-            </p>
-            <p className="text-lg text-gray-700">
-              From the first consultation to your last dance, we&apos;re with you every step of the way, 
-              ensuring your intimate celebration is exactly as you&apos;ve dreamed.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* ...removed Meet Soup Sisters section... */}
 
       {/* Pricing Preview */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
@@ -210,29 +192,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-rose-50 to-rose-100">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-4">Ready to Start Planning?</h2>
-          <p className="text-xl text-gray-700 mb-8">
-            Book your date today with just a $1,000 deposit
-          </p>
-          <Link href="/packages">
-            <Button size="lg" className="text-lg px-12 py-6">
-              Get Started Now
-            </Button>
-          </Link>
-        </div>
-      </section>
+      {/* ...removed Ready to Start Planning section... */}
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto text-center">
-          <Heart className="w-8 h-8 mx-auto mb-4 text-rose-400" />
-          <p className="text-gray-400">© 2025 Tiny Weddings. All rights reserved.</p>
-          <p className="text-gray-500 mt-2">Intimate celebrations at Tiny Diner</p>
-        </div>
-      </footer>
+      {/* Footer links section remains, copyright footer removed. */}
     </main>
   )
 }
+

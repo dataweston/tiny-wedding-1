@@ -2,9 +2,10 @@
 
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Menu, X } from 'lucide-react'
+import { Menu, Xmark } from 'iconoir-react'
 import { BeehiveIcon } from '@/components/icons/beehive'
 import { useState } from 'react'
+import { supabase } from '@/lib/supabase/client'
 
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -27,11 +28,18 @@ export function Navigation() {
             <Link href="/calendar" className="text-gray-700 hover:text-rose-500 transition-colors">
               Availability
             </Link>
-            <Link href="/admin" className="text-gray-700 hover:text-rose-500 transition-colors">
-              Admin
-            </Link>
             <Button asChild>
               <Link href="/packages">Get Started</Link>
+            </Button>
+            <Button variant="ghost" onClick={async () => {
+              // Sign in with Google using Supabase
+              try {
+                await supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: `${window.location.origin}/dashboard` } })
+              } catch (error) {
+                console.error('Sign in error', error)
+              }
+            }}>
+              Sign in
             </Button>
           </div>
 
@@ -41,7 +49,7 @@ export function Navigation() {
             className="md:hidden p-2"
           >
             {mobileMenuOpen ? (
-              <X className="w-6 h-6" />
+              <Xmark className="w-6 h-6" />
             ) : (
               <Menu className="w-6 h-6" />
             )}
@@ -64,13 +72,6 @@ export function Navigation() {
               onClick={() => setMobileMenuOpen(false)}
             >
               Availability
-            </Link>
-            <Link
-              href="/admin"
-              className="block text-gray-700 hover:text-rose-500 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Admin
             </Link>
             <Button asChild className="w-full">
               <Link href="/packages" onClick={() => setMobileMenuOpen(false)}>

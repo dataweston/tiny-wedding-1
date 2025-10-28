@@ -31,11 +31,6 @@ export function Footer() {
                   Check Availability
                 </Link>
               </li>
-              <li>
-                <Link href="/admin" className="hover:text-white transition-colors">
-                  Admin Dashboard
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -53,9 +48,8 @@ export function Footer() {
           <div>
             <h3 className="font-semibold mb-4">Contact</h3>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li>Tiny Diner</li>
-              <li>Minneapolis, MN</li>
-              <li>contact@tinyweddings.com</li>
+              <li>Alyssa Andes</li>
+              <li>soupsistersmn@gmail.com</li>
             </ul>
           </div>
         </div>

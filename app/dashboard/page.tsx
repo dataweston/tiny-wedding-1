@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Calendar, DollarSign, MessageSquare, Plus, X, Loader2, Check } from 'lucide-react'
+import { Calendar, DollarCircle, MessageText, Plus, Xmark, ShieldLoading, CheckCircle } from 'iconoir-react'
 import { format } from 'date-fns'
 import { supabase } from '@/lib/supabase/client'
 import { ServiceSelector } from '@/components/service-selector'
@@ -24,6 +24,8 @@ interface DashboardData {
     id: string
     eventDate: string
     isFastPackage: boolean
+    depositPaid?: boolean
+    heldUntil?: string | null
   }
   questionnaireData: any
   totalCost: number
@@ -87,6 +89,18 @@ function DashboardContent() {
     }
   }, [dashboardId])
 
+  // Claim holds / ensure Prisma user exists when a user signs in via Supabase
+  useEffect(() => {
+    const claim = async () => {
+      try {
+        await fetch('/api/auth/claim')
+      } catch (err) {
+        // non-fatal
+      }
+    }
+    claim()
+  }, [])
+
   // Autosave effect
   useEffect(() => {
     if (!debouncedDashboard || !dashboardId) return
@@ -127,7 +141,7 @@ function DashboardContent() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-rose-500" />
+        <ShieldLoading className="w-8 h-8 animate-spin text-rose-500" />
       </div>
     )
   }
@@ -158,12 +172,12 @@ function DashboardContent() {
             <div className="flex items-center gap-2 text-sm text-gray-600">
               {saving ? (
                 <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <ShieldLoading className="w-4 h-4 animate-spin" />
                   Saving...
                 </>
               ) : lastSaved ? (
                 <>
-                  <Check className="w-4 h-4 text-green-500" />
+                  <CheckCircle className="w-4 h-4 text-green-500" />
                   Saved {format(lastSaved, 'h:mm a')}
                 </>
               ) : null}
@@ -188,14 +202,20 @@ function DashboardContent() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium">Current Total</CardTitle>
-              <DollarSign className="h-4 w-4 text-gray-600" />
+              <DollarCircle className="h-4 w-4 text-gray-600" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-rose-600">
                 ${dashboard.totalCost.toLocaleString()}
               </div>
               <p className="text-xs text-gray-600 mt-1">
-                + $1,000 deposit already paid
+                {dashboard.booking.depositPaid ? (
+                  '+ $1,000 deposit already paid'
+                ) : dashboard.booking.heldUntil && new Date(dashboard.booking.heldUntil) > new Date() ? (
+                  `Date held until ${format(new Date(dashboard.booking.heldUntil), 'MMMM d, h:mm a')}`
+                ) : (
+                  '$1,000 deposit required to secure date'
+                )}
               </p>
             </CardContent>
           </Card>
@@ -203,7 +223,7 @@ function DashboardContent() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium">Status</CardTitle>
-              <MessageSquare className="h-4 w-4 text-gray-600" />
+              <MessageText className="h-4 w-4 text-gray-600" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold capitalize">
@@ -252,7 +272,7 @@ function DashboardContent() {
                           size="sm"
                           onClick={() => removeService(service.id)}
                         >
-                          <X className="w-4 h-4 text-gray-600" />
+                          <Xmark className="w-4 h-4 text-gray-600" />
                         </Button>
                       </div>
                     </CardHeader>
@@ -306,7 +326,7 @@ function DashboardContent() {
         {/* Actions */}
         <div className="mt-8 flex gap-4 justify-center">
           <Button variant="outline" onClick={() => window.location.href = `/messages?dashboard=${dashboardId}`}>
-            <MessageSquare className="w-4 h-4 mr-2" />
+            <MessageText className="w-4 h-4 mr-2" />
             Message Vendors
           </Button>
           <Button onClick={() => window.location.href = `/balance?booking=${dashboard.booking.id}`}>
@@ -327,7 +347,7 @@ function DashboardContent() {
 
 export default function DashboardPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin" /></div>}>
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><ShieldLoading className="w-8 h-8 animate-spin" /></div>}>
       <DashboardContent />
     </Suspense>
   )

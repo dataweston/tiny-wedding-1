@@ -6,19 +6,30 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { AvailabilityCalendar } from '@/components/availability-calendar'
 import { formatDate } from '@/lib/utils'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'iconoir-react'
+import { HoldModal } from '@/components/hold-modal'
 
 function CalendarContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const packageType = searchParams.get('package') || 'fast'
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
+  const [showHoldModal, setShowHoldModal] = useState(false)
 
   const handleContinue = () => {
     if (selectedDate) {
       const dateStr = selectedDate.toISOString().split('T')[0]
       router.push(`/checkout?package=${packageType}&date=${dateStr}`)
     }
+  }
+
+  const handleHoldClick = () => {
+    if (!selectedDate) return
+    setShowHoldModal(true)
+  }
+
+  const handleHoldSuccess = (dashboardId: string) => {
+    router.push(`/dashboard?id=${dashboardId}`)
   }
 
   return (
@@ -30,7 +41,7 @@ function CalendarContent() {
             {packageType === 'fast' ? 'Fast Package' : 'Build Your Own'} - Choose an available date
           </p>
           <p className="text-gray-500 mt-2">
-            $1,000 deposit required to hold your date
+            Hold your date for 12 hours while you shop — $1,000 deposit required to finalize
           </p>
         </div>
 
@@ -47,12 +58,27 @@ function CalendarContent() {
             <p className="text-2xl text-rose-600 font-bold mb-4">
               {formatDate(selectedDate)}
             </p>
-            <Button onClick={handleContinue} size="lg" className="w-full">
-              Continue to Payment
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
+            <div className="space-y-3">
+              <Button onClick={handleContinue} size="lg" className="w-full">
+                Continue to Payment
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+              <Button variant="outline" onClick={handleHoldClick} className="w-full">
+                Hold Date (12 hours)
+              </Button>
+            </div>
           </div>
         )}
+
+      {showHoldModal && selectedDate && (
+        <HoldModal
+          open={showHoldModal}
+          onClose={() => setShowHoldModal(false)}
+          eventDate={selectedDate.toISOString().split('T')[0]}
+          packageType={packageType as 'fast' | 'custom'}
+          onSuccess={handleHoldSuccess}
+        />
+      )}
 
         <div className="text-center">
           <Link href="/packages">

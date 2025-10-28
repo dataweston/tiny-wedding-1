@@ -1,19 +1,26 @@
 'use client'
 
-import { useState, Suspense } from 'react'
+import { useState, Suspense, type ElementType } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { ChevronRight, ChevronLeft } from 'lucide-react'
+import { NavArrowRight, NavArrowLeft, OrganicFood, Spark, Calendar, Wallet, Check } from 'iconoir-react'
 
-const steps = [
-  { id: 1, name: 'Client Information', fields: ['contactPerson', 'phone', 'partnerName'] },
-  { id: 2, name: 'Wedding Details', fields: ['guestCount', 'visionDescription'] },
-  { id: 3, name: 'Service Preferences', fields: ['cateringPreferences', 'musicPreferences'] },
-  { id: 4, name: 'Budget & Timeline', fields: ['estimatedBudget', 'flexibleDates'] }
+type Step = {
+  id: number
+  name: string
+  fields: string[]
+  icon: ElementType
+}
+
+const steps: Step[] = [
+  { id: 1, name: 'Client Information', fields: ['contactPerson', 'phone', 'partnerName'], icon: Spark },
+  { id: 2, name: 'Wedding Details', fields: ['guestCount', 'visionDescription'], icon: Calendar },
+  { id: 3, name: 'Service Preferences', fields: ['cateringPreferences', 'musicPreferences'], icon: OrganicFood },
+  { id: 4, name: 'Budget & Timeline', fields: ['estimatedBudget', 'flexibleDates'], icon: Wallet }
 ]
 
 function QuestionnaireContent() {
@@ -75,22 +82,49 @@ function QuestionnaireContent() {
         {/* Progress */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-2">
-            {steps.map((step, idx) => (
-              <div key={step.id} className="flex items-center flex-1">
-                <div className={`flex items-center justify-center w-10 h-10 rounded-full ${
-                  currentStep >= step.id ? 'bg-rose-500 text-white' : 'bg-gray-200 text-gray-600'
-                }`}>
-                  {step.id}
+            {steps.map((step, idx) => {
+              const StepIcon = step.icon as ElementType
+              const isCompleted = currentStep > step.id
+              const isActive = currentStep === step.id
+              return (
+                <div key={step.id} className="flex items-center flex-1">
+                  <div
+                    className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors ${
+                      isCompleted
+                        ? 'bg-emerald-500 text-white'
+                        : isActive
+                        ? 'bg-rose-500 text-white'
+                        : 'bg-gray-200 text-gray-600'
+                    }`}
+                  >
+                    {isCompleted ? (
+                      <Check className="h-4 w-4" />
+                    ) : (
+                      <StepIcon className="h-4 w-4" />
+                    )}
+                  </div>
+                  {idx < steps.length - 1 && (
+                    <div
+                      className={`flex-1 h-1 mx-2 transition-colors ${
+                        currentStep > step.id ? 'bg-rose-500' : 'bg-gray-200'
+                      }`}
+                    />
+                  )}
                 </div>
-                {idx < steps.length - 1 && (
-                  <div className={`flex-1 h-1 mx-2 ${
-                    currentStep > step.id ? 'bg-rose-500' : 'bg-gray-200'
-                  }`} />
-                )}
-              </div>
-            ))}
-          </div>
-          <div className="text-center text-sm text-gray-600">
+              )
+            })}
+        </div>
+        <div className="grid grid-cols-4 text-xs font-medium text-gray-500 mb-4">
+          {steps.map((step) => (
+            <div
+              key={`label-${step.id}`}
+              className={`text-center ${currentStep === step.id ? 'text-rose-600' : ''}`}
+            >
+              {step.name}
+            </div>
+          ))}
+        </div>
+        <div className="text-center text-sm text-gray-600">
             Step {currentStep} of {steps.length}: {steps[currentStep - 1].name}
           </div>
         </div>
@@ -221,7 +255,7 @@ function QuestionnaireContent() {
             onClick={() => setCurrentStep(prev => Math.max(1, prev - 1))}
             disabled={currentStep === 1}
           >
-            <ChevronLeft className="w-4 h-4 mr-2" />
+            <NavArrowLeft className="w-4 h-4 mr-2" />
             Previous
           </Button>
 
@@ -231,7 +265,7 @@ function QuestionnaireContent() {
               disabled={!canGoNext()}
             >
               Next
-              <ChevronRight className="w-4 h-4 ml-2" />
+              <NavArrowRight className="w-4 h-4 ml-2" />
             </Button>
           ) : (
             <Button onClick={handleSubmit} disabled={!canGoNext()}>

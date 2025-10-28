@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Check, ArrowRight, Calendar } from 'lucide-react'
+import { Check, ArrowRight, Calendar } from 'iconoir-react'
 
 export default function PackagesPage() {
   return (

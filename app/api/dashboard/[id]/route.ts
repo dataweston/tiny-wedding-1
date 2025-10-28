@@ -36,6 +36,8 @@ export async function GET(
       booking: {
         id: dashboard.booking.id,
         eventDate: dashboard.booking.eventDate,
+        depositPaid: dashboard.booking.depositPaid,
+        heldUntil: (dashboard.booking as any).heldUntil,
         isFastPackage: dashboard.booking.isFastPackage
       },
       questionnaireData: dashboard.questionnaireData,

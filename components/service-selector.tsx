@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { X, Plus, Search } from 'lucide-react'
+import { Xmark, Plus, Search } from 'iconoir-react'
 
 interface Vendor {
   id: string
@@ -92,7 +92,7 @@ export function ServiceSelector({ dashboardId, onClose }: ServiceSelectorProps) 
           <div className="flex items-center justify-between">
             <CardTitle>Add Services</CardTitle>
             <Button variant="ghost" size="sm" onClick={onClose}>
-              <X className="w-4 h-4" />
+              <Xmark className="w-4 h-4" />
             </Button>
           </div>
         </CardHeader>

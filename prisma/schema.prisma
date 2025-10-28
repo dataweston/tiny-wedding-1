@@ -108,6 +108,7 @@ model Booking {
   balanceAmount      Decimal       @map("balance_amount") @db.Decimal(10, 2)
   balancePaymentId   String?       @map("balance_payment_id")
   status             BookingStatus @default(PENDING_DEPOSIT)
+  heldUntil          DateTime?     @map("held_until")
   createdAt          DateTime      @default(now()) @map("created_at")
   updatedAt          DateTime      @updatedAt @map("updated_at")
 

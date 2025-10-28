@@ -6,7 +6,14 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Calendar, Users, Building2, DollarSign, Plus, Loader2 } from 'lucide-react'
+import {
+  Calendar,
+  Group,
+  Building,
+  DollarCircle,
+  Plus,
+  ShieldLoading
+} from 'iconoir-react'
 import { format } from 'date-fns'
 import { supabase } from '@/lib/supabase/client'
 
@@ -156,7 +163,7 @@ export default function AdminPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-rose-500" />
+        <ShieldLoading className="w-8 h-8 animate-spin text-rose-500" />
       </div>
     )
   }
@@ -181,7 +188,7 @@ export default function AdminPage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium">Active Dashboards</CardTitle>
-              <Users className="h-4 w-4 text-gray-600" />
+              <Group className="h-4 w-4 text-gray-600" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{dashboards.length}</div>
@@ -191,7 +198,7 @@ export default function AdminPage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium">Total Vendors</CardTitle>
-              <Building2 className="h-4 w-4 text-gray-600" />
+              <Building className="h-4 w-4 text-gray-600" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{vendors.length}</div>
@@ -201,7 +208,7 @@ export default function AdminPage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium">Deposits Collected</CardTitle>
-              <DollarSign className="h-4 w-4 text-gray-600" />
+              <DollarCircle className="h-4 w-4 text-gray-600" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-rose-600">
