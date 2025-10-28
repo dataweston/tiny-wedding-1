@@ -25,7 +25,10 @@ export async function GET(request: Request) {
         const lastMessage = await prisma.message.findFirst({
           where: {
             dashboardId,
-            vendorId: service.vendorId
+            OR: [
+              { senderId: service.vendor.userId },
+              { recipientId: service.vendor.userId }
+            ]
           },
           orderBy: {
             createdAt: 'desc'
@@ -34,7 +37,7 @@ export async function GET(request: Request) {
 
         return {
           vendorId: service.vendorId,
-          vendorName: service.vendor.companyName,
+          vendorName: service.vendor.businessName,
           lastMessage: lastMessage?.content
         }
       })
