@@ -1,4 +1,6 @@
-'use client'
+ 'use client'
+
+export const dynamic = 'force-dynamic'
 
 import { useState, useEffect, useRef, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
@@ -251,4 +253,4 @@ export default function MessagesPage() {
   )
 }
 
-export const dynamic = 'force-dynamic'
+// dynamic export placed at top for client directive ordering
