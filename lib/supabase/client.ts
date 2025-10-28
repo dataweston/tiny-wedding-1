@@ -118,7 +118,7 @@ function createRealtimeFallback(): SupabaseClient {
         throw new Error('Supabase client unavailable: missing environment variables. OAuth sign-in is disabled.')
       },
       // Add other auth methods as needed
-    }
+    } as any
   }
 
   return noopClient as SupabaseClient
