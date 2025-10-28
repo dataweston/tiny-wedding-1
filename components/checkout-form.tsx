@@ -55,8 +55,8 @@ export function CheckoutForm({ packageType, eventDate, onSuccess }: CheckoutForm
         {clientName && clientEmail && (
           <div className="pt-4">
             <PaymentForm
-              applicationId={process.env.NEXT_PUBLIC_SQUARE_APPLICATION_ID!}
-              locationId={process.env.SQUARE_LOCATION_ID!}
+              applicationId={process.env.NEXT_PUBLIC_SQUARE_APP_ID!}
+              locationId={process.env.NEXT_PUBLIC_SQUARE_LOCATION_ID!}
               cardTokenizeResponseReceived={async (token) => {
                 setLoading(true)
                 setError('')
