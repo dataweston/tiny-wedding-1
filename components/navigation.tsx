@@ -2,7 +2,8 @@
 
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Heart, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
+import { BeehiveIcon } from '@/components/icons/beehive'
 import { useState } from 'react'
 
 export function Navigation() {
@@ -14,7 +15,7 @@ export function Navigation() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <Heart className="w-6 h-6 text-rose-500 fill-rose-500" />
+            <BeehiveIcon className="w-6 h-6 text-amber-500" />
             <span className="text-xl font-bold">Tiny Weddings</span>
           </Link>
 

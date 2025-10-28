@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Heart } from 'lucide-react'
+import { BeehiveIcon } from '@/components/icons/beehive'
 
 export function Footer() {
   return (
@@ -9,7 +9,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <Heart className="w-6 h-6 text-rose-500 fill-rose-500" />
+              <BeehiveIcon className="w-6 h-6 text-amber-400" />
               <span className="text-xl font-bold">Tiny Weddings</span>
             </div>
             <p className="text-gray-400 text-sm">
