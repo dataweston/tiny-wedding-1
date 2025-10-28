@@ -10,7 +10,7 @@ export async function GET(
       where: { id: params.id },
       include: {
         client: true,
-        dashboard: true
+        clientDashboard: true
       }
     })
 
