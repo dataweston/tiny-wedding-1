@@ -34,6 +34,7 @@ export async function GET(
     return NextResponse.json({
       id: dashboard.id,
       booking: {
+        id: dashboard.booking.id,
         eventDate: dashboard.booking.eventDate,
         isFastPackage: dashboard.booking.isFastPackage
       },

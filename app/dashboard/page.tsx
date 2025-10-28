@@ -21,8 +21,9 @@ interface DashboardService {
 interface DashboardData {
   id: string
   booking: {
+    id: string
     eventDate: string
-    packageType: string
+    isFastPackage: boolean
   }
   questionnaireData: any
   totalCost: number
