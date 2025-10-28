@@ -7,17 +7,26 @@ export async function GET(request: Request) {
     const category = searchParams.get('category')
 
     const vendors = await prisma.vendor.findMany({
-      where: category ? { serviceType: category } : undefined,
+      where: category ? { category: category } : undefined,
       select: {
         id: true,
-        companyName: true,
-        serviceType: true,
+        businessName: true,
+        category: true,
         basePrice: true,
         description: true
       }
     })
 
-    return NextResponse.json(vendors)
+    // Map to expected format
+    const formattedVendors = vendors.map((v: any) => ({
+      id: v.id,
+      companyName: v.businessName,
+      serviceType: v.category,
+      basePrice: Number(v.basePrice),
+      description: v.description
+    }))
+
+    return NextResponse.json(formattedVendors)
   } catch (error) {
     console.error('Error fetching vendors:', error)
     return NextResponse.json({ error: 'Failed to fetch vendors' }, { status: 500 })

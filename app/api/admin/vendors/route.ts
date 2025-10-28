@@ -3,7 +3,7 @@ import { prisma } from '@/lib/prisma'
 
 export async function POST(request: Request) {
   try {
-    const { companyName, serviceType, contactEmail, basePrice } = await request.json()
+    const { companyName, serviceType, contactEmail, contactPhone, basePrice, description } = await request.json()
 
     // Create user for vendor
     const user = await prisma.user.create({
@@ -18,9 +18,11 @@ export async function POST(request: Request) {
     const vendor = await prisma.vendor.create({
       data: {
         userId: user.id,
-        companyName,
-        serviceType,
+        businessName: companyName,
+        category: serviceType,
         contactEmail,
+        contactPhone: contactPhone || '',
+        description: description || '',
         basePrice
       }
     })
