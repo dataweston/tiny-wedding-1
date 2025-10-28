@@ -7,15 +7,12 @@ import { Button } from '@/components/ui/button'
 import { AvailabilityCalendar } from '@/components/availability-calendar'
 import { formatDate } from '@/lib/utils'
 import { ArrowRight } from 'iconoir-react'
-import { HoldModal } from '@/components/hold-modal'
 
 function CalendarContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const packageType = searchParams.get('package') || 'fast'
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
-  const [showHoldModal, setShowHoldModal] = useState(false)
-
   const handleContinue = () => {
     if (selectedDate) {
       const dateStr = selectedDate.toISOString().split('T')[0]
@@ -23,13 +20,9 @@ function CalendarContent() {
     }
   }
 
+  // Force sign up instead of showing modal
   const handleHoldClick = () => {
-    if (!selectedDate) return
-    setShowHoldModal(true)
-  }
-
-  const handleHoldSuccess = (dashboardId: string) => {
-    router.push(`/dashboard?id=${dashboardId}`)
+    router.push(`/signup?redirect=/calendar?package=${packageType}&date=${selectedDate ? selectedDate.toISOString().split('T')[0] : ''}`)
   }
 
   return (
@@ -70,15 +63,7 @@ function CalendarContent() {
           </div>
         )}
 
-      {showHoldModal && selectedDate && (
-        <HoldModal
-          open={showHoldModal}
-          onClose={() => setShowHoldModal(false)}
-          eventDate={selectedDate.toISOString().split('T')[0]}
-          packageType={packageType as 'fast' | 'custom'}
-          onSuccess={handleHoldSuccess}
-        />
-      )}
+      {/* HoldModal removed, force sign up instead. */}
 
         <div className="text-center">
           <Link href="/packages">

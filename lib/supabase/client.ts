@@ -112,6 +112,12 @@ function createRealtimeFallback(): SupabaseClient {
         finally: result.finally.bind(result)
       }
       return queryChain
+    },
+    auth: {
+      signInWithOAuth: async () => {
+        throw new Error('Supabase client unavailable: missing environment variables. OAuth sign-in is disabled.')
+      },
+      // Add other auth methods as needed
     }
   }
 
