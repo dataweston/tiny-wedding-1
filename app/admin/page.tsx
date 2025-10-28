@@ -100,9 +100,10 @@ export default function AdminPage() {
     try {
       const response = await fetch('/api/admin/bookings')
       const data = await response.json()
-      setBookings(data)
+      setBookings(Array.isArray(data) ? data : [])
     } catch (error) {
       console.error('Error fetching bookings:', error)
+      setBookings([])
     }
   }
 
@@ -110,9 +111,10 @@ export default function AdminPage() {
     try {
       const response = await fetch('/api/admin/dashboards')
       const data = await response.json()
-      setDashboards(data)
+      setDashboards(Array.isArray(data) ? data : [])
     } catch (error) {
       console.error('Error fetching dashboards:', error)
+      setDashboards([])
     }
   }
 
@@ -120,9 +122,10 @@ export default function AdminPage() {
     try {
       const response = await fetch('/api/vendors')
       const data = await response.json()
-      setVendors(data)
+      setVendors(Array.isArray(data) ? data : [])
     } catch (error) {
       console.error('Error fetching vendors:', error)
+      setVendors([])
     }
   }
 
