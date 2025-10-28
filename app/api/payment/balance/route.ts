@@ -4,7 +4,7 @@ import { randomUUID } from 'crypto'
 import { prisma } from '@/lib/prisma'
 
 const client = new SquareClient({
-  accessToken: process.env.SQUARE_ACCESS_TOKEN,
+  token: process.env.SQUARE_ACCESS_TOKEN,
   environment: process.env.SQUARE_ENVIRONMENT === 'production' 
     ? SquareEnvironment.Production
     : SquareEnvironment.Sandbox
