@@ -150,7 +150,7 @@ export default function AdminPage() {
     }
   }
 
-  const totalRevenue = bookings.reduce((sum, booking) => sum + booking.totalCost + 1000, 0)
+  const totalRevenue = bookings.reduce((sum, booking) => sum + Number(booking.totalCost) + 1000, 0)
   const depositsPaid = bookings.length * 1000
 
   if (loading) {

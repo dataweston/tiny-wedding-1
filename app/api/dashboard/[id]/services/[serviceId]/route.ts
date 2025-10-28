@@ -16,7 +16,7 @@ export async function DELETE(
       where: { dashboardId: params.id }
     })
 
-    const totalCost = services.reduce((sum, service) => sum + service.cost, 0)
+    const totalCost = services.reduce((sum, service) => sum + Number(service.cost), 0)
 
     // Update dashboard total
     await prisma.clientDashboard.update({
