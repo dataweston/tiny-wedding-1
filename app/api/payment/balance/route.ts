@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server'
-import { Client as SquareClient } from 'square'
+import { SquareClient, SquareEnvironment } from 'square'
 import { randomUUID } from 'crypto'
 import { prisma } from '@/lib/prisma'
 
 const client = new SquareClient({
   accessToken: process.env.SQUARE_ACCESS_TOKEN,
   environment: process.env.SQUARE_ENVIRONMENT === 'production' 
-    ? 'production'
-    : 'sandbox'
+    ? SquareEnvironment.Production
+    : SquareEnvironment.Sandbox
 })
 
 export async function POST(request: Request) {

@@ -1,13 +1,13 @@
 'use server'
 
 import { prisma } from '@/lib/prisma'
-import { Client as SquareClient } from 'square'
+import { SquareClient, SquareEnvironment } from 'square'
 
 const client = new SquareClient({
   accessToken: process.env.SQUARE_ACCESS_TOKEN!,
   environment: process.env.SQUARE_ENVIRONMENT === 'production' 
-    ? 'production'
-    : 'sandbox'
+    ? SquareEnvironment.Production
+    : SquareEnvironment.Sandbox
 })
 
 export async function processDeposit(data: {
