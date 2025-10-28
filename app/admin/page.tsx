@@ -58,7 +58,13 @@ export default function AdminPage() {
   })
 
   useEffect(() => {
-    fetchAllData()
+    const fetchData = async () => {
+      setLoading(true)
+      await Promise.all([fetchBookings(), fetchDashboards(), fetchVendors()])
+      setLoading(false)
+    }
+
+    fetchData()
 
     // Set up real-time subscriptions
     const bookingsChannel = supabase
@@ -87,13 +93,8 @@ export default function AdminPage() {
       supabase.removeChannel(bookingsChannel)
       supabase.removeChannel(dashboardsChannel)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  const fetchAllData = async () => {
-    setLoading(true)
-    await Promise.all([fetchBookings(), fetchDashboards(), fetchVendors()])
-    setLoading(false)
-  }
 
   const fetchBookings = async () => {
     try {

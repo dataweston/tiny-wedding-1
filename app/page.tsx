@@ -117,8 +117,8 @@ export default function Home() {
               We handle all the details so you can focus on what matters—celebrating your love with the people who mean the most.
             </p>
             <p className="text-lg text-gray-700">
-              From the first consultation to your last dance, we're with you every step of the way, 
-              ensuring your intimate celebration is exactly as you've dreamed.
+              From the first consultation to your last dance, we&apos;re with you every step of the way, 
+              ensuring your intimate celebration is exactly as you&apos;ve dreamed.
             </p>
           </div>
         </div>

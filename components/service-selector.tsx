@@ -39,24 +39,25 @@ export function ServiceSelector({ dashboardId, onClose }: ServiceSelectorProps) 
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    fetchVendors()
-  }, [selectedCategory])
-
-  const fetchVendors = async () => {
-    setLoading(true)
-    try {
-      const url = selectedCategory
-        ? `/api/vendors?category=${selectedCategory}`
-        : '/api/vendors'
-      const response = await fetch(url)
-      const data = await response.json()
-      setVendors(data)
-    } catch (error) {
-      console.error('Error fetching vendors:', error)
-    } finally {
-      setLoading(false)
+    const loadVendors = async () => {
+      setLoading(true)
+      try {
+        const url = selectedCategory
+          ? `/api/vendors?category=${selectedCategory}`
+          : '/api/vendors'
+        const response = await fetch(url)
+        const data = await response.json()
+        setVendors(data)
+      } catch (error) {
+        console.error('Error fetching vendors:', error)
+      } finally {
+        setLoading(false)
+      }
     }
-  }
+
+    loadVendors()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCategory])
 
   const addService = async (vendor: Vendor) => {
     try {
