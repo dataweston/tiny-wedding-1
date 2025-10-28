@@ -56,7 +56,7 @@ export default function Home() {
               <CardHeader>
                 <UtensilsCrossed className="w-10 h-10 mb-2 text-rose-500" />
                 <CardTitle>Catering</CardTitle>
-                <CardDescription>Seasonal hors d'oeuvres by Local Effort</CardDescription>
+                <CardDescription>Seasonal hors d&apos;oeuvres by Local Effort</CardDescription>
               </CardHeader>
             </Card>
             
