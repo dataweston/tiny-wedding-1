@@ -9,25 +9,25 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-gray-950 via-gray-900 to-rose-900 py-24 px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-gradient-to-b from-rose-50 via-amber-50 to-white py-24 px-4 sm:px-6 lg:px-8">
         <SparklesCore
           background="transparent"
-          minSize={0.6}
-          maxSize={1.4}
-          particleDensity={100}
+          minSize={0.4}
+          maxSize={1.2}
+          particleDensity={80}
           className="absolute inset-0 w-full h-full"
-          particleColor="#ffffff"
-          speed={1}
+          particleColor="#f97316"
+          speed={0.6}
         />
         <div className="relative z-10 max-w-7xl mx-auto text-center">
-          <BeehiveIcon className="w-16 h-16 mx-auto mb-6 text-rose-300" />
-          <h1 className="text-5xl sm:text-6xl font-bold text-white mb-6">
+          <BeehiveIcon className="w-16 h-16 mx-auto mb-6 text-rose-500" />
+          <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 mb-6">
             Tiny Weddings
           </h1>
-          <p className="text-xl sm:text-2xl text-rose-100/90 mb-4 max-w-3xl mx-auto">
+          <p className="text-xl sm:text-2xl text-gray-700 mb-4 max-w-3xl mx-auto">
             Intimate, Beautiful, Unforgettable
           </p>
-          <p className="text-lg text-rose-100/70 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
             All-inclusive wedding packages at Tiny Diner for celebrations that matter most
           </p>
           <Link href="/packages">
