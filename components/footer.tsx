@@ -34,16 +34,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Packages */}
-          <div>
-            <h3 className="font-semibold mb-4">Our Packages</h3>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li>Fast Package - $5,000</li>
-              <li>Build Your Own</li>
-              <li>$1,000 deposit to secure date</li>
-            </ul>
-          </div>
-
           {/* Contact */}
           <div>
             <h3 className="font-semibold mb-4">Contact</h3>
