@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Tangerine, Caveat, Patrick_Hand } from 'next/font/google'
+import { Tangerine, Caveat, Patrick_Hand_SC } from 'next/font/google'
 import './globals.css'
 import { Navigation } from '@/components/navigation'
 
@@ -15,10 +15,10 @@ const caveat = Caveat({
   variable: '--font-caveat',
 })
 
-const patrickHand = Patrick_Hand({
+const patrickHandSc = Patrick_Hand_SC({
   subsets: ['latin'],
   weight: '400',
-  variable: '--font-patrick-hand',
+  variable: '--font-patrick-hand-sc',
 })
 
 export const metadata: Metadata = {
@@ -42,11 +42,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={`${tangerine.variable} ${caveat.variable} ${patrickHand.variable}`}>
+      <body className={`${tangerine.variable} ${caveat.variable} ${patrickHandSc.variable}`}>
         <Navigation />
         <main className="min-h-screen">{children}</main>
       </body>
     </html>
   )
 }
-

@@ -4,11 +4,13 @@ import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Calendar, DollarCircle, MessageText, Plus, Xmark, ShieldLoading, CheckCircle } from 'iconoir-react'
+import { Calendar, DollarCircle, MessageText, Plus, Xmark, ShieldLoading, CheckCircle, Wallet } from 'iconoir-react'
 import { format } from 'date-fns'
 import { supabase } from '@/lib/supabase/client'
 import { ServiceSelector } from '@/components/service-selector'
 import { useDebounce } from 'use-debounce'
+import { PaymentForm, CreditCard } from 'react-square-web-payments-sdk'
+import { payDepositForBooking } from '@/app/actions/payment'
 
 interface DashboardService {
   id: string
@@ -42,6 +44,9 @@ function DashboardContent() {
   const [saving, setSaving] = useState(false)
   const [lastSaved, setLastSaved] = useState<Date | null>(null)
   const [debouncedDashboard] = useDebounce(dashboard, 500)
+  const [showPaymentForm, setShowPaymentForm] = useState(false)
+  const [paymentProcessing, setPaymentProcessing] = useState(false)
+  const [paymentError, setPaymentError] = useState('')
 
   useEffect(() => {
     if (!dashboardId) {
@@ -146,6 +151,33 @@ function DashboardContent() {
     }
   }
 
+  const handlePaymentSubmit = async (token: any) => {
+    setPaymentProcessing(true)
+    setPaymentError('')
+
+    try {
+      const result = await payDepositForBooking({
+        sourceId: token.token,
+        bookingId: dashboard!.booking.id
+      })
+
+      if (result.success) {
+        // Refresh dashboard data to show updated payment status
+        const response = await fetch(`/api/dashboard/${dashboardId}`)
+        const data = await response.json()
+        setDashboard(data)
+        setShowPaymentForm(false)
+      } else {
+        setPaymentError(result.error || 'Payment failed')
+      }
+    } catch (error) {
+      setPaymentError('Payment processing error')
+      console.error('Payment error:', error)
+    } finally {
+      setPaymentProcessing(false)
+    }
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -240,6 +272,74 @@ function DashboardContent() {
             </CardContent>
           </Card>
         </div>
+
+        {/* Deposit Payment Banner - Show if deposit not paid */}
+        {!dashboard.booking.depositPaid && (
+          <Card className="mb-8 border-2 border-rose-500 bg-rose-50">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-rose-900">
+                <Wallet className="h-5 w-5" />
+                Secure Your Date - Pay Deposit
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <p className="text-gray-700">
+                  Your date is currently held until{' '}
+                  <span className="font-semibold">
+                    {dashboard.booking.heldUntil
+                      ? format(new Date(dashboard.booking.heldUntil), 'MMMM d, h:mm a')
+                      : 'the hold expires'}
+                  </span>
+                  . Pay the $1,000 deposit now to confirm your booking.
+                </p>
+
+                {!showPaymentForm ? (
+                  <Button
+                    onClick={() => setShowPaymentForm(true)}
+                    size="lg"
+                    className="bg-rose-600 hover:bg-rose-700"
+                  >
+                    <Wallet className="w-5 h-5 mr-2" />
+                    Pay $1,000 Deposit Now
+                  </Button>
+                ) : (
+                  <div className="bg-white p-6 rounded-lg border border-gray-200">
+                    {paymentError && (
+                      <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded text-red-700 text-sm">
+                        {paymentError}
+                      </div>
+                    )}
+
+                    <PaymentForm
+                      applicationId={process.env.NEXT_PUBLIC_SQUARE_APPLICATION_ID!}
+                      locationId={process.env.NEXT_PUBLIC_SQUARE_LOCATION_ID!}
+                      cardTokenizeResponseReceived={handlePaymentSubmit}
+                    >
+                      <CreditCard />
+                      <Button
+                        type="submit"
+                        disabled={paymentProcessing}
+                        className="w-full mt-4"
+                      >
+                        {paymentProcessing ? 'Processing...' : 'Pay $1,000 Deposit'}
+                      </Button>
+                    </PaymentForm>
+
+                    <Button
+                      variant="ghost"
+                      onClick={() => setShowPaymentForm(false)}
+                      className="w-full mt-2"
+                      disabled={paymentProcessing}
+                    >
+                      Cancel
+                    </Button>
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Services */}
         <Card className="mb-8">

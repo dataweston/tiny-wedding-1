@@ -30,13 +30,14 @@ export default function PackagesPage() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="max-w-4xl mx-auto mb-12">
-            <div className="relative overflow-hidden rounded-3xl shadow-lg">
+            <div className="relative overflow-hidden rounded-3xl shadow-lg h-48 sm:h-60 lg:h-72">
               <div className="absolute inset-0 bg-gradient-to-t from-white/70 to-transparent z-10" />
               <Image
                 src={heroPackages}
                 alt="Tiny Weddings celebration"
                 className="object-cover w-full h-full"
                 priority
+                sizes="(max-width: 640px) 90vw, (max-width: 1024px) 70vw, 45vw"
               />
             </div>
           </div>

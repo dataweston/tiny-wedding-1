@@ -107,14 +107,14 @@
   }
   h2,
   h3 {
-    font-family: var(--font-caveat), 'Caveat', cursive;
+    font-family: var(--font-patrick-hand-sc), 'Patrick Hand SC', cursive;
     letter-spacing: 0.01em;
   }
 }
 
 @layer utilities {
   .font-logo {
-    font-family: var(--font-patrick-hand), 'Patrick Hand', cursive;
+    font-family: var(--font-patrick-hand-sc), 'Patrick Hand SC', cursive;
     letter-spacing: 0.02em;
   }
 }

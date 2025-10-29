@@ -76,3 +76,60 @@ export async function processDeposit(data: {
     }
   }
 }
+
+export async function payDepositForBooking(data: {
+  sourceId: string
+  bookingId: string
+}) {
+  try {
+    // Get the booking
+    const booking = await prisma.booking.findUnique({
+      where: { id: data.bookingId }
+    })
+
+    if (!booking) {
+      throw new Error('Booking not found')
+    }
+
+    if (booking.depositPaid) {
+      throw new Error('Deposit already paid')
+    }
+
+    // Process payment
+    const payment = await client.payments.create({
+      sourceId: data.sourceId,
+      idempotencyKey: crypto.randomUUID(),
+      amountMoney: {
+        amount: BigInt(100000), // $1000 in cents
+        currency: 'USD'
+      },
+      locationId: process.env.SQUARE_LOCATION_ID!
+    })
+
+    if (!payment.payment) {
+      throw new Error('Payment failed')
+    }
+
+    // Update booking
+    await prisma.booking.update({
+      where: { id: data.bookingId },
+      data: {
+        depositPaid: true,
+        depositPaymentId: payment.payment.id!,
+        status: 'DEPOSIT_PAID',
+        heldUntil: null
+      }
+    })
+
+    return {
+      success: true,
+      paymentId: payment.payment.id
+    }
+  } catch (error) {
+    console.error('Deposit payment error:', error)
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Payment failed'
+    }
+  }
+}

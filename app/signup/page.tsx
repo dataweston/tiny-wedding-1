@@ -28,8 +28,13 @@ function SignupContent() {
         })
         const data = await res.json()
         if (res.ok && data.dashboardId) {
-          // Redirect to dashboard instead of back to calendar
-          router.push(`/dashboard?id=${data.dashboardId}`)
+          // For custom packages, go to questionnaire first to gather details
+          // For fast packages, go straight to dashboard
+          if (packageType === 'custom') {
+            router.push(`/questionnaire?booking=${data.bookingId}`)
+          } else {
+            router.push(`/dashboard?id=${data.dashboardId}`)
+          }
           return
         }
       } catch (error) {
