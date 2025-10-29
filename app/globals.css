@@ -99,7 +99,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-caveat), 'Caveat', cursive;
+    font-family: var(--font-funnel-sans), 'Funnel Sans', sans-serif;
   }
   h1 {
     font-family: var(--font-tangerine), 'Tangerine', cursive;
@@ -107,7 +107,7 @@
   }
   h2,
   h3 {
-    font-family: var(--font-reenie-beanie), 'Reenie Beanie', cursive;
+    font-family: var(--font-caveat), 'Caveat', cursive;
     letter-spacing: 0.01em;
   }
 }

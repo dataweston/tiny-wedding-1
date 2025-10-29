@@ -4,6 +4,7 @@ import {
   Reenie_Beanie,
   Caveat,
   Patrick_Hand,
+  Funnel_Sans,
 } from 'next/font/google'
 import './globals.css'
 import { Navigation } from '@/components/navigation'
@@ -32,6 +33,12 @@ const patrickHand = Patrick_Hand({
   variable: '--font-patrick-hand',
 })
 
+const funnelSans = Funnel_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-funnel-sans',
+})
+
 export const metadata: Metadata = {
   title: 'Tiny Weddings - Intimate Wedding Packages at Tiny Diner',
   description: 'Celebrate your love with our curated wedding packages. From full-service Simple Package to custom Build Your Own options.',
@@ -45,7 +52,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${caveat.className} ${tangerine.variable} ${reenieBeanie.variable} ${patrickHand.variable}`}
+        className={`${funnelSans.className} ${tangerine.variable} ${caveat.variable} ${reenieBeanie.variable} ${patrickHand.variable}`}
       >
         <Navigation />
         <main className="min-h-screen">
