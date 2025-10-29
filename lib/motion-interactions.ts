@@ -1,8 +1,9 @@
 'use client'
 
-import { animate, type AnimationOptions } from '@motionone/dom'
+import { animate } from '@motionone/dom'
 
 type AnimatableElement = HTMLElement | SVGElement
+type AnimationOptions = NonNullable<Parameters<typeof animate>[2]>
 
 const hoverInKeyframes = { scale: 1.03, y: -2 }
 const hoverOutKeyframes = { scale: 1, y: 0 }
@@ -32,4 +33,3 @@ export function animateHoverEnd(element: AnimatableElement | null) {
 export function animateTap(element: AnimatableElement | null) {
   runAnimation(element, tapKeyframes, tapOptions)
 }
-
