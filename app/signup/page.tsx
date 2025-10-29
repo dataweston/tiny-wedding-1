@@ -80,7 +80,7 @@ function SignupContent() {
     <div className="min-h-screen bg-gradient-to-b from-rose-50 to-white flex items-center justify-center px-4">
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
-          <BeehiveIcon className="w-16 h-16 mx-auto mb-6 text-rose-500" />
+          <BeehiveIcon className="w-16 h-16 mx-auto mb-6" />
           <h1 className="text-3xl font-bold text-gray-900 mb-4">Sign Up to Continue</h1>
           <p className="text-gray-600">
             Create your account to hold your wedding date and access your dashboard.

@@ -1,6 +1,8 @@
 import type { SVGProps } from 'react';
 
-export function BeehiveIcon(props: SVGProps<SVGSVGElement>) {
+export function BeehiveIcon({ style, ...props }: SVGProps<SVGSVGElement>) {
+  const mergedStyle = { color: '#fdcb6e', ...(style ?? {}) };
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -13,6 +15,7 @@ export function BeehiveIcon(props: SVGProps<SVGSVGElement>) {
       strokeLinecap="round"
       strokeLinejoin="round"
       className="lucide lucide-bee-hive-icon lucide-bee-hive"
+      style={mergedStyle}
       {...props}
     >
       <rect width="10" height="4" x="7" y="2" rx="2" />

@@ -9,7 +9,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <BeehiveIcon className="w-6 h-6 text-amber-400" />
+              <BeehiveIcon className="w-6 h-6" />
               <span className="text-xl font-bold">Tiny Weddings</span>
             </div>
             <p className="text-gray-400 text-sm">

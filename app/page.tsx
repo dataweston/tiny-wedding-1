@@ -24,7 +24,7 @@ export default function Home() {
           speed={0.6}
         />
         <div className="relative z-10 max-w-7xl mx-auto text-center">
-          <BeehiveIcon className="w-16 h-16 mx-auto mb-6 text-rose-500" />
+          <BeehiveIcon className="w-16 h-16 mx-auto mb-6" />
           <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 mb-6">
             Tiny Weddings
           </h1>
@@ -108,7 +108,7 @@ export default function Home() {
             
             <Card>
               <CardHeader>
-                <BeehiveIcon className="w-10 h-10 mb-2 text-rose-500" />
+                <BeehiveIcon className="w-10 h-10 mb-2" />
                 <CardTitle>Officiant</CardTitle>
                 <CardDescription>Licensed officiant services</CardDescription>
               </CardHeader>
