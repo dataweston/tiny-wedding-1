@@ -2,29 +2,32 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { BeehiveIcon } from '@/components/icons/beehive'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { SparklesCore } from '@/components/ui/shadcn-io/sparkles'
+import { SparklesCore } from '@/components/ui/sparkles'
 import { Group, Camera, Flower, OrganicFood, GlassHalf, Spark, Check } from 'iconoir-react'
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-rose-50 to-white py-20 px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-gradient-to-b from-gray-950 via-gray-900 to-rose-900 py-24 px-4 sm:px-6 lg:px-8">
         <SparklesCore
-          className="absolute inset-0 h-full w-full -z-10 opacity-60 [mask-image:radial-gradient(circle_at_center,rgba(0,0,0,0.85),transparent_70%)]"
           background="transparent"
-          particleColor="#fb7185"
-          particleDensity={120}
+          minSize={0.6}
+          maxSize={1.4}
+          particleDensity={100}
+          className="absolute inset-0 w-full h-full"
+          particleColor="#ffffff"
+          speed={1}
         />
-        <div className="max-w-7xl mx-auto text-center">
-          <BeehiveIcon className="w-16 h-16 mx-auto mb-6 text-rose-500" />
-          <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 mb-6">
+        <div className="relative z-10 max-w-7xl mx-auto text-center">
+          <BeehiveIcon className="w-16 h-16 mx-auto mb-6 text-rose-300" />
+          <h1 className="text-5xl sm:text-6xl font-bold text-white mb-6">
             Tiny Weddings
           </h1>
-          <p className="text-xl sm:text-2xl text-gray-600 mb-4 max-w-3xl mx-auto">
+          <p className="text-xl sm:text-2xl text-rose-100/90 mb-4 max-w-3xl mx-auto">
             Intimate, Beautiful, Unforgettable
           </p>
-          <p className="text-lg text-gray-500 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-rose-100/70 mb-8 max-w-2xl mx-auto">
             All-inclusive wedding packages at Tiny Diner for celebrations that matter most
           </p>
           <Link href="/packages">
