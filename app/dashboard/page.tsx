@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, Suspense } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Calendar, DollarCircle, MessageText, Plus, Xmark, ShieldLoading, CheckCircle, Wallet } from 'iconoir-react'
@@ -37,6 +37,7 @@ interface DashboardData {
 
 function DashboardContent() {
   const searchParams = useSearchParams()
+  const router = useRouter()
   const dashboardId = searchParams.get('id')
   const [dashboard, setDashboard] = useState<DashboardData | null>(null)
   const [loading, setLoading] = useState(true)
@@ -49,11 +50,54 @@ function DashboardContent() {
   const [paymentError, setPaymentError] = useState('')
 
   useEffect(() => {
-    if (!dashboardId) {
-      // Redirect to home if no dashboard id
-      window.location.href = '/'
+    if (dashboardId) {
       return
     }
+
+    const resolveDashboard = async () => {
+      try {
+        setLoading(true)
+        const response = await fetch('/api/auth/claim', { credentials: 'include' })
+        if (!response.ok) {
+          throw new Error('Failed to resolve dashboards')
+        }
+
+        const payload = await response.json()
+        const dashboards: Array<{ id: string; updatedAt?: string; createdAt?: string }> = Array.isArray(
+          payload?.dashboards
+        )
+          ? payload.dashboards
+          : []
+
+        if (dashboards.length > 0) {
+          const [latestDashboard] = dashboards
+            .slice()
+            .sort(
+              (a, b) =>
+                new Date(b.updatedAt ?? b.createdAt ?? 0).getTime() -
+                new Date(a.updatedAt ?? a.createdAt ?? 0).getTime()
+            )
+
+          router.replace(`/dashboard?id=${latestDashboard.id}`)
+          return
+        }
+
+        router.replace('/packages')
+      } catch (error) {
+        console.error('Unable to resolve dashboard redirect:', error)
+        router.replace('/')
+      }
+    }
+
+    resolveDashboard()
+  }, [dashboardId, router])
+
+  useEffect(() => {
+    if (!dashboardId) {
+      return
+    }
+
+    setLoading(true)
 
     // Fetch initial dashboard data
     const fetchDashboard = async () => {

@@ -1,13 +1,13 @@
 'use client'
 
-import { useState, Suspense } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import { createBrowserClient } from '@supabase/ssr'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { supabase } from '@/lib/supabase/client'
 
 function LoginForm() {
   const router = useRouter()
@@ -17,12 +17,51 @@ function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const [oauthLoading, setOauthLoading] = useState(false)
   const [error, setError] = useState('')
 
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
+  useEffect(() => {
+    let isMounted = true
+
+    const syncAndRedirect = async () => {
+      const { data } = await supabase.auth.getUser()
+      const user = data.user
+      if (!isMounted || !user) {
+        return
+      }
+
+      try {
+        await fetch('/api/auth/claim', { credentials: 'include' })
+      } catch (claimError) {
+        console.error('Failed to sync user session on login:', claimError)
+      }
+
+      router.push(redirect)
+      router.refresh()
+    }
+
+    syncAndRedirect()
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === 'SIGNED_IN' && session) {
+        try {
+          await fetch('/api/auth/claim', { credentials: 'include' })
+        } catch (claimError) {
+          console.error('Failed to sync user session after OAuth login:', claimError)
+        }
+
+        router.push(redirect)
+        router.refresh()
+      }
+    })
+
+    return () => {
+      isMounted = false
+      subscription.unsubscribe()
+    }
+  }, [redirect, router])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -38,7 +77,7 @@ function LoginForm() {
       if (signInError) throw signInError
 
       // Claim user in database
-      await fetch('/api/auth/claim', { method: 'POST' })
+      await fetch('/api/auth/claim', { credentials: 'include' })
 
       router.push(redirect)
       router.refresh()
@@ -46,6 +85,24 @@ function LoginForm() {
       setError(err.message || 'Failed to login')
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleGoogleSignIn = async () => {
+    setOauthLoading(true)
+    setError('')
+
+    try {
+      await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/login?redirect=${encodeURIComponent(redirect)}`
+        }
+      })
+    } catch (err: any) {
+      console.error('Google sign-in failed:', err)
+      setError(err.message || 'Failed to sign in with Google')
+      setOauthLoading(false)
     }
   }
 
@@ -73,7 +130,7 @@ function LoginForm() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                disabled={loading}
+                disabled={loading || oauthLoading}
               />
             </div>
 
@@ -86,12 +143,24 @@ function LoginForm() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                disabled={loading}
+                disabled={loading || oauthLoading}
               />
             </div>
 
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full" disabled={loading || oauthLoading}>
               {loading ? 'Signing in...' : 'Sign In'}
+            </Button>
+
+            <div className="text-center text-xs uppercase tracking-wide text-gray-400">or</div>
+
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full"
+              onClick={handleGoogleSignIn}
+              disabled={loading || oauthLoading}
+            >
+              {oauthLoading ? 'Redirecting...' : 'Continue with Google'}
             </Button>
 
             <div className="text-center text-sm text-gray-600">
