@@ -1,19 +1,7 @@
 import type { Metadata } from 'next'
-import {
-  Tangerine,
-  Reenie_Beanie,
-  Caveat,
-  Patrick_Hand,
-  Funnel_Sans,
-} from 'next/font/google'
+import { Tangerine, Caveat, Patrick_Hand } from 'next/font/google'
 import './globals.css'
 import { Navigation } from '@/components/navigation'
-
-const caveat = Caveat({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-caveat',
-})
 
 const tangerine = Tangerine({
   subsets: ['latin'],
@@ -21,10 +9,10 @@ const tangerine = Tangerine({
   variable: '--font-tangerine',
 })
 
-const reenieBeanie = Reenie_Beanie({
+const caveat = Caveat({
   subsets: ['latin'],
-  weight: '400',
-  variable: '--font-reenie-beanie',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-caveat',
 })
 
 const patrickHand = Patrick_Hand({
@@ -33,15 +21,10 @@ const patrickHand = Patrick_Hand({
   variable: '--font-patrick-hand',
 })
 
-const funnelSans = Funnel_Sans({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-funnel-sans',
-})
-
 export const metadata: Metadata = {
   title: 'Tiny Weddings - Intimate Wedding Packages at Tiny Diner',
-  description: 'Celebrate your love with our curated wedding packages. From full-service Simple Package to custom Build Your Own options.',
+  description:
+    'Celebrate your love with our curated wedding packages. From full-service Simple Package to custom Build Your Own options.',
 }
 
 export default function RootLayout({
@@ -51,14 +34,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={`${funnelSans.className} ${tangerine.variable} ${caveat.variable} ${reenieBeanie.variable} ${patrickHand.variable}`}
-      >
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className={`${tangerine.variable} ${caveat.variable} ${patrickHand.variable}`}>
         <Navigation />
-        <main className="min-h-screen">
-          {children}
-        </main>
+        <main className="min-h-screen">{children}</main>
       </body>
     </html>
   )
 }
+

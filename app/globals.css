@@ -99,7 +99,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-funnel-sans), 'Funnel Sans', sans-serif;
+    font-family: 'Funnel Sans', 'Inter', sans-serif;
   }
   h1 {
     font-family: var(--font-tangerine), 'Tangerine', cursive;
