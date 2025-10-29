@@ -1,9 +1,36 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import {
+  Tangerine,
+  Reenie_Beanie,
+  Caveat,
+  Patrick_Hand,
+} from 'next/font/google'
 import './globals.css'
 import { Navigation } from '@/components/navigation'
 
-const inter = Inter({ subsets: ['latin'] })
+const caveat = Caveat({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-caveat',
+})
+
+const tangerine = Tangerine({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-tangerine',
+})
+
+const reenieBeanie = Reenie_Beanie({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-reenie-beanie',
+})
+
+const patrickHand = Patrick_Hand({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-patrick-hand',
+})
 
 export const metadata: Metadata = {
   title: 'Tiny Weddings - Intimate Wedding Packages at Tiny Diner',
@@ -17,7 +44,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body
+        className={`${caveat.className} ${tangerine.variable} ${reenieBeanie.variable} ${patrickHand.variable}`}
+      >
         <Navigation />
         <main className="min-h-screen">
           {children}

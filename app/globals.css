@@ -99,5 +99,22 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-caveat), 'Caveat', cursive;
+  }
+  h1 {
+    font-family: var(--font-tangerine), 'Tangerine', cursive;
+    letter-spacing: 0.01em;
+  }
+  h2,
+  h3 {
+    font-family: var(--font-reenie-beanie), 'Reenie Beanie', cursive;
+    letter-spacing: 0.01em;
+  }
+}
+
+@layer utilities {
+  .font-logo {
+    font-family: var(--font-patrick-hand), 'Patrick Hand', cursive;
+    letter-spacing: 0.02em;
   }
 }

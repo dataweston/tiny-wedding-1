@@ -8,7 +8,11 @@
         "start": "next start",
         "lint": "next lint",
         "type-check": "tsc --noEmit",
-        "prisma:generate": "prisma generate"
+        "prisma:generate": "prisma generate",
+        "seed": "tsx prisma/seed.ts"
+    },
+    "prisma": {
+        "seed": "tsx prisma/seed.ts"
     },
     "dependencies": {
         "@hookform/resolvers": "^5.2.2",
@@ -50,6 +54,8 @@
         "prisma": "^6.18.0",
         "tailwindcss": "^3.4.1",
         "tailwindcss-animate": "^1.0.7",
+        "ts-node": "^10.9.2",
+        "tsx": "^4.20.6",
         "typescript": "^5"
     }
 }

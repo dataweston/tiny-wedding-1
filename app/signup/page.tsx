@@ -61,6 +61,10 @@ function SignupContent() {
     return () => subscription.unsubscribe()
   }, [handlePostAuth])
 
+  const handleEmailSignup = () => {
+    router.push(`/signup/email?redirect=${encodeURIComponent(redirect)}`)
+  }
+
   const handleSignIn = async () => {
     setLoading(true)
     try {
@@ -87,7 +91,16 @@ function SignupContent() {
           </p>
         </div>
 
-        <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+        <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-3">
+          <Button
+            onClick={handleEmailSignup}
+            variant="outline"
+            className="w-full"
+            size="lg"
+          >
+            Sign Up with Email
+          </Button>
+
           <Button
             onClick={handleSignIn}
             disabled={loading}
@@ -96,6 +109,13 @@ function SignupContent() {
           >
             {loading ? 'Signing in...' : 'Continue with Google'}
           </Button>
+
+          <div className="text-center text-sm text-gray-600 pt-2">
+            Already have an account?{' '}
+            <a href="/login" className="text-rose-600 hover:underline">
+              Sign in
+            </a>
+          </div>
 
           <p className="text-sm text-gray-500 text-center mt-4">
             By signing up, you agree to our terms and privacy policy.

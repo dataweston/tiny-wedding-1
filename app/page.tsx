@@ -77,8 +77,8 @@ export default function Home() {
             <Card>
               <CardHeader>
                 <Group className="w-10 h-10 mb-2 text-rose-500" />
-                <CardTitle>Exclusive Venue</CardTitle>
-                <CardDescription>Private use of Tiny Diner space</CardDescription>
+                <CardTitle>Perfect Little Venues</CardTitle>
+                <CardDescription>Proud to work with Tiny Diner in Minneapolis</CardDescription>
               </CardHeader>
             </Card>
             

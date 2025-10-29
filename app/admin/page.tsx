@@ -162,14 +162,17 @@ export default function AdminPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" data-disable-motion>
         <ShieldLoading className="w-8 h-8 animate-spin text-rose-500" />
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-rose-50 to-white py-12 px-4 sm:px-6 lg:px-8">
+    <div
+      className="min-h-screen bg-gradient-to-b from-rose-50 to-white py-12 px-4 sm:px-6 lg:px-8"
+      data-disable-motion
+    >
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold mb-8">Admin Dashboard</h1>
 
