@@ -80,9 +80,11 @@ function MessagesContent() {
         schema: 'public',
         table: 'messages',
         filter: `dashboard_id=eq.${dashboardId}`
-      }, (_payload) => {
+      },
+      (_payload: any) => {
         fetchMessages()
-      })
+      }
+    )
       .subscribe()
 
     return () => {
