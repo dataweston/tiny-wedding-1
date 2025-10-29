@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { supabase } from '@/lib/supabase/client'
 import { BeehiveIcon } from '@/components/icons/beehive'
+import type { AuthChangeEvent, Session } from '@supabase/supabase-js'
 
 function SignupContent() {
   const searchParams = useSearchParams()
@@ -63,7 +64,7 @@ function SignupContent() {
     checkUser()
 
     // Listen for auth state changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event: AuthChangeEvent, session: Session | null) => {
       if (event === 'SIGNED_IN' && session) {
         await handlePostAuth()
       }
