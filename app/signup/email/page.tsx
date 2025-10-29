@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { createBrowserClient } from '@supabase/ssr'
@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
-export default function EmailSignupPage() {
+function EmailSignupForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const redirect = searchParams.get('redirect') || '/dashboard'
@@ -125,5 +125,17 @@ export default function EmailSignupPage() {
         </CardContent>
       </Card>
     </div>
+  )
+}
+
+export default function EmailSignupPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-rose-50 to-white px-4">
+        <div>Loading...</div>
+      </div>
+    }>
+      <EmailSignupForm />
+    </Suspense>
   )
 }
