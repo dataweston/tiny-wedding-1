@@ -27,7 +27,7 @@ export function AvailabilityCalendar({ onSelectDate, selectedDate }: Availabilit
         event: '*',
         schema: 'public',
         table: 'bookings'
-      }, (payload) => {
+      }, (payload: any) => {
         if (payload.eventType === 'INSERT') {
           const newDate = new Date(payload.new.event_date)
           setBookedDates(prev => [...prev, newDate])
