@@ -1,4 +1,4 @@
-import { createClient, type SupabaseClient, type RealtimeChannel } from '@supabase/supabase-js'
+import { createBrowserClient, type SupabaseClient, type RealtimeChannel } from '@supabase/ssr'
 
 let cachedClient: SupabaseClient | null | undefined
 
@@ -20,7 +20,7 @@ export function getSupabaseClient(): SupabaseClient | null {
     return null
   }
 
-  cachedClient = createClient(url, anonKey)
+  cachedClient = createBrowserClient(url, anonKey)
   return cachedClient
 }
 
