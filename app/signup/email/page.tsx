@@ -3,11 +3,11 @@
 import { useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import { createBrowserClient } from '@supabase/ssr'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { supabase } from '@/lib/supabase/client'
 
 function EmailSignupForm() {
   const router = useRouter()
@@ -19,11 +19,6 @@ function EmailSignupForm() {
   const [fullName, setFullName] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -44,7 +39,7 @@ function EmailSignupForm() {
       if (signUpError) throw signUpError
 
       // Claim user in database
-      await fetch('/api/auth/claim', { method: 'POST' })
+      await fetch('/api/auth/claim', { credentials: 'include' })
 
       router.push(redirect)
       router.refresh()
@@ -101,7 +96,7 @@ function EmailSignupForm() {
               <Input
                 id="password"
                 type="password"
-                placeholder="••••••••"
+                placeholder="********"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required

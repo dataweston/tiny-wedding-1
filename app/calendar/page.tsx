@@ -28,7 +28,7 @@ function CalendarContent() {
             {packageType === 'fast' ? 'Simple Package' : 'Build Your Own'} - Choose an available date
           </p>
           <p className="text-gray-500 mt-2">
-            Hold your date for 12 hours while you shop — $1,000 deposit required to finalize
+            Hold your date for 12 hours while you shop - $1,000 deposit required to finalize
           </p>
         </div>
 
@@ -59,7 +59,7 @@ function CalendarContent() {
         <div className="text-center">
           <Link href="/packages">
             <Button variant="ghost">
-              ← Back to Packages
+              Back to Packages
             </Button>
           </Link>
         </div>

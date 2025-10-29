@@ -18,6 +18,12 @@ function SignupContent() {
     const date = url.searchParams.get('date')
     const packageType = url.searchParams.get('package')
 
+    try {
+      await fetch('/api/auth/claim', { credentials: 'include' })
+    } catch (error) {
+      console.error('Failed to sync user profile after authentication:', error)
+    }
+
     if (date && packageType) {
       // This is a date holding request - create the booking
       try {

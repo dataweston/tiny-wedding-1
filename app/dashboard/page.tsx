@@ -150,7 +150,7 @@ function DashboardContent() {
   useEffect(() => {
     const claim = async () => {
       try {
-        await fetch('/api/auth/claim')
+        await fetch('/api/auth/claim', { credentials: 'include' })
       } catch (err) {
         // non-fatal
       }
