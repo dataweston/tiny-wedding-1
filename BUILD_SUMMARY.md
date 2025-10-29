@@ -8,13 +8,13 @@ A full-stack wedding package sales and client onboarding platform built with Nex
 
 ### 1. **Landing Page** ✅
 - Hero section with CTA
-- Services showcase (8 Soup Sisters services)
+- Services showcase (8 Alyssa Andes services)
 - Team section
 - Package preview
 - Responsive design
 
 ### 2. **Package Selection** ✅
-- Fast Package ($5,000) with complete service list
+- Simple Package ($5,000) with complete service list
 - Build Your Own (custom package)
 - Both require $1,000 deposit
 - Clear pricing breakdown
@@ -28,7 +28,7 @@ A full-stack wedding package sales and client onboarding platform built with Nex
 
 ### 4. **Payment Processing** ✅
 - **Deposit Payment**: $1,000 Square integration
-- **Balance Payment**: $4,000 Fast Package or variable Build Your Own
+- **Balance Payment**: $4,000 Simple Package or variable Build Your Own
 - Secure tokenization with Square Web Payments SDK
 - Payment status tracking
 
@@ -167,9 +167,9 @@ tiny-wedding/
 
 ## User Flows
 
-### Fast Package Flow
+### Simple Package Flow
 1. Landing page → "Get Started"
-2. Select "Fast Package"
+2. Select "Simple Package"
 3. Choose available date on calendar
 4. Pay $1,000 deposit (Square)
 5. Confirmation page with services included

@@ -17,13 +17,13 @@ export default function PackagesPage() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {/* Fast Package */}
+          {/* Simple Package */}
           <Card className="border-2 border-rose-500 relative">
             <div className="absolute top-4 right-4 bg-rose-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
               Popular
             </div>
             <CardHeader>
-              <CardTitle className="text-3xl">Fast Package</CardTitle>
+              <CardTitle className="text-3xl">Simple Package</CardTitle>
               <CardDescription className="text-lg">
                 All-inclusive, stress-free planning
               </CardDescription>
@@ -39,7 +39,7 @@ export default function PackagesPage() {
                 <ul className="space-y-2">
                   <li className="flex items-start">
                     <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                    <span>Event coordination & design by Soup Sisters</span>
+                    <span>Event coordination & design by Alyssa Andes</span>
                   </li>
                   <li className="flex items-start">
                     <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />

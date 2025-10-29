@@ -19,13 +19,13 @@
 - Updated environment variables to Square credentials
 - Updated payment integration examples
 
-### 2. ✅ Fast Package Details Added
+### 2. ✅ Simple Package Details Added
 
 **File Updated:**
 - `FAST_PACKAGE_DETAILS.md` - Complete rewrite
 
 **Services Included (Confirmed):**
-1. Event coordination & design by Soup Sisters
+1. Event coordination & design by Alyssa Andes
 2. Exclusive use of Tiny Diner space (ceremony + cocktail hour)
 3. Ceremony and cocktail hour furniture + setup
 4. Seasonal hors d'oeuvres by Local Effort
@@ -69,7 +69,7 @@
 - Non-refundable
 
 **Flow Changes:**
-- Fast Package: Calendar → Deposit → Confirmation
+- Simple Package: Calendar → Deposit → Confirmation
 - Build Your Own: Calendar → Deposit → Questionnaire → Dashboard
 
 ### 5. ✅ Database Schema Enhanced
@@ -97,7 +97,7 @@ bookings
 
 **Updated Tasks:**
 - All tasks updated to reflect Square integration
-- Fast Package task includes complete service list
+- Simple Package task includes complete service list
 - Database task includes bookings table
 
 **Total Tasks:** 19 (was 16)
@@ -120,7 +120,7 @@ bookings
 | Aspect | Before | After |
 |--------|--------|-------|
 | **Payment** | Stripe | Square |
-| **Fast Package** | Placeholder services | Complete list (8 services) |
+| **Simple Package** | Placeholder services | Complete list (8 services) |
 | **Booking Flow** | Direct to checkout/form | Calendar → Deposit → Continue |
 | **Deposit** | Not specified | $1,000 (both packages) |
 | **Availability** | Not real-time | Real-time calendar with instant updates |
@@ -154,7 +154,7 @@ SQUARE_WEBHOOK_SIGNATURE_KEY
 ## Action Items Completed
 
 ✅ Changed Stripe to Square everywhere  
-✅ Added complete Fast Package service list  
+✅ Added complete Simple Package service list  
 ✅ Designed real-time availability calendar  
 ✅ Specified $1,000 deposit requirement  
 ✅ Updated database schema with bookings table  
@@ -166,7 +166,7 @@ SQUARE_WEBHOOK_SIGNATURE_KEY
 
 All documentation has been updated to reflect:
 - Square payment integration
-- Complete Fast Package details
+- Complete Simple Package details
 - Real-time availability calendar
 - Deposit payment flows
 - Enhanced database schema

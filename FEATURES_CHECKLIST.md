@@ -24,10 +24,10 @@
 
 ## Package Selection
 - [ ] Modal or dedicated page for package selection
-- [ ] Fast Package option prominently displayed
+- [ ] Simple Package option prominently displayed
   - [ ] Price: $5,000 ($1,000 deposit + $4,000 balance)
   - [ ] Complete service list display
-  - [ ] "Choose Fast Package" button
+  - [ ] "Keep It Simple" button
   - [ ] Links to availability calendar
 - [ ] Build Your Own option
   - [ ] Description of custom approach
@@ -36,9 +36,9 @@
   - [ ] Links to availability calendar
 - [ ] Clear comparison between options
 
-## Fast Package Flow
+## Simple Package Flow
 - [ ] Display all included services (from FAST_PACKAGE_DETAILS.md)
-  - [ ] Event coordination by Soup Sisters
+  - [ ] Event coordination by Alyssa Andes
   - [ ] Exclusive Tiny Diner venue use
   - [ ] Ceremony & cocktail furniture/setup
   - [ ] Seasonal hors d'oeuvres by Local Effort

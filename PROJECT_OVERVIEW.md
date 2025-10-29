@@ -21,7 +21,7 @@ A wedding package sales and client onboarding platform that allows couples to ei
 - $1,000 deposit required to hold date
 - Square payment integration
 
-**Option A: Fast Package ($5,000)**
+**Option A: Simple Package ($5,000)**
 - Pre-configured service bundle
 - All-inclusive (coordination, venue, catering, florals, photography, officiant, bar)
 - Quick checkout process

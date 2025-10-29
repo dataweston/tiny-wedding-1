@@ -2,13 +2,20 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { BeehiveIcon } from '@/components/icons/beehive'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { SparklesCore } from '@/components/ui/shadcn-io/sparkles'
 import { Group, Camera, Flower, OrganicFood, GlassHalf, Spark, Check } from 'iconoir-react'
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-rose-50 to-white py-20 px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-gradient-to-b from-rose-50 to-white py-20 px-4 sm:px-6 lg:px-8">
+        <SparklesCore
+          className="absolute inset-0 h-full w-full -z-10 opacity-60 [mask-image:radial-gradient(circle_at_center,rgba(0,0,0,0.85),transparent_70%)]"
+          background="transparent"
+          particleColor="#fb7185"
+          particleDensity={120}
+        />
         <div className="max-w-7xl mx-auto text-center">
           <BeehiveIcon className="w-16 h-16 mx-auto mb-6 text-rose-500" />
           <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 mb-6">
@@ -41,7 +48,7 @@ export default function Home() {
               <CardHeader>
                 <Spark className="w-10 h-10 mb-2 text-rose-500" />
                 <CardTitle>Event Design</CardTitle>
-                <CardDescription>Professional coordination by Soup Sisters</CardDescription>
+                <CardDescription>Professional coordination by Alyssa Andes</CardDescription>
               </CardHeader>
             </Card>
             
@@ -117,7 +124,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <Card className="border-2 border-rose-500">
               <CardHeader>
-                <CardTitle className="text-2xl">Fast Package</CardTitle>
+                <CardTitle className="text-2xl">Simple Package</CardTitle>
                 <CardDescription>All-inclusive, pre-designed perfection</CardDescription>
               </CardHeader>
               <CardContent>
@@ -146,7 +153,7 @@ export default function Home() {
                 </ul>
                 <Link href="/packages">
                   <Button className="w-full" size="lg">
-                    Choose Fast Package
+                    Keep It Simple
                   </Button>
                 </Link>
               </CardContent>

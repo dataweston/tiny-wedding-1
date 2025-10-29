@@ -11,7 +11,7 @@ A modern wedding package sales and client onboarding platform built with Next.js
 ## 🎯 Purpose
 
 Tiny Weddings helps couples plan their special day by offering:
-1. **Fast Package** - Pre-configured $5,000 wedding package
+1. **Simple Package** - Pre-configured $5,000 wedding package
 2. **Build Your Own** - Custom package builder with real-time pricing
 
 ## 🏗️ Architecture
@@ -64,7 +64,7 @@ Open [http://localhost:3000](http://localhost:3000)
 ### For Clients
 - Browse wedding packages
 - Check real-time availability calendar
-- Choose $5k fast package or build custom
+- Choose $5k Simple Package or build custom
 - Pay $1k deposit to hold date (via Square)
 - Interactive dashboard with real-time pricing
 - Direct vendor messaging
@@ -204,7 +204,7 @@ npm run build
 
 - [ ] Landing page
 - [ ] Package selection
-- [ ] Fast package checkout
+- [ ] Simple Package checkout
 - [ ] Questionnaire
 - [ ] Client dashboard
 - [ ] Real-time updates

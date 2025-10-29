@@ -38,7 +38,7 @@ function CheckoutContent() {
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-4">Complete Your Booking</h1>
           <p className="text-xl text-gray-600">
-            {packageType === 'fast' ? 'Fast Package' : 'Build Your Own'}
+            {packageType === 'fast' ? 'Simple Package' : 'Build Your Own'}
           </p>
         </div>
 
@@ -58,7 +58,7 @@ function CheckoutContent() {
                 <div>
                   <div className="text-sm text-gray-600 mb-1">Package</div>
                   <div className="text-lg font-semibold">
-                    {packageType === 'fast' ? 'Fast Package' : 'Build Your Own'}
+                    {packageType === 'fast' ? 'Simple Package' : 'Build Your Own'}
                   </div>
                 </div>
 
@@ -68,7 +68,7 @@ function CheckoutContent() {
                     <ul className="space-y-2 text-sm">
                       <li className="flex items-start">
                         <Check className="w-4 h-4 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                        <span>Event coordination by Soup Sisters</span>
+                        <span>Event coordination by Alyssa Andes</span>
                       </li>
                       <li className="flex items-start">
                         <Check className="w-4 h-4 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />

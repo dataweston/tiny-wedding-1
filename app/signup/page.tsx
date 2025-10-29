@@ -1,36 +1,65 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense, useCallback } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { supabase } from '@/lib/supabase/client'
 import { BeehiveIcon } from '@/components/icons/beehive'
 
-export default function SignupPage() {
+function SignupContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const redirect = searchParams.get('redirect') || '/dashboard'
   const [loading, setLoading] = useState(false)
+
+  const handlePostAuth = useCallback(async () => {
+    // Check if this is a date holding redirect
+    const url = new URL(decodeURIComponent(redirect), window.location.origin)
+    const date = url.searchParams.get('date')
+    const packageType = url.searchParams.get('package')
+
+    if (date && packageType) {
+      // This is a date holding request - create the booking
+      try {
+        const res = await fetch('/api/bookings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ eventDate: date, packageType })
+        })
+        const data = await res.json()
+        if (res.ok && data.dashboardId) {
+          // Redirect to dashboard instead of back to calendar
+          router.push(`/dashboard?id=${data.dashboardId}`)
+          return
+        }
+      } catch (error) {
+        console.error('Error creating booking after signup:', error)
+      }
+    }
+
+    // Default redirect
+    router.push(decodeURIComponent(redirect))
+  }, [redirect, router])
 
   useEffect(() => {
     // Check if user is already authenticated
     const checkUser = async () => {
       const { data: { user } } = await supabase.auth.getUser()
       if (user) {
-        router.push(decodeURIComponent(redirect))
+        await handlePostAuth()
       }
     }
     checkUser()
 
     // Listen for auth state changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (event === 'SIGNED_IN' && session) {
-        router.push(decodeURIComponent(redirect))
+        await handlePostAuth()
       }
     })
 
     return () => subscription.unsubscribe()
-  }, [redirect, router])
+  }, [handlePostAuth])
 
   const handleSignIn = async () => {
     setLoading(true)
@@ -74,5 +103,13 @@ export default function SignupPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function SignupPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SignupContent />
+    </Suspense>
   )
 }

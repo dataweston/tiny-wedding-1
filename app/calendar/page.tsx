@@ -31,7 +31,7 @@ function CalendarContent() {
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-4">Select Your Wedding Date</h1>
           <p className="text-xl text-gray-600">
-            {packageType === 'fast' ? 'Fast Package' : 'Build Your Own'} - Choose an available date
+            {packageType === 'fast' ? 'Simple Package' : 'Build Your Own'} - Choose an available date
           </p>
           <p className="text-gray-500 mt-2">
             Hold your date for 12 hours while you shop — $1,000 deposit required to finalize

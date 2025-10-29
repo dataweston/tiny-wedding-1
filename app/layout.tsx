@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Tiny Weddings - Intimate Wedding Packages at Tiny Diner',
-  description: 'Celebrate your love with our curated wedding packages. From full-service Fast Package to custom Build Your Own options.',
+  description: 'Celebrate your love with our curated wedding packages. From full-service Simple Package to custom Build Your Own options.',
 }
 
 export default function RootLayout({

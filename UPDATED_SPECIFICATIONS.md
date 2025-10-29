@@ -8,10 +8,10 @@
 ### ✅ Payment Processor: Square (Not Stripe)
 - Using Square Web Payments SDK
 - Deposit: $1,000 (both packages)
-- Balance: $4,000 (Fast Package) or variable (Build Your Own)
+- Balance: $4,000 (Simple Package) or variable (Build Your Own)
 
-### ✅ Fast Package Details Confirmed
-Complete service list from Soup Sisters provided and documented.
+### ✅ Simple Package Details Confirmed
+Complete service list from Alyssa Andes provided and documented.
 
 ### ✅ Availability Calendar Required
 - Real-time calendar showing available/booked dates
@@ -21,7 +21,7 @@ Complete service list from Soup Sisters provided and documented.
 
 ## Complete User Flow
 
-### Flow for Fast Package ($5,000)
+### Flow for Simple Package ($5,000)
 
 ```
 1. Landing Page
@@ -30,9 +30,9 @@ Complete service list from Soup Sisters provided and documented.
    ↓
 3. Package Selection Screen
    - Shows both options
-   - Fast Package highlights
+   - Simple Package highlights
    ↓
-4. User selects "Fast Package"
+4. User selects "Simple Package"
    ↓
 5. **Availability Calendar** (NEW)
    - Shows available dates in real-time
@@ -244,10 +244,10 @@ CREATE TABLE packages (
   updated_at TIMESTAMP DEFAULT NOW()
 );
 
--- Seed Fast Package
+-- Seed Simple Package
 INSERT INTO packages (name, description, price, deposit_amount, is_fast_package)
 VALUES (
-  'Fast Package',
+  'Simple Package',
   'All-inclusive Tiny Wedding package',
   5000.00,
   1000.00,
@@ -343,11 +343,11 @@ NEXT_PUBLIC_SQUARE_APPLICATION_ID="sq0..." # Production app ID
 SQUARE_ENVIRONMENT="production"
 ```
 
-## Fast Package Service Details
+## Simple Package Service Details
 
-**Confirmed Services (from Soup Sisters):**
+**Confirmed Services (from Alyssa Andes):**
 
-1. **Event Coordination & Design** - Soup Sisters
+1. **Event Coordination & Design** - Alyssa Andes
 2. **Exclusive Venue Use** - Tiny Diner (ceremony + cocktail hour)
 3. **Furniture & Setup** - Ceremony and cocktail hour
 4. **Catering** - Seasonal hors d'oeuvres by Local Effort
@@ -417,7 +417,7 @@ enum BookingStatus {
 Booking Details:
 - Client: Jane Doe
 - Date: June 15, 2026
-- Package: Fast Package ($5,000)
+- Package: Simple Package ($5,000)
 - Deposit: ✅ Paid ($1,000) - Oct 28, 2025
 - Balance: ⏳ Due ($4,000) - May 15, 2026
 ```
@@ -520,14 +520,14 @@ export function AvailabilityCalendar() {
 
 **Updated Tasks:**
 - All documentation now reflects Square (not Stripe)
-- Fast Package details are complete
+- Simple Package details are complete
 - Database schema includes bookings table
 - Real-time includes calendar updates
 
 ## Questions Resolved
 
 ✅ **Payment Processor:** Square  
-✅ **Fast Package Services:** Complete list provided  
+✅ **Simple Package Services:** Complete list provided  
 ✅ **Deposit Amount:** $1,000 for both packages  
 ✅ **Availability System:** Real-time calendar required  
 ✅ **Double-Booking Prevention:** Database constraints + real-time updates  

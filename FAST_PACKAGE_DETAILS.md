@@ -1,4 +1,4 @@
-# Fast Package - $5,000
+# Simple Package - $5,000
 
 ## All-Inclusive Tiny Wedding Package
 
@@ -13,7 +13,7 @@ Our all-inclusive Tiny Wedding package is designed to give you everything you ne
 ## What's Included
 
 ### 1. **Event Coordination & Design**
-**By Soup Sisters**
+**By Alyssa Andes**
 - Complete event planning and coordination
 - Custom design tailored to your vision
 - Day-of coordination to ensure everything runs smoothly
@@ -83,7 +83,7 @@ Our all-inclusive Tiny Wedding package is designed to give you everything you ne
 2. **Select Your Date** - Choose an available date
 3. **Pay Deposit** - $1,000 deposit via Square to hold your date
 4. **Confirmation** - Receive instant booking confirmation
-5. **Planning** - Work with Soup Sisters on details
+5. **Planning** - Work with Alyssa Andes on details
 6. **Balance Due** - $4,000 balance paid before wedding day
 
 ---
@@ -137,7 +137,7 @@ Availability is shown in real-time on our booking calendar. Dates are held only 
 
 ---
 
-## Why Choose the Fast Package?
+## Why Choose the Simple Package?
 
 **Perfect if you:**
 - Want a simple, stress-free planning experience

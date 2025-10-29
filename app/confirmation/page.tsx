@@ -89,7 +89,7 @@ function ConfirmationContent() {
               <div>
                 <div className="text-sm text-gray-600 mb-1">Package</div>
                 <div className="text-lg font-semibold">
-                  {booking.isFastPackage ? 'Fast Package' : 'Build Your Own'}
+                  {booking.isFastPackage ? 'Simple Package' : 'Build Your Own'}
                 </div>
               </div>
             </div>
@@ -121,7 +121,7 @@ function ConfirmationContent() {
           </CardContent>
         </Card>
 
-        {/* Fast Package Services */}
+        {/* Simple Package Services */}
         {booking.isFastPackage && (
           <Card className="mb-6">
             <CardHeader>
@@ -131,7 +131,7 @@ function ConfirmationContent() {
               <ul className="grid md:grid-cols-2 gap-3">
                 <li className="flex items-start">
                   <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                  <span>Event coordination & design by Soup Sisters</span>
+                  <span>Event coordination & design by Alyssa Andes</span>
                 </li>
                 <li className="flex items-start">
                   <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
@@ -196,7 +196,7 @@ function ConfirmationContent() {
               <li className="flex items-start">
                 <span className="flex-shrink-0 w-6 h-6 bg-rose-500 text-white rounded-full flex items-center justify-center text-sm mr-3">{!booking.isFastPackage ? '3' : '2'}</span>
                 <div>
-                  <div className="font-semibold">Meet with Soup Sisters</div>
+                  <div className="font-semibold">Meet with Alyssa Andes</div>
                   <div className="text-sm text-gray-600">
                     Schedule your planning session
                   </div>

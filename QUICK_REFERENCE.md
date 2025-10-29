@@ -34,7 +34,7 @@ Single-page site with "Get Started" CTA
 - $1,000 deposit to hold date (via Square)
 - Date instantly marked as booked
 
-**A. Fast Package ($5,000)**
+**A. Simple Package ($5,000)**
 - Pre-configured bundle (coordination, venue, catering, florals, photography, officiant, bar)
 - Quick deposit checkout
 - $1,000 deposit + $4,000 balance
@@ -122,7 +122,7 @@ tiny-wedding/
 2. → **Foundation** - Next.js setup, Supabase, Prisma
 3. → **Landing** - Single page with CTA
 4. → **Package Selection** - Modal/page with 2 options
-5. → **Fast Package** - Checkout flow
+5. → **Simple Package** - Checkout flow
 6. → **Questionnaire** - Multi-step form
 7. → **Client Dashboard** - Interactive builder
 8. → **Real-time** - Supabase subscriptions
@@ -189,7 +189,7 @@ SQUARE_ENVIRONMENT
 4. Set up database schema
 5. Build landing page
 6. Build package selection
-7. Build fast package flow
+7. Build Simple Package flow
 8. Build questionnaire
 9. Build client dashboard
 10. Implement real-time
@@ -202,7 +202,7 @@ SQUARE_ENVIRONMENT
 
 ## Questions for Client (Still Needed)
 
-1. **Fast Package Services** - What's included in $5k?
+1. **Simple Package Services** - What's included in $5k?
 2. **Team Info** - Names, roles, photos for landing page
 3. **Branding** - Colors, logo, voice/tone
 4. **Vendor Categories** - Photography, catering, etc.?
