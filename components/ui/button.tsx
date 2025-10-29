@@ -96,23 +96,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const handleMouseUp: React.MouseEventHandler<HTMLButtonElement> =
       React.useCallback(
         (event) => {
-          if (disabled) {
-            onMouseUp?.(event)
-            return
-          }
-
-          const element = event.currentTarget
-          const isHovering = element.matches(':hover')
-
-          if (isHovering) {
-            animateHoverStart(element)
-          } else {
-            animateHoverEnd(element)
-          }
-
           onMouseUp?.(event)
         },
-        [disabled, onMouseUp]
+        [onMouseUp]
       )
 
     return (

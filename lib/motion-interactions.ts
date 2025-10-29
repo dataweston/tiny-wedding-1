@@ -4,13 +4,23 @@ import { animate } from '@motionone/dom'
 
 type AnimatableElement = HTMLElement | SVGElement
 type AnimationOptions = NonNullable<Parameters<typeof animate>[2]>
+type AnimationKeyframes = Parameters<typeof animate>[1]
 type AnimationControls = import('@motionone/types').AnimationControls
 
 const activeAnimations = new WeakMap<AnimatableElement, AnimationControls>()
 
-const hoverInKeyframes = { scale: 1.01 }
-const hoverOutKeyframes = { scale: 1 }
-const tapKeyframes = { scale: 0.985 }
+const MOTION_STATE = {
+  REST: 'rest',
+  HOVER: 'hover',
+  ACTIVE: 'active',
+} as const
+
+const HOVER_SCALE = 1.01
+const REST_SCALE = 1
+const TAP_SCALE = 0.985
+
+const hoverInKeyframes: AnimationKeyframes = { scale: HOVER_SCALE }
+const hoverOutKeyframes: AnimationKeyframes = { scale: REST_SCALE }
 
 const hoverInOptions: AnimationOptions = {
   duration: 0.18,
@@ -33,12 +43,22 @@ function shouldSkipMotion(element: AnimatableElement | null) {
   return Boolean(element.closest(DISABLE_SELECTOR))
 }
 
+function getMotionState(element: AnimatableElement | null) {
+  if (!element) return MOTION_STATE.REST
+  return (element.getAttribute('data-motion-state') as typeof MOTION_STATE[keyof typeof MOTION_STATE]) ?? MOTION_STATE.REST
+}
+
+function setMotionState(element: AnimatableElement | null, state: typeof MOTION_STATE[keyof typeof MOTION_STATE]) {
+  if (!element) return
+  element.setAttribute('data-motion-state', state)
+}
+
 function runAnimation(
   element: AnimatableElement | null,
-  keyframes: Record<string, number>,
+  keyframes: AnimationKeyframes,
   options: AnimationOptions
 ) {
-  if (shouldSkipMotion(element)) return
+  if (shouldSkipMotion(element)) return null
 
   const target = element as AnimatableElement
   const previous = activeAnimations.get(target)
@@ -56,16 +76,42 @@ function runAnimation(
         activeAnimations.delete(target)
       }
     })
+
+  return controls
 }
 
 export function animateHoverStart(element: AnimatableElement | null) {
+  if (!element) return
+  if (getMotionState(element) === MOTION_STATE.HOVER) return
+  setMotionState(element, MOTION_STATE.HOVER)
   runAnimation(element, hoverInKeyframes, hoverInOptions)
 }
 
 export function animateHoverEnd(element: AnimatableElement | null) {
+  if (!element) return
+  if (getMotionState(element) === MOTION_STATE.REST) return
+  setMotionState(element, MOTION_STATE.REST)
   runAnimation(element, hoverOutKeyframes, hoverOutOptions)
 }
 
 export function animateTap(element: AnimatableElement | null) {
-  runAnimation(element, tapKeyframes, tapOptions)
+  if (!element) return
+  setMotionState(element, MOTION_STATE.ACTIVE)
+
+  const controls = runAnimation(element, { scale: TAP_SCALE }, tapOptions)
+
+  controls
+    ?.finished.then(() => {
+      if (getMotionState(element) !== MOTION_STATE.ACTIVE) return
+
+      const stillHovering = element.matches(':hover')
+      const targetState = stillHovering ? MOTION_STATE.HOVER : MOTION_STATE.REST
+      const targetScale = stillHovering ? HOVER_SCALE : REST_SCALE
+      const targetOptions = stillHovering ? hoverInOptions : hoverOutOptions
+      setMotionState(element, targetState)
+      runAnimation(element, { scale: targetScale }, targetOptions)
+    })
+    .catch(() => {
+      // Swallow cancellation rejections
+    })
 }

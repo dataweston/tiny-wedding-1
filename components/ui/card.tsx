@@ -42,15 +42,6 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     const handleMouseUp: React.MouseEventHandler<HTMLDivElement> =
       React.useCallback(
         (event) => {
-          const element = event.currentTarget
-          const isHovering = element.matches(':hover')
-
-          if (isHovering) {
-            animateHoverStart(element)
-          } else {
-            animateHoverEnd(element)
-          }
-
           onMouseUp?.(event)
         },
         [onMouseUp]

@@ -82,15 +82,6 @@ export function Navigation() {
             onMouseEnter={(event) => animateHoverStart(event.currentTarget)}
             onMouseLeave={(event) => animateHoverEnd(event.currentTarget)}
             onMouseDown={(event) => animateTap(event.currentTarget)}
-            onMouseUp={(event) => {
-              const element = event.currentTarget
-              const isHovering = element.matches(':hover')
-              if (isHovering) {
-                animateHoverStart(element)
-              } else {
-                animateHoverEnd(element)
-              }
-            }}
           >
             {mobileMenuOpen ? (
               <Xmark className="w-6 h-6" />
