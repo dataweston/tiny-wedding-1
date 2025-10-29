@@ -108,8 +108,10 @@ NEXT_PUBLIC_APP_URL="http://localhost:3000"
 ```
 
 ### Step 3: Initialize Database
+**Note:** You'll need a working database connection first (Supabase or local PostgreSQL)
+
 ```bash
-# Generate Prisma client
+# Generate Prisma client (already done ✅)
 npx prisma generate
 
 # Push schema to database (for development)
@@ -118,9 +120,14 @@ npx prisma db push
 # Or create migration (for production)
 npx prisma migrate dev --name init
 
-# Seed database
+# Seed database (after database is connected)
 npm run seed
 ```
+
+**If you see "Can't reach database server":**
+- Verify `DATABASE_URL` in `.env.local` is correct
+- Ensure your Supabase project is running
+- Check your internet connection for cloud databases
 
 ### Step 4: Run Development Server
 ```bash
