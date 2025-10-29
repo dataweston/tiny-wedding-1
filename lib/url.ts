@@ -1,7 +1,7 @@
 const APP_BASE_PATH =
   process.env.NEXT_PUBLIC_BASE_PATH && process.env.NEXT_PUBLIC_BASE_PATH !== '/'
     ? process.env.NEXT_PUBLIC_BASE_PATH
-    : '/tiny-weddings'
+    : '/'
 
 function normalizePath(path: string): string {
   if (!path) return '/'
