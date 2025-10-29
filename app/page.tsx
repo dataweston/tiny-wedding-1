@@ -1,9 +1,13 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { BeehiveIcon } from '@/components/icons/beehive'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { SparklesCore } from '@/components/ui/sparkles'
 import { Group, Camera, Flower, OrganicFood, GlassHalf, Spark, Check } from 'iconoir-react'
+import heroImage from '@/lib/resource/IMG_8412.jpg'
+import simplePackageImage from '@/lib/resource/IMG_8422.jpg'
+import customPackageImage from '@/lib/resource/2S6A8682.jpg'
 
 export default function Home() {
   return (
@@ -35,6 +39,21 @@ export default function Home() {
               Get Started
             </Button>
           </Link>
+        </div>
+      </section>
+
+      {/* Feature Image */}
+      <section className="px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-5xl mx-auto overflow-hidden rounded-3xl shadow-lg">
+          <div className="relative aspect-[16/9]">
+            <Image
+              src={heroImage}
+              alt="Couple celebrating their Tiny Wedding"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
         </div>
       </section>
 
@@ -127,6 +146,15 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <Card className="border-2 border-rose-500">
               <CardHeader>
+                <div className="relative mb-4 overflow-hidden rounded-xl">
+                  <Image
+                    src={simplePackageImage}
+                    alt="Simple Package ceremony setup"
+                    width={800}
+                    height={600}
+                    className="object-cover w-full h-52"
+                  />
+                </div>
                 <CardTitle className="text-2xl">Simple Package</CardTitle>
                 <CardDescription>All-inclusive, pre-designed perfection</CardDescription>
               </CardHeader>
@@ -164,6 +192,15 @@ export default function Home() {
             
             <Card>
               <CardHeader>
+                <div className="relative mb-4 overflow-hidden rounded-xl">
+                  <Image
+                    src={customPackageImage}
+                    alt="Custom Tiny Wedding reception"
+                    width={800}
+                    height={600}
+                    className="object-cover w-full h-52"
+                  />
+                </div>
                 <CardTitle className="text-2xl">Build Your Own</CardTitle>
                 <CardDescription>Customize every detail your way</CardDescription>
               </CardHeader>

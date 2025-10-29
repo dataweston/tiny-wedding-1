@@ -13,12 +13,6 @@ function CalendarContent() {
   const router = useRouter()
   const packageType = searchParams.get('package') || 'fast'
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
-  const handleContinue = () => {
-    if (selectedDate) {
-      const dateStr = selectedDate.toISOString().split('T')[0]
-      router.push(`/checkout?package=${packageType}&date=${dateStr}`)
-    }
-  }
 
   // Force sign up instead of showing modal
   const handleHoldClick = () => {
@@ -52,12 +46,9 @@ function CalendarContent() {
               {formatDate(selectedDate)}
             </p>
             <div className="space-y-3">
-              <Button onClick={handleContinue} size="lg" className="w-full">
-                Continue to Payment
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-              <Button variant="outline" onClick={handleHoldClick} className="w-full">
+              <Button onClick={handleHoldClick} size="lg" className="w-full">
                 Hold Date (12 hours)
+                <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </div>
           </div>
