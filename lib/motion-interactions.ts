@@ -15,17 +15,14 @@ const tapKeyframes = { scale: 0.985 }
 const hoverInOptions: AnimationOptions = {
   duration: 0.18,
   easing: [0.2, 0, 0, 1],
-  fill: 'forwards',
 }
 const hoverOutOptions: AnimationOptions = {
   duration: 0.16,
   easing: [0.17, 0, 0.2, 1],
-  fill: 'forwards',
 }
 const tapOptions: AnimationOptions = {
   duration: 0.12,
   easing: [0.2, 0, 0, 1],
-  fill: 'forwards',
 }
 
 const DISABLE_SELECTOR =
