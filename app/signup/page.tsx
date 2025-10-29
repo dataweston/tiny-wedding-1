@@ -12,8 +12,11 @@ import { buildAbsoluteAppUrl, withAppBasePath } from '@/lib/url'
 function SignupContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
+  const date = searchParams.get('date')
+  const packageType = searchParams.get('package')
   const redirect = searchParams.get('redirect') || '/dashboard'
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
   const hasHandledAuth = useRef(false)
 
   const handlePostAuth = useCallback(async () => {
@@ -22,20 +25,18 @@ function SignupContent() {
       return
     }
     hasHandledAuth.current = true
-    // Check if this is a date holding redirect
-    const targetPath = decodeURIComponent(redirect)
-    const url = new URL(withAppBasePath(targetPath), window.location.origin)
-    const date = url.searchParams.get('date')
-    const packageType = url.searchParams.get('package')
 
     try {
+      // Sync user with database
       await fetch('/api/auth/claim', { credentials: 'include' })
     } catch (error) {
       console.error('Failed to sync user profile after authentication:', error)
+      setError('Failed to sync user profile. Please refresh the page.')
+      return
     }
 
+    // If we have date and package, this is a booking flow
     if (date && packageType) {
-      // This is a date holding request - create the booking
       try {
         const res = await fetch('/api/bookings', {
           method: 'POST',
@@ -43,8 +44,15 @@ function SignupContent() {
           body: JSON.stringify({ eventDate: date, packageType })
         })
         const data = await res.json()
-        if (res.ok && data.dashboardId) {
-          // For custom packages, go to questionnaire first to gather details
+
+        if (!res.ok) {
+          console.error('Booking creation failed:', data.error)
+          setError(data.error || 'Failed to create booking')
+          return
+        }
+
+        if (data.dashboardId) {
+          // For custom packages, go to questionnaire first
           // For fast packages, go straight to dashboard
           if (packageType === 'custom') {
             router.push(`/questionnaire?booking=${data.bookingId}`)
@@ -55,12 +63,14 @@ function SignupContent() {
         }
       } catch (error) {
         console.error('Error creating booking after signup:', error)
+        setError('Failed to create booking. Please try again.')
+        return
       }
     }
 
-    // Default redirect
-    router.push(decodeURIComponent(redirect))
-  }, [redirect, router])
+    // No booking needed, just redirect to intended destination
+    router.push(redirect)
+  }, [date, packageType, redirect, router])
 
   useEffect(() => {
     // Check if user is already authenticated
@@ -83,16 +93,29 @@ function SignupContent() {
   }, [handlePostAuth])
 
   const handleEmailSignup = () => {
-    router.push(`/signup/email?redirect=${encodeURIComponent(redirect)}`)
+    // Build the redirect URL with all necessary params
+    const params = new URLSearchParams()
+    if (date) params.set('date', date)
+    if (packageType) params.set('package', packageType)
+    if (redirect !== '/dashboard') params.set('redirect', redirect)
+    const redirectUrl = params.toString() ? `/signup/email?${params.toString()}` : '/signup/email'
+    router.push(redirectUrl)
   }
 
   const handleSignIn = async () => {
     setLoading(true)
     try {
+      // Build the OAuth redirect URL preserving date and package params
+      const params = new URLSearchParams()
+      if (date) params.set('date', date)
+      if (packageType) params.set('package', packageType)
+      if (redirect !== '/dashboard') params.set('redirect', redirect)
+      const redirectUrl = params.toString() ? `/signup?${params.toString()}` : '/signup'
+
       await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: buildAbsoluteAppUrl(`/signup?redirect=${encodeURIComponent(redirect)}`),
+          redirectTo: buildAbsoluteAppUrl(redirectUrl),
         },
       })
     } catch (error) {
@@ -113,6 +136,12 @@ function SignupContent() {
         </div>
 
         <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-3">
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-md text-sm">
+              {error}
+            </div>
+          )}
+
           <Button
             onClick={handleEmailSignup}
             variant="outline"

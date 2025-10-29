@@ -14,6 +14,8 @@ import { buildAbsoluteAppUrl } from '@/lib/url'
 function LoginForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const date = searchParams.get('date')
+  const packageType = searchParams.get('package')
   const redirect = searchParams.get('redirect') || '/dashboard'
 
   const [email, setEmail] = useState('')
@@ -44,6 +46,39 @@ function LoginForm() {
         await fetch('/api/auth/claim', { credentials: 'include' })
       } catch (claimError) {
         console.error('Failed to sync user session on login:', claimError)
+        setError('Failed to sync user session')
+        return
+      }
+
+      // If we have date and package, create booking
+      if (date && packageType) {
+        try {
+          const res = await fetch('/api/bookings', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ eventDate: date, packageType })
+          })
+          const data = await res.json()
+
+          if (!res.ok) {
+            console.error('Booking creation failed:', data.error)
+            setError(data.error || 'Failed to create booking')
+            return
+          }
+
+          if (data.dashboardId) {
+            if (packageType === 'custom') {
+              router.push(`/questionnaire?booking=${data.bookingId}`)
+            } else {
+              router.push(`/dashboard?id=${data.dashboardId}`)
+            }
+            return
+          }
+        } catch (error) {
+          console.error('Error creating booking after login:', error)
+          setError('Failed to create booking')
+          return
+        }
       }
 
       router.push(redirect)
@@ -66,6 +101,39 @@ function LoginForm() {
           await fetch('/api/auth/claim', { credentials: 'include' })
         } catch (claimError) {
           console.error('Failed to sync user session after OAuth login:', claimError)
+          setError('Failed to sync user session')
+          return
+        }
+
+        // If we have date and package, create booking
+        if (date && packageType) {
+          try {
+            const res = await fetch('/api/bookings', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ eventDate: date, packageType })
+            })
+            const bookingData = await res.json()
+
+            if (!res.ok) {
+              console.error('Booking creation failed:', bookingData.error)
+              setError(bookingData.error || 'Failed to create booking')
+              return
+            }
+
+            if (bookingData.dashboardId) {
+              if (packageType === 'custom') {
+                router.push(`/questionnaire?booking=${bookingData.bookingId}`)
+              } else {
+                router.push(`/dashboard?id=${bookingData.dashboardId}`)
+              }
+              return
+            }
+          } catch (error) {
+            console.error('Error creating booking after OAuth login:', error)
+            setError('Failed to create booking')
+            return
+          }
         }
 
         router.push(redirect)
@@ -77,7 +145,7 @@ function LoginForm() {
       isMounted = false
       subscription.unsubscribe()
     }
-  }, [redirect, router])
+  }, [date, packageType, redirect, router])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -95,6 +163,29 @@ function LoginForm() {
       // Claim user in database
       await fetch('/api/auth/claim', { credentials: 'include' })
 
+      // If we have date and package, create booking
+      if (date && packageType) {
+        const res = await fetch('/api/bookings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ eventDate: date, packageType })
+        })
+        const bookingData = await res.json()
+
+        if (!res.ok) {
+          throw new Error(bookingData.error || 'Failed to create booking')
+        }
+
+        if (bookingData.dashboardId) {
+          if (packageType === 'custom') {
+            router.push(`/questionnaire?booking=${bookingData.bookingId}`)
+          } else {
+            router.push(`/dashboard?id=${bookingData.dashboardId}`)
+          }
+          return
+        }
+      }
+
       router.push(redirect)
       router.refresh()
     } catch (err: any) {
@@ -109,10 +200,17 @@ function LoginForm() {
     setError('')
 
     try {
+      // Build the OAuth redirect URL preserving date and package params
+      const params = new URLSearchParams()
+      if (date) params.set('date', date)
+      if (packageType) params.set('package', packageType)
+      if (redirect !== '/dashboard') params.set('redirect', redirect)
+      const redirectUrl = params.toString() ? `/login?${params.toString()}` : '/login'
+
       await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: buildAbsoluteAppUrl(`/login?redirect=${encodeURIComponent(redirect)}`),
+          redirectTo: buildAbsoluteAppUrl(redirectUrl),
         },
       })
     } catch (err: any) {

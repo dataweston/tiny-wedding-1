@@ -16,7 +16,9 @@ function CalendarContent() {
 
   // Force sign up instead of showing modal
   const handleHoldClick = () => {
-    router.push(`/signup?redirect=/calendar?package=${packageType}&date=${selectedDate ? selectedDate.toISOString().split('T')[0] : ''}`)
+    if (!selectedDate) return
+    // Pass date and package as direct params, not nested in redirect URL
+    router.push(`/signup?package=${packageType}&date=${selectedDate.toISOString().split('T')[0]}`)
   }
 
   return (

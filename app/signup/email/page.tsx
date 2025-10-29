@@ -12,6 +12,8 @@ import { supabase } from '@/lib/supabase/client'
 function EmailSignupForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const date = searchParams.get('date')
+  const packageType = searchParams.get('package')
   const redirect = searchParams.get('redirect') || '/dashboard'
 
   const [email, setEmail] = useState('')
@@ -41,6 +43,32 @@ function EmailSignupForm() {
       // Claim user in database
       await fetch('/api/auth/claim', { credentials: 'include' })
 
+      // If we have date and package, create booking
+      if (date && packageType) {
+        const res = await fetch('/api/bookings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ eventDate: date, packageType })
+        })
+        const data = await res.json()
+
+        if (!res.ok) {
+          throw new Error(data.error || 'Failed to create booking')
+        }
+
+        if (data.dashboardId) {
+          // For custom packages, go to questionnaire first
+          // For fast packages, go straight to dashboard
+          if (packageType === 'custom') {
+            router.push(`/questionnaire?booking=${data.bookingId}`)
+          } else {
+            router.push(`/dashboard?id=${data.dashboardId}`)
+          }
+          return
+        }
+      }
+
+      // No booking needed, just redirect
       router.push(redirect)
       router.refresh()
     } catch (err: any) {
