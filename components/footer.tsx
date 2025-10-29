@@ -13,7 +13,7 @@ export function Footer() {
               <span className="text-xl font-bold">Tiny Weddings</span>
             </div>
             <p className="text-gray-400 text-sm">
-              Intimate celebrations at Tiny Diner by the Soup Sisters
+              coordinating beautiful, modern, small weddings in Minneapolis.
             </p>
           </div>
 

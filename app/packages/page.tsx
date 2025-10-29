@@ -80,7 +80,7 @@ export default function PackagesPage() {
                   </Button>
                 </Link>
                 <p className="text-sm text-gray-500 text-center">
-                  Perfect for up to 50 guests
+                  Perfect for up to 35 guests
                 </p>
               </div>
             </CardContent>
@@ -146,7 +146,7 @@ export default function PackagesPage() {
                   </Button>
                 </Link>
                 <p className="text-sm text-gray-500 text-center">
-                  Perfect for any guest count
+                  Perfect for up to 85 guests
                 </p>
               </div>
             </CardContent>
