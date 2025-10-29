@@ -91,6 +91,9 @@ function createRealtimeFallback(): SupabaseClient {
     }
   } as unknown as RealtimeChannel
 
+  const missingEnvMessage =
+    'Supabase client unavailable: missing environment variables. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to enable auth.'
+
   const noopClient: Partial<SupabaseClient> = {
     channel() {
       return noopChannel
@@ -115,7 +118,34 @@ function createRealtimeFallback(): SupabaseClient {
     },
     auth: {
       signInWithOAuth: async () => {
-        throw new Error('Supabase client unavailable: missing environment variables. OAuth sign-in is disabled.')
+        throw new Error(missingEnvMessage)
+      },
+      onAuthStateChange: () => {
+        if (process.env.NODE_ENV !== 'production') {
+          console.warn(missingEnvMessage)
+        }
+        return {
+          data: {
+            subscription: {
+              id: 'noop',
+              unsubscribe: () => {
+                if (process.env.NODE_ENV !== 'production') {
+                  console.warn('Supabase auth subscription unavailable - already unsubscribed.')
+                }
+              }
+            }
+          },
+          error: new Error(missingEnvMessage)
+        }
+      },
+      getUser: async () => {
+        if (process.env.NODE_ENV !== 'production') {
+          console.warn(missingEnvMessage)
+        }
+        return {
+          data: { user: null },
+          error: new Error(missingEnvMessage)
+        }
       },
       // Add other auth methods as needed
     } as any
