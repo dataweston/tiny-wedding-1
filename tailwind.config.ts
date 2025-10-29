@@ -15,13 +15,25 @@ const config: Config = {
   			ring: 'hsl(var(--ring))',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
+  			'color-bg': 'hsl(var(--color-bg))',
+  			'color-text': 'hsl(var(--color-text))',
   			primary: {
   				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
+  				foreground: 'hsl(var(--primary-foreground))',
+  				hover: 'hsl(var(--color-primary-hover))',
+  				active: 'hsl(var(--color-primary-active))'
   			},
   			secondary: {
   				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
+  				foreground: 'hsl(var(--secondary-foreground))',
+  				hover: 'hsl(var(--color-secondary-hover))',
+  				active: 'hsl(var(--color-secondary-active))'
+  			},
+  			accent: {
+  				DEFAULT: 'hsl(var(--accent))',
+  				foreground: 'hsl(var(--accent-foreground))',
+  				hover: 'hsl(var(--color-accent-hover))',
+  				active: 'hsl(var(--color-accent-active))'
   			},
   			destructive: {
   				DEFAULT: 'hsl(var(--destructive))',
@@ -30,10 +42,6 @@ const config: Config = {
   			muted: {
   				DEFAULT: 'hsl(var(--muted))',
   				foreground: 'hsl(var(--muted-foreground))'
-  			},
-  			accent: {
-  				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
   			},
   			popover: {
   				DEFAULT: 'hsl(var(--popover))',

@@ -44,16 +44,24 @@ function DashboardContent() {
   const [debouncedDashboard] = useDebounce(dashboard, 500)
 
   useEffect(() => {
-    if (!dashboardId) return
+    if (!dashboardId) {
+      // Redirect to home if no dashboard id
+      window.location.href = '/'
+      return
+    }
 
     // Fetch initial dashboard data
     const fetchDashboard = async () => {
       try {
         const response = await fetch(`/api/dashboard/${dashboardId}`)
+        if (!response.ok) {
+          throw new Error('Failed to fetch dashboard')
+        }
         const data = await response.json()
         setDashboard(data)
       } catch (error) {
         console.error('Error fetching dashboard:', error)
+        setDashboard(null)
       } finally {
         setLoading(false)
       }

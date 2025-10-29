@@ -6,6 +6,11 @@ import { Menu, Xmark } from 'iconoir-react'
 import { BeehiveIcon } from '@/components/icons/beehive'
 import { useState } from 'react'
 import { supabase } from '@/lib/supabase/client'
+import {
+  animateHoverEnd,
+  animateHoverStart,
+  animateTap,
+} from '@/lib/motion-interactions'
 
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -47,6 +52,18 @@ export function Navigation() {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden p-2"
+            onMouseEnter={(event) => animateHoverStart(event.currentTarget)}
+            onMouseLeave={(event) => animateHoverEnd(event.currentTarget)}
+            onMouseDown={(event) => animateTap(event.currentTarget)}
+            onMouseUp={(event) => {
+              const element = event.currentTarget
+              const isHovering = element.matches(':hover')
+              if (isHovering) {
+                animateHoverStart(element)
+              } else {
+                animateHoverEnd(element)
+              }
+            }}
           >
             {mobileMenuOpen ? (
               <Xmark className="w-6 h-6" />
