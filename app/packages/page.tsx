@@ -39,14 +39,14 @@ export default function PackagesPage() {
               </CardHeader>
               <CardContent className="flex flex-col items-center gap-4">
                 <div className="relative w-full">
-                  <div className="mx-auto w-2/3 max-w-xs">
+                  <div className="mx-auto w-1/2 max-w-[150px]">
                     <div className="relative aspect-[3/4] overflow-hidden rounded-3xl shadow-lg border border-white/60">
                       <Image
                         src={heroPackages}
                         alt="Vertical view of the Tiny Weddings celebration"
                         fill
                         className="object-cover"
-                        sizes="(max-width: 640px) 160px, (max-width: 1024px) 200px, 240px"
+                        sizes="(max-width: 640px) 110px, (max-width: 1024px) 140px, 180px"
                         priority
                       />
                     </div>
