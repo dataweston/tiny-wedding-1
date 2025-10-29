@@ -2,10 +2,12 @@
 
 import { useEffect, useState, Suspense, useCallback } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { supabase } from '@/lib/supabase/client'
 import { BeehiveIcon } from '@/components/icons/beehive'
 import type { AuthChangeEvent, Session } from '@supabase/supabase-js'
+import { buildAbsoluteAppUrl, withAppBasePath } from '@/lib/url'
 
 function SignupContent() {
   const searchParams = useSearchParams()
@@ -15,7 +17,8 @@ function SignupContent() {
 
   const handlePostAuth = useCallback(async () => {
     // Check if this is a date holding redirect
-    const url = new URL(decodeURIComponent(redirect), window.location.origin)
+    const targetPath = decodeURIComponent(redirect)
+    const url = new URL(withAppBasePath(targetPath), window.location.origin)
     const date = url.searchParams.get('date')
     const packageType = url.searchParams.get('package')
 
@@ -83,8 +86,8 @@ function SignupContent() {
       await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/signup?redirect=${encodeURIComponent(redirect)}`
-        }
+          redirectTo: buildAbsoluteAppUrl(`/signup?redirect=${encodeURIComponent(redirect)}`),
+        },
       })
     } catch (error) {
       console.error('Sign in error', error)
@@ -124,9 +127,9 @@ function SignupContent() {
 
           <div className="text-center text-sm text-gray-600 pt-2">
             Already have an account?{' '}
-            <a href="/login" className="text-rose-600 hover:underline">
+            <Link href="/login" className="text-rose-600 hover:underline">
               Sign in
-            </a>
+            </Link>
           </div>
 
           <p className="text-sm text-gray-500 text-center mt-4">

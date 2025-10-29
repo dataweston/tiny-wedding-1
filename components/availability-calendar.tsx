@@ -49,11 +49,11 @@ export function AvailabilityCalendar({ onSelectDate, selectedDate }: Availabilit
     // For now, using placeholder data
     const { data, error } = await supabase
       .from('bookings')
-      .select<{ event_date: string }>('event_date')
+      .select('event_date')
       .neq('status', 'CANCELLED')
 
     if (!error && data) {
-      setBookedDates(data.map((booking) => new Date(booking.event_date)))
+      setBookedDates(data.map((booking: { event_date: string }) => new Date(booking.event_date)))
     }
     setLoading(false)
   }

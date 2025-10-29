@@ -1,4 +1,5 @@
-import { createBrowserClient, type SupabaseClient, type RealtimeChannel } from '@supabase/ssr'
+import { createBrowserClient } from '@supabase/ssr'
+import type { SupabaseClient, RealtimeChannel } from '@supabase/supabase-js'
 
 let cachedClient: SupabaseClient | null | undefined
 

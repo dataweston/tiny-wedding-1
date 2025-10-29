@@ -477,11 +477,11 @@ function DashboardContent() {
 
         {/* Actions */}
         <div className="mt-8 flex gap-4 justify-center">
-          <Button variant="outline" onClick={() => window.location.href = `/messages?dashboard=${dashboardId}`}>
+          <Button variant="outline" onClick={() => router.push(`/messages?dashboard=${dashboardId}`)}>
             <MessageText className="w-4 h-4 mr-2" />
             Message Vendors
           </Button>
-          <Button onClick={() => window.location.href = `/balance?booking=${dashboard.booking.id}`}>
+          <Button onClick={() => router.push(`/balance?booking=${dashboard.booking.id}`)}>
             Finalize & Pay Balance
           </Button>
         </div>

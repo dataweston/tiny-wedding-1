@@ -1,5 +1,8 @@
+const basePath = '/tiny-weddings'
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  basePath,
   images: {
     remotePatterns: [
       {

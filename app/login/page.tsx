@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { supabase } from '@/lib/supabase/client'
 import type { AuthChangeEvent, Session } from '@supabase/supabase-js'
+import { buildAbsoluteAppUrl } from '@/lib/url'
 
 function LoginForm() {
   const router = useRouter()
@@ -97,8 +98,8 @@ function LoginForm() {
       await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/login?redirect=${encodeURIComponent(redirect)}`
-        }
+          redirectTo: buildAbsoluteAppUrl(`/login?redirect=${encodeURIComponent(redirect)}`),
+        },
       })
     } catch (err: any) {
       console.error('Google sign-in failed:', err)
