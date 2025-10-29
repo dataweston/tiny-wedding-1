@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, Suspense, useCallback } from 'react'
+import { useEffect, useState, Suspense, useCallback, useRef } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -14,8 +14,14 @@ function SignupContent() {
   const router = useRouter()
   const redirect = searchParams.get('redirect') || '/dashboard'
   const [loading, setLoading] = useState(false)
+  const hasHandledAuth = useRef(false)
 
   const handlePostAuth = useCallback(async () => {
+    // Prevent double-execution
+    if (hasHandledAuth.current) {
+      return
+    }
+    hasHandledAuth.current = true
     // Check if this is a date holding redirect
     const targetPath = decodeURIComponent(redirect)
     const url = new URL(withAppBasePath(targetPath), window.location.origin)

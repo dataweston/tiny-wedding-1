@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, Suspense } from 'react'
+import { useState, useEffect, Suspense, useRef } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -21,16 +21,24 @@ function LoginForm() {
   const [loading, setLoading] = useState(false)
   const [oauthLoading, setOauthLoading] = useState(false)
   const [error, setError] = useState('')
+  const hasHandledAuth = useRef(false)
 
   useEffect(() => {
     let isMounted = true
 
     const syncAndRedirect = async () => {
+      // Prevent double-execution
+      if (hasHandledAuth.current) {
+        return
+      }
+
       const { data } = await supabase.auth.getUser()
       const user = data.user
       if (!isMounted || !user) {
         return
       }
+
+      hasHandledAuth.current = true
 
       try {
         await fetch('/api/auth/claim', { credentials: 'include' })
@@ -48,6 +56,12 @@ function LoginForm() {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (event: AuthChangeEvent, session: Session | null) => {
       if (event === 'SIGNED_IN' && session) {
+        // Prevent double-execution
+        if (hasHandledAuth.current) {
+          return
+        }
+        hasHandledAuth.current = true
+
         try {
           await fetch('/api/auth/claim', { credentials: 'include' })
         } catch (claimError) {
