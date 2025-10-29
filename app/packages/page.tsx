@@ -29,34 +29,15 @@ export default function PackagesPage() {
         />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="max-w-xl mx-auto mb-12">
-            <Card className="bg-white/80 backdrop-blur-sm shadow-xl border-0">
-              <CardHeader className="pb-2 text-center">
-                <CardTitle className="text-xl text-gray-800">Tiny Weddings Snapshot</CardTitle>
-                <CardDescription className="text-sm text-gray-600">
-                  A vertical glimpse at our celebration styling.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="flex flex-col items-center gap-4">
-                <div className="relative w-full">
-                  <div className="mx-auto w-1/2 max-w-[150px]">
-                    <div className="relative aspect-[3/4] overflow-hidden rounded-3xl shadow-lg border border-white/60">
-                      <Image
-                        src={heroPackages}
-                        alt="Vertical view of the Tiny Weddings celebration"
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 640px) 110px, (max-width: 1024px) 140px, 180px"
-                        priority
-                      />
-                    </div>
-                  </div>
-                </div>
-                <p className="text-sm text-gray-600 text-center">
-                  Styled imagery scaled to half size to keep load times light while highlighting the mood.
-                </p>
-              </CardContent>
-            </Card>
+          <div className="flex justify-center mb-12">
+            <Image
+              src={heroPackages}
+              alt="Vertical view of the Tiny Weddings celebration"
+              width={675}
+              height={900}
+              className="h-[450px] w-auto object-contain"
+              priority
+            />
           </div>
 
           <div className="text-center max-w-3xl mx-auto">
