@@ -388,7 +388,7 @@ function DashboardContent() {
                     )}
 
                     <PaymentForm
-                      applicationId={process.env.NEXT_PUBLIC_SQUARE_APPLICATION_ID!}
+                      applicationId={process.env.NEXT_PUBLIC_SQUARE_APP_ID!}
                       locationId={process.env.NEXT_PUBLIC_SQUARE_LOCATION_ID!}
                       cardTokenizeResponseReceived={handlePaymentSubmit}
                     >

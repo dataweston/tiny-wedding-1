@@ -324,71 +324,75 @@ export default function AdminPage() {
     )
   }
 
-  const totalRevenue = bookings.reduce((sum, booking) => sum + Number(booking.totalCost) + 1000, 0)
-  const depositsPaid = bookings.length * 1000
+  // Calculate confirmed income from bookings with deposits paid
+  const confirmedBookings = bookings.filter(b => b.status === 'DEPOSIT_PAID' || b.status === 'CONFIRMED' || b.status === 'COMPLETED')
+  const remainingDue = confirmedBookings.reduce((sum, booking) => {
+    return sum + Number(booking.totalCost)
+  }, 0)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-rose-50 to-purple-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-surface py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <h1 className="text-4xl font-bold text-gray-900">Admin Dashboard</h1>
-            <p className="text-gray-600 mt-2">Welcome back, {userEmail}</p>
+            <h1 className="text-gray-900">Admin Dashboard</h1>
+            <p className="text-lg text-on-surface/80 mt-2">Welcome back, {userEmail}</p>
           </div>
-          <Button variant="outline" onClick={() => supabase.auth.signOut()}>
+          <Button variant="outline" onClick={() => supabase.auth.signOut()} className="text-on-surface">
             Sign Out
           </Button>
         </div>
 
         {/* Stats */}
-        <div className="grid md:grid-cols-4 gap-6 mb-8">
-          <Card className="border-amber-200 bg-white/80 backdrop-blur">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <Card className="bg-surface-container border-tertiary/20 shadow-elevation-2">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-700">Total Bookings</CardTitle>
-              <Calendar className="h-4 w-4 text-amber-600" />
+              <CardTitle className="text-sm font-[family-name:var(--font-patrick-hand-sc)] text-on-surface">Total Bookings</CardTitle>
+              <Calendar className="h-5 w-5 text-tertiary" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-amber-600">{bookings.length}</div>
+              <div className="text-2xl font-bold text-tertiary">{bookings.length}</div>
             </CardContent>
           </Card>
 
-          <Card className="border-rose-200 bg-white/80 backdrop-blur">
+          <Card className="bg-surface-container border-secondary/20 shadow-elevation-2">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-700">Active Dashboards</CardTitle>
-              <Group className="h-4 w-4 text-rose-600" />
+              <CardTitle className="text-sm font-[family-name:var(--font-patrick-hand-sc)] text-on-surface">Active Dashboards</CardTitle>
+              <Group className="h-5 w-5 text-secondary" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-rose-600">{dashboards.length}</div>
+              <div className="text-2xl font-bold text-secondary">{dashboards.length}</div>
             </CardContent>
           </Card>
 
-          <Card className="border-purple-200 bg-white/80 backdrop-blur">
+          <Card className="bg-surface-container border-primary/20 shadow-elevation-2">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-700">Total Vendors</CardTitle>
-              <Building className="h-4 w-4 text-purple-600" />
+              <CardTitle className="text-sm font-[family-name:var(--font-patrick-hand-sc)] text-on-surface">Total Vendors</CardTitle>
+              <Building className="h-5 w-5 text-primary" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-purple-600">{vendors.length}</div>
+              <div className="text-2xl font-bold text-primary">{vendors.length}</div>
             </CardContent>
           </Card>
 
-          <Card className="border-green-200 bg-white/80 backdrop-blur">
+          <Card className="bg-surface-container border-tertiary/20 shadow-elevation-2">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-700">Deposits Collected</CardTitle>
-              <DollarCircle className="h-4 w-4 text-green-600" />
+              <CardTitle className="text-sm font-[family-name:var(--font-patrick-hand-sc)] text-on-surface">Income Expected</CardTitle>
+              <DollarCircle className="h-5 w-5 text-tertiary" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold text-green-600">
-                ${depositsPaid.toLocaleString()}
+              <div className="text-2xl font-bold text-tertiary">
+                ${remainingDue.toLocaleString()}
               </div>
+              <p className="text-xs text-on-surface-variant mt-1">{confirmedBookings.length} confirmed</p>
             </CardContent>
           </Card>
         </div>
 
         {/* Tabs */}
         <Tabs defaultValue="bookings" className="space-y-6">
-          <TabsList className="bg-white/80 backdrop-blur border border-gray-200">
+          <TabsList className="bg-surface-container shadow-elevation-1">
             <TabsTrigger value="bookings">Bookings</TabsTrigger>
             <TabsTrigger value="dashboards">Client Dashboards</TabsTrigger>
             <TabsTrigger value="vendors">Vendors</TabsTrigger>
@@ -396,9 +400,9 @@ export default function AdminPage() {
 
           {/* Bookings Tab */}
           <TabsContent value="bookings">
-            <Card className="bg-white/90 backdrop-blur">
+            <Card className="bg-surface-container shadow-elevation-2">
               <CardHeader>
-                <CardTitle className="text-2xl text-gray-900">All Bookings</CardTitle>
+                <CardTitle className="font-[family-name:var(--font-patrick-hand-sc)] text-xl text-on-surface">All Bookings</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="overflow-x-auto">
@@ -452,9 +456,9 @@ export default function AdminPage() {
 
           {/* Dashboards Tab */}
           <TabsContent value="dashboards">
-            <Card className="bg-white/90 backdrop-blur">
+            <Card className="bg-surface-container shadow-elevation-2">
               <CardHeader>
-                <CardTitle className="text-2xl text-gray-900">Client Dashboards</CardTitle>
+                <CardTitle className="font-[family-name:var(--font-patrick-hand-sc)] text-xl text-on-surface">Client Dashboards</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -499,11 +503,11 @@ export default function AdminPage() {
 
           {/* Vendors Tab */}
           <TabsContent value="vendors">
-            <Card className="bg-white/90 backdrop-blur">
+            <Card className="bg-surface-container shadow-elevation-2">
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-2xl text-gray-900">Vendors</CardTitle>
-                  <Button onClick={() => { resetVendorForm(); setShowVendorForm(true); }} className="bg-purple-600">
+                  <CardTitle className="font-[family-name:var(--font-patrick-hand-sc)] text-xl text-on-surface">Vendors</CardTitle>
+                  <Button onClick={() => { resetVendorForm(); setShowVendorForm(true); }} className="bg-primary text-on-primary">
                     <Plus className="w-4 h-4 mr-2" />
                     Add Vendor
                   </Button>
