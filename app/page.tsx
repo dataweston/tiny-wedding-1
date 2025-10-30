@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { Metadata } from 'next'
 import { Button } from '@/components/ui/button'
 import { BeehiveIcon } from '@/components/icons/beehive'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -9,10 +10,20 @@ import { Group, Camera, Flower, OrganicFood, GlassHalf, Spark, Check } from 'ico
 import heroImage from '@/lib/resource/IMG_8412.jpg'
 import simplePackageImage from '@/lib/resource/IMG_8422.jpg'
 import customPackageImage from '@/lib/resource/2S6A8682.jpg'
+import { homeMetadata } from '@/lib/seo/metadata'
+import { getHomePageSchema } from '@/lib/seo/schema'
+
+export const metadata: Metadata = homeMetadata
 
 export default function Home() {
+  const schema = getHomePageSchema()
   return (
     <main className="min-h-screen bg-surface">
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <MotionInit />
       {/* Hero Section - M3 Expressive */}
       <section className="relative overflow-hidden bg-gradient-to-b from-surface-container-low via-primary-container/10 to-surface py-8 px-4 sm:px-6 lg:px-8">

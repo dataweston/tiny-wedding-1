@@ -13,10 +13,17 @@ import { Check, ArrowRight, Calendar } from 'iconoir-react'
 import { SparklesCore } from '@/components/ui/sparkles'
 import Image from 'next/image'
 import heroPackages from '@/lib/resource/IMG_7064.jpg'
+import { getPackagesPageSchema } from '@/lib/seo/schema'
 
 export default function PackagesPage() {
+  const schema = getPackagesPageSchema()
   return (
     <main className="min-h-screen bg-surface">
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <section className="relative overflow-hidden bg-gradient-to-b from-surface-container-low via-primary-container/10 to-surface">
         <SparklesCore
           background="transparent"

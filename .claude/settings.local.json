@@ -14,7 +14,9 @@
       "Bash(rm:*)",
       "Bash(tree:*)",
       "Bash(timeout 10 tail:*)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(find:*)",
+      "Bash(timeout 120 npm run build:*)"
     ],
     "deny": [],
     "ask": []

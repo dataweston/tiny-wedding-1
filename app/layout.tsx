@@ -23,9 +23,69 @@ const patrickHandSc = Patrick_Hand_SC({
 })
 
 export const metadata: Metadata = {
-  title: 'Tiny Weddings - Intimate Wedding Packages at Tiny Diner',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://tinyweddings.com'),
+  title: {
+    default: 'Tiny Weddings - Intimate Wedding Packages in Minneapolis',
+    template: '%s | Tiny Weddings',
+  },
   description:
-    'Celebrate your love with our curated wedding packages. From full-service Simple Package to custom Build Your Own options.',
+    'Celebrate your love with our curated wedding packages in Minneapolis, MN. From full-service Simple Package ($5,000) to custom Build Your Own options. Professional coordination, beautiful venues, and unforgettable memories.',
+  keywords: [
+    'tiny weddings',
+    'intimate wedding',
+    'small wedding',
+    'Minneapolis wedding',
+    'wedding packages',
+    'wedding venue Minneapolis',
+    'micro wedding',
+    'elopement packages',
+    'Tiny Diner wedding',
+    'wedding coordination Minneapolis',
+  ],
+  authors: [{ name: 'Tiny Weddings' }],
+  creator: 'Tiny Weddings',
+  publisher: 'Tiny Weddings',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: '/',
+    siteName: 'Tiny Weddings',
+    title: 'Tiny Weddings - Intimate Wedding Packages in Minneapolis',
+    description:
+      'Celebrate your love with our curated wedding packages in Minneapolis, MN. From full-service Simple Package ($5,000) to custom Build Your Own options.',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Tiny Weddings - Intimate Wedding Packages',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Tiny Weddings - Intimate Wedding Packages in Minneapolis',
+    description:
+      'Celebrate your love with our curated wedding packages in Minneapolis, MN. From full-service Simple Package ($5,000) to custom Build Your Own options.',
+    images: ['/og-image.jpg'],
+    creator: '@tinyweddings',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 }
 
 export default function RootLayout({
