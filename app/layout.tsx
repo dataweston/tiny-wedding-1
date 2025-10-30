@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Tangerine, Caveat, Patrick_Hand_SC } from 'next/font/google'
+import { Tangerine, Caveat, Patrick_Hand_SC, Inter } from 'next/font/google'
 import './globals.css'
 import { Navigation } from '@/components/navigation'
 
@@ -21,6 +21,11 @@ const patrickHandSc = Patrick_Hand_SC({
   variable: '--font-patrick-hand-sc',
 })
 
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+})
+
 export const metadata: Metadata = {
   title: 'Tiny Weddings - Intimate Wedding Packages at Tiny Diner',
   description:
@@ -34,7 +39,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${tangerine.variable} ${caveat.variable} ${patrickHandSc.variable}`}>
+      <body className={`${inter.variable} ${tangerine.variable} ${caveat.variable} ${patrickHandSc.variable}`}>
         <Navigation />
         <main className="min-h-screen">{children}</main>
       </body>

@@ -106,10 +106,12 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Funnel Sans', 'Inter', sans-serif;
+    font-family: 'Funnel Sans', var(--font-inter), 'Inter', sans-serif;
   }
   h1 {
     font-family: var(--font-tangerine), 'Tangerine', cursive;
+    font-size: 3.5rem;
+    line-height: 1.2;
     letter-spacing: 0.01em;
   }
   h2,

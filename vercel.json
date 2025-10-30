@@ -13,7 +13,7 @@
   "redirects": [
     {
       "source": "/(.*)",
-      "destination": "https://localeffortfood.com/tiny-weddings",
+      "destination": "https://tiny-weddings.localeffortfood.com",
       "has": [
         {
           "type": "host",
