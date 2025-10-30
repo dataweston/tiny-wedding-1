@@ -18,6 +18,7 @@ interface Vendor {
 interface ServiceSelectorProps {
   dashboardId: string
   onClose: () => void
+  onServiceAdded?: () => void
 }
 
 const serviceCategories = [
@@ -32,7 +33,7 @@ const serviceCategories = [
   'Other'
 ]
 
-export function ServiceSelector({ dashboardId, onClose }: ServiceSelectorProps) {
+export function ServiceSelector({ dashboardId, onClose, onServiceAdded }: ServiceSelectorProps) {
   const [vendors, setVendors] = useState<Vendor[]>([])
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
@@ -73,6 +74,8 @@ export function ServiceSelector({ dashboardId, onClose }: ServiceSelectorProps) 
       })
 
       if (response.ok) {
+        // Notify parent component that a service was added
+        onServiceAdded?.()
         onClose()
       }
     } catch (error) {

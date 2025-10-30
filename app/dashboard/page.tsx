@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, Suspense } from 'react'
+import { useState, useEffect, useCallback, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -48,6 +48,25 @@ function DashboardContent() {
   const [showPaymentForm, setShowPaymentForm] = useState(false)
   const [paymentProcessing, setPaymentProcessing] = useState(false)
   const [paymentError, setPaymentError] = useState('')
+
+  // Fetch dashboard data - extracted as a reusable function
+  const fetchDashboard = useCallback(async () => {
+    if (!dashboardId) return
+
+    try {
+      const response = await fetch(`/api/dashboard/${dashboardId}`)
+      if (!response.ok) {
+        throw new Error('Failed to fetch dashboard')
+      }
+      const data = await response.json()
+      setDashboard(data)
+    } catch (error) {
+      console.error('Error fetching dashboard:', error)
+      setDashboard(null)
+    } finally {
+      setLoading(false)
+    }
+  }, [dashboardId])
 
   useEffect(() => {
     if (dashboardId) {
@@ -98,24 +117,6 @@ function DashboardContent() {
     }
 
     setLoading(true)
-
-    // Fetch initial dashboard data
-    const fetchDashboard = async () => {
-      try {
-        const response = await fetch(`/api/dashboard/${dashboardId}`)
-        if (!response.ok) {
-          throw new Error('Failed to fetch dashboard')
-        }
-        const data = await response.json()
-        setDashboard(data)
-      } catch (error) {
-        console.error('Error fetching dashboard:', error)
-        setDashboard(null)
-      } finally {
-        setLoading(false)
-      }
-    }
-
     fetchDashboard()
 
     // Set up real-time subscription
@@ -144,7 +145,7 @@ function DashboardContent() {
     return () => {
       supabase.removeChannel(channel)
     }
-  }, [dashboardId])
+  }, [dashboardId, fetchDashboard])
 
   // Claim holds / ensure Prisma user exists when a user signs in via Supabase
   useEffect(() => {
@@ -242,51 +243,82 @@ function DashboardContent() {
     )
   }
 
+  const handleReleaseDate = async () => {
+    if (!confirm('Are you sure you want to release this date? This will delete your booking and dashboard.')) {
+      return
+    }
+
+    try {
+      const response = await fetch(`/api/bookings/${dashboard.booking.id}/release`, {
+        method: 'POST'
+      })
+
+      if (response.ok) {
+        router.push('/packages')
+      } else {
+        const data = await response.json()
+        alert(data.error || 'Failed to release date')
+      }
+    } catch (error) {
+      console.error('Error releasing date:', error)
+      alert('Failed to release date')
+    }
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-rose-50 to-white py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-rose-50 to-purple-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-4xl font-bold mb-2">Your Wedding Dashboard</h1>
-              <p className="text-xl text-gray-600">
-                Plan your perfect celebration
-              </p>
-            </div>
-            <div className="flex items-center gap-2 text-sm text-gray-600">
-              {saving ? (
-                <>
-                  <ShieldLoading className="w-4 h-4 animate-spin" />
-                  Saving...
-                </>
-              ) : lastSaved ? (
-                <>
-                  <CheckCircle className="w-4 h-4 text-green-500" />
-                  Saved {format(lastSaved, 'h:mm a')}
-                </>
-              ) : null}
-            </div>
+        {/* Header with Dreamy Title */}
+        <div className="mb-12 text-center">
+          <h1 className="text-5xl font-bold mb-3 bg-gradient-to-r from-amber-600 via-rose-600 to-purple-600 bg-clip-text text-transparent">
+            Your Dream Wedding
+          </h1>
+          <p className="text-xl text-gray-700 italic">
+            Let&apos;s bring your vision to life
+          </p>
+          <div className="flex items-center justify-center gap-2 text-sm text-gray-600 mt-4">
+            {saving ? (
+              <>
+                <ShieldLoading className="w-4 h-4 animate-spin text-rose-500" />
+                <span>Saving your changes...</span>
+              </>
+            ) : lastSaved ? (
+              <>
+                <CheckCircle className="w-4 h-4 text-emerald-500" />
+                <span>All saved • {format(lastSaved, 'h:mm a')}</span>
+              </>
+            ) : null}
           </div>
         </div>
 
-        {/* Key Info */}
+        {/* Key Info Cards */}
         <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <Card>
+          <Card className="border-amber-200 bg-white/80 backdrop-blur shadow-lg">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Wedding Date</CardTitle>
-              <Calendar className="h-4 w-4 text-gray-600" />
+              <CardTitle className="text-sm font-medium text-gray-700">Your Special Day</CardTitle>
+              <Calendar className="h-5 w-5 text-amber-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">
+              <div className="text-2xl font-bold text-amber-600">
                 {format(new Date(dashboard.booking.eventDate), 'MMMM d, yyyy')}
               </div>
+              {!dashboard.booking.depositPaid && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleReleaseDate}
+                  className="mt-3 text-xs border-amber-300 text-amber-700"
+                >
+                  Release Date
+                </Button>
+              )}
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="border-rose-200 bg-white/80 backdrop-blur shadow-lg">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Current Total</CardTitle>
-              <DollarCircle className="h-4 w-4 text-gray-600" />
+              <CardTitle className="text-sm font-medium text-gray-700">Investment</CardTitle>
+              <DollarCircle className="h-5 w-5 text-rose-600" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-rose-600">
@@ -294,23 +326,23 @@ function DashboardContent() {
               </div>
               <p className="text-xs text-gray-600 mt-1">
                 {dashboard.booking.depositPaid ? (
-                  '+ $1,000 deposit already paid'
+                  <span className="text-emerald-600 font-medium">✓ $1,000 deposit paid</span>
                 ) : dashboard.booking.heldUntil && new Date(dashboard.booking.heldUntil) > new Date() ? (
-                  `Date held until ${format(new Date(dashboard.booking.heldUntil), 'MMMM d, h:mm a')}`
+                  `Held until ${format(new Date(dashboard.booking.heldUntil), 'MMM d, h:mm a')}`
                 ) : (
-                  '$1,000 deposit required to secure date'
+                  '$1,000 deposit to secure'
                 )}
               </p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="border-purple-200 bg-white/80 backdrop-blur shadow-lg">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Status</CardTitle>
-              <MessageText className="h-4 w-4 text-gray-600" />
+              <CardTitle className="text-sm font-medium text-gray-700">Planning Status</CardTitle>
+              <MessageText className="h-5 w-5 text-purple-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold capitalize">
+              <div className="text-2xl font-bold capitalize text-purple-600">
                 {dashboard.status.toLowerCase().replace('_', ' ')}
               </div>
             </CardContent>
@@ -319,36 +351,36 @@ function DashboardContent() {
 
         {/* Deposit Payment Banner - Show if deposit not paid */}
         {!dashboard.booking.depositPaid && (
-          <Card className="mb-8 border-2 border-rose-500 bg-rose-50">
+          <Card className="mb-8 border-2 border-rose-400 bg-gradient-to-r from-rose-50 to-pink-50 shadow-xl">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-rose-900">
-                <Wallet className="h-5 w-5" />
-                Secure Your Date - Pay Deposit
+              <CardTitle className="flex items-center gap-2 text-rose-800">
+                <Wallet className="h-6 w-6" />
+                Secure Your Dream Day
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <p className="text-gray-700">
-                  Your date is currently held until{' '}
-                  <span className="font-semibold">
+                <p className="text-gray-800 text-lg">
+                  Your date is reserved until{' '}
+                  <span className="font-bold text-rose-600">
                     {dashboard.booking.heldUntil
                       ? format(new Date(dashboard.booking.heldUntil), 'MMMM d, h:mm a')
                       : 'the hold expires'}
                   </span>
-                  . Pay the $1,000 deposit now to confirm your booking.
+                  . Secure it now with your $1,000 deposit.
                 </p>
 
                 {!showPaymentForm ? (
                   <Button
                     onClick={() => setShowPaymentForm(true)}
                     size="lg"
-                    className="bg-rose-600 hover:bg-rose-700"
+                    className="bg-gradient-to-r from-rose-500 to-pink-500 text-white font-semibold shadow-lg"
                   >
                     <Wallet className="w-5 h-5 mr-2" />
                     Pay $1,000 Deposit Now
                   </Button>
                 ) : (
-                  <div className="bg-white p-6 rounded-lg border border-gray-200">
+                  <div className="bg-white p-6 rounded-lg border-2 border-rose-200 shadow-md">
                     {paymentError && (
                       <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded text-red-700 text-sm">
                         {paymentError}
@@ -385,12 +417,12 @@ function DashboardContent() {
           </Card>
         )}
 
-        {/* Services */}
-        <Card className="mb-8">
+        {/* Services Section */}
+        <Card className="mb-8 border-purple-200 bg-white/80 backdrop-blur shadow-lg">
           <CardHeader>
             <div className="flex items-center justify-between">
-              <CardTitle>Your Services</CardTitle>
-              <Button onClick={() => setShowServiceSelector(true)}>
+              <CardTitle className="text-2xl text-gray-900">Your Wedding Team</CardTitle>
+              <Button onClick={() => setShowServiceSelector(true)} className="bg-purple-600">
                 <Plus className="w-4 h-4 mr-2" />
                 Add Service
               </Button>
@@ -398,23 +430,25 @@ function DashboardContent() {
           </CardHeader>
           <CardContent>
             {dashboard.services.length === 0 ? (
-              <div className="text-center py-12">
-                <p className="text-gray-600 mb-4">
-                  No services added yet. Get started by adding your first service!
-                </p>
-                <Button onClick={() => setShowServiceSelector(true)}>
-                  <Plus className="w-4 h-4 mr-2" />
-                  Add Your First Service
-                </Button>
+              <div className="text-center py-16 px-4">
+                <div className="max-w-md mx-auto">
+                  <p className="text-gray-600 text-lg mb-6">
+                    Start building your dream team! Add the perfect vendors to bring your vision to life.
+                  </p>
+                  <Button onClick={() => setShowServiceSelector(true)} size="lg" className="bg-gradient-to-r from-purple-500 to-pink-500">
+                    <Plus className="w-5 h-5 mr-2" />
+                    Browse Vendors
+                  </Button>
+                </div>
               </div>
             ) : (
               <div className="grid md:grid-cols-2 gap-4">
                 {dashboard.services.map((service) => (
-                  <Card key={service.id}>
+                  <Card key={service.id} className="border-l-4 border-l-purple-400 bg-gradient-to-r from-white to-purple-50">
                     <CardHeader>
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
-                          <CardTitle className="text-lg">{service.service}</CardTitle>
+                          <CardTitle className="text-lg text-gray-900">{service.service}</CardTitle>
                           <p className="text-sm text-gray-600 mt-1">
                             by {service.vendorName}
                           </p>
@@ -424,15 +458,15 @@ function DashboardContent() {
                           size="sm"
                           onClick={() => removeService(service.id)}
                         >
-                          <Xmark className="w-4 h-4 text-gray-600" />
+                          <Xmark className="w-4 h-4 text-gray-500" />
                         </Button>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-gray-600 mb-3">
+                      <p className="text-sm text-gray-700 mb-3">
                         {service.description}
                       </p>
-                      <div className="text-xl font-bold text-rose-600">
+                      <div className="text-xl font-bold text-purple-600">
                         ${service.cost.toLocaleString()}
                       </div>
                     </CardContent>
@@ -444,9 +478,9 @@ function DashboardContent() {
         </Card>
 
         {/* Wedding Details */}
-        <Card>
+        <Card className="border-amber-200 bg-white/80 backdrop-blur shadow-lg">
           <CardHeader>
-            <CardTitle>Your Wedding Details</CardTitle>
+            <CardTitle className="text-2xl text-gray-900">Your Love Story Details</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-2 gap-6">
@@ -491,6 +525,7 @@ function DashboardContent() {
         <ServiceSelector
           dashboardId={dashboardId!}
           onClose={() => setShowServiceSelector(false)}
+          onServiceAdded={fetchDashboard}
         />
       )}
     </div>

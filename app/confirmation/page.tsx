@@ -1,12 +1,13 @@
 'use client'
 
 import { useEffect, useState, Suspense } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { formatCurrency, formatDate } from '@/lib/utils'
 import { Check, Download, Mail } from 'iconoir-react'
+import { SimpleQuestionnaire } from '@/components/simple-questionnaire'
 
 interface Booking {
   id: string
@@ -20,9 +21,11 @@ interface Booking {
 
 function ConfirmationContent() {
   const searchParams = useSearchParams()
+  const router = useRouter()
   const bookingId = searchParams.get('booking')
   const [booking, setBooking] = useState<Booking | null>(null)
   const [loading, setLoading] = useState(true)
+  const [showQuestionnaire, setShowQuestionnaire] = useState(false)
 
   useEffect(() => {
     if (bookingId) {
@@ -182,19 +185,17 @@ function ConfirmationContent() {
                   </div>
                 </div>
               </li>
-              {!booking.isFastPackage && (
-                <li className="flex items-start">
-                  <span className="flex-shrink-0 w-6 h-6 bg-rose-500 text-white rounded-full flex items-center justify-center text-sm mr-3">2</span>
-                  <div>
-                    <div className="font-semibold">Complete your questionnaire</div>
-                    <div className="text-sm text-gray-600">
-                      Tell us about your vision and preferences
-                    </div>
-                  </div>
-                </li>
-              )}
               <li className="flex items-start">
-                <span className="flex-shrink-0 w-6 h-6 bg-rose-500 text-white rounded-full flex items-center justify-center text-sm mr-3">{!booking.isFastPackage ? '3' : '2'}</span>
+                <span className="flex-shrink-0 w-6 h-6 bg-rose-500 text-white rounded-full flex items-center justify-center text-sm mr-3">2</span>
+                <div>
+                  <div className="font-semibold">Complete your {booking.isFastPackage ? 'details' : 'questionnaire'}</div>
+                  <div className="text-sm text-gray-600">
+                    Tell us about your vision and preferences
+                  </div>
+                </div>
+              </li>
+              <li className="flex items-start">
+                <span className="flex-shrink-0 w-6 h-6 bg-rose-500 text-white rounded-full flex items-center justify-center text-sm mr-3">3</span>
                 <div>
                   <div className="font-semibold">Meet with Alyssa Andes</div>
                   <div className="text-sm text-gray-600">
@@ -203,7 +204,7 @@ function ConfirmationContent() {
                 </div>
               </li>
               <li className="flex items-start">
-                <span className="flex-shrink-0 w-6 h-6 bg-rose-500 text-white rounded-full flex items-center justify-center text-sm mr-3">{!booking.isFastPackage ? '4' : '3'}</span>
+                <span className="flex-shrink-0 w-6 h-6 bg-rose-500 text-white rounded-full flex items-center justify-center text-sm mr-3">4</span>
                 <div>
                   <div className="font-semibold">Balance payment</div>
                   <div className="text-sm text-gray-600">
@@ -217,7 +218,11 @@ function ConfirmationContent() {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          {!booking.isFastPackage && (
+          {booking.isFastPackage ? (
+            <Button size="lg" onClick={() => setShowQuestionnaire(true)} className="bg-gradient-to-r from-amber-500 via-rose-500 to-purple-500">
+              Complete Your Details
+            </Button>
+          ) : (
             <Link href={`/questionnaire?booking=${booking.id}`}>
               <Button size="lg">
                 Start Questionnaire
@@ -242,6 +247,17 @@ function ConfirmationContent() {
           </Link>
         </div>
       </div>
+
+      {/* Simple Questionnaire Modal */}
+      {showQuestionnaire && booking && (
+        <SimpleQuestionnaire
+          bookingId={booking.id}
+          onComplete={(dashboardId) => {
+            router.push(`/dashboard?id=${dashboardId}`)
+          }}
+          onCancel={() => setShowQuestionnaire(false)}
+        />
+      )}
     </div>
   )
 }
