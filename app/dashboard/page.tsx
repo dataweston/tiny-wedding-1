@@ -271,7 +271,7 @@ function DashboardContent() {
         {/* Header with Dreamy Title */}
         <div className="mb-12 text-center">
           <h1 className="text-5xl font-bold mb-3 bg-gradient-to-r from-amber-600 via-rose-600 to-purple-600 bg-clip-text text-transparent">
-            Your Dream Wedding
+            {dashboard.questionnaireData.contactPerson} & {dashboard.questionnaireData.partnerName}&apos;s Dream Wedding
           </h1>
           <p className="text-xl text-gray-700 italic">
             Let&apos;s bring your vision to life
@@ -295,7 +295,7 @@ function DashboardContent() {
         <div className="grid md:grid-cols-3 gap-6 mb-8">
           <Card className="border-amber-200 bg-white/80 backdrop-blur shadow-lg">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-700">Your Special Day</CardTitle>
+              <CardTitle className="text-sm font-medium text-gray-700 font-[family-name:var(--font-patrick-hand-sc)]">Your Special Day</CardTitle>
               <Calendar className="h-5 w-5 text-amber-600" />
             </CardHeader>
             <CardContent>
@@ -317,7 +317,7 @@ function DashboardContent() {
 
           <Card className="border-rose-200 bg-white/80 backdrop-blur shadow-lg">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-700">Investment</CardTitle>
+              <CardTitle className="text-sm font-medium text-gray-700 font-[family-name:var(--font-patrick-hand-sc)]">Current Estimate</CardTitle>
               <DollarCircle className="h-5 w-5 text-rose-600" />
             </CardHeader>
             <CardContent>
@@ -338,7 +338,7 @@ function DashboardContent() {
 
           <Card className="border-purple-200 bg-white/80 backdrop-blur shadow-lg">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-700">Planning Status</CardTitle>
+              <CardTitle className="text-sm font-medium text-gray-700 font-[family-name:var(--font-patrick-hand-sc)]">Planning Status</CardTitle>
               <MessageText className="h-5 w-5 text-purple-600" />
             </CardHeader>
             <CardContent>

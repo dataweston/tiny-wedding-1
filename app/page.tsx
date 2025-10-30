@@ -71,64 +71,64 @@ export default function Home() {
             <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized group">
               <CardHeader>
                 <Spark className="w-10 h-10 mb-2 text-tertiary/70 group-hover:text-tertiary transition-colors duration-200" />
-                <CardTitle className="text-title-large font-baseline">Event Design</CardTitle>
-                <CardDescription className="text-body-medium text-on-surface-variant">Professional coordination by Alyssa Andes</CardDescription>
+                <CardTitle className="font-[family-name:var(--font-patrick-hand-sc)] text-xl">Event Design</CardTitle>
+                <CardDescription className="text-sm text-on-surface-variant">Professional coordination by Alyssa Andes</CardDescription>
               </CardHeader>
             </Card>
 
             <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized group">
               <CardHeader>
                 <Group className="w-10 h-10 mb-2 text-secondary/70 group-hover:text-secondary transition-colors duration-200" />
-                <CardTitle className="text-title-large font-baseline">Perfect Little Venues</CardTitle>
-                <CardDescription className="text-body-medium text-on-surface-variant">Proud to work with Tiny Diner in Minneapolis</CardDescription>
+                <CardTitle className="font-[family-name:var(--font-patrick-hand-sc)] text-xl">Perfect Little Venues</CardTitle>
+                <CardDescription className="text-sm text-on-surface-variant">Proud to work with Tiny Diner in Minneapolis</CardDescription>
               </CardHeader>
             </Card>
 
             <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized group">
               <CardHeader>
                 <OrganicFood className="w-10 h-10 mb-2 text-tertiary/70 group-hover:text-tertiary transition-colors duration-200" />
-                <CardTitle className="text-title-large font-baseline">Catering</CardTitle>
-                <CardDescription className="text-body-medium text-on-surface-variant">Seasonal hors d&apos;oeuvres by Local Effort</CardDescription>
+                <CardTitle className="font-[family-name:var(--font-patrick-hand-sc)] text-xl">Catering</CardTitle>
+                <CardDescription className="text-sm text-on-surface-variant">Seasonal hors d&apos;oeuvres by Local Effort</CardDescription>
               </CardHeader>
             </Card>
 
             <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized group">
               <CardHeader>
                 <GlassHalf className="w-10 h-10 mb-2 text-secondary/70 group-hover:text-secondary transition-colors duration-200" />
-                <CardTitle className="text-title-large font-baseline">Bar Service</CardTitle>
-                <CardDescription className="text-body-medium text-on-surface-variant">Curated drinks & pro bartender</CardDescription>
+                <CardTitle className="font-[family-name:var(--font-patrick-hand-sc)] text-xl">Bar Service</CardTitle>
+                <CardDescription className="text-sm text-on-surface-variant">Curated drinks & pro bartender</CardDescription>
               </CardHeader>
             </Card>
 
             <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized group">
               <CardHeader>
                 <Flower className="w-10 h-10 mb-2 text-tertiary/70 group-hover:text-tertiary transition-colors duration-200" />
-                <CardTitle className="text-title-large font-baseline">Florals</CardTitle>
-                <CardDescription className="text-body-medium text-on-surface-variant">Seasonal ceremony design & bouquet</CardDescription>
+                <CardTitle className="font-[family-name:var(--font-patrick-hand-sc)] text-xl">Florals</CardTitle>
+                <CardDescription className="text-sm text-on-surface-variant">Seasonal ceremony design & bouquet</CardDescription>
               </CardHeader>
             </Card>
 
             <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized group">
               <CardHeader>
                 <BeehiveIcon className="w-10 h-10 mb-2 text-primary" />
-                <CardTitle className="text-title-large font-baseline">Officiant</CardTitle>
-                <CardDescription className="text-body-medium text-on-surface-variant">Licensed officiant services</CardDescription>
+                <CardTitle className="font-[family-name:var(--font-patrick-hand-sc)] text-xl">Officiant</CardTitle>
+                <CardDescription className="text-sm text-on-surface-variant">Licensed officiant services</CardDescription>
               </CardHeader>
             </Card>
 
             <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized group">
               <CardHeader>
                 <Camera className="w-10 h-10 mb-2 text-secondary/70 group-hover:text-secondary transition-colors duration-200" />
-                <CardTitle className="text-title-large font-baseline">Photography</CardTitle>
-                <CardDescription className="text-body-medium text-on-surface-variant">Ceremony & portraits included</CardDescription>
+                <CardTitle className="font-[family-name:var(--font-patrick-hand-sc)] text-xl">Photography</CardTitle>
+                <CardDescription className="text-sm text-on-surface-variant">Ceremony & portraits included</CardDescription>
               </CardHeader>
             </Card>
 
             <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized group">
               <CardHeader>
                 <Check className="w-10 h-10 mb-2 text-tertiary/70 group-hover:text-tertiary transition-colors duration-200" />
-                <CardTitle className="text-title-large font-baseline">All-Inclusive</CardTitle>
-                <CardDescription className="text-body-medium text-on-surface-variant">No hidden fees or surprises</CardDescription>
+                <CardTitle className="font-[family-name:var(--font-patrick-hand-sc)] text-xl">All-Inclusive</CardTitle>
+                <CardDescription className="text-sm text-on-surface-variant">No hidden fees or surprises</CardDescription>
               </CardHeader>
             </Card>
           </div>
@@ -157,8 +157,8 @@ export default function Home() {
                     className="object-cover w-full h-52"
                   />
                 </div>
-                <CardTitle className="text-title-large font-expressive text-on-surface">Simple Package</CardTitle>
-                <CardDescription className="text-body-medium text-on-surface-variant">All-inclusive, pre-designed perfection</CardDescription>
+                <CardTitle className="font-[family-name:var(--font-patrick-hand-sc)] text-2xl text-on-surface">Simple Package</CardTitle>
+                <CardDescription className="text-sm text-on-surface-variant">All-inclusive, pre-designed perfection</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="text-display-medium font-expressive text-tertiary mb-4">$5,000</div>
@@ -203,8 +203,8 @@ export default function Home() {
                     className="object-cover w-full h-52"
                   />
                 </div>
-                <CardTitle className="text-title-large font-expressive text-on-surface">Build Your Own</CardTitle>
-                <CardDescription className="text-body-medium text-on-surface-variant">Customize every detail your way</CardDescription>
+                <CardTitle className="font-[family-name:var(--font-patrick-hand-sc)] text-2xl text-on-surface">Build Your Own</CardTitle>
+                <CardDescription className="text-sm text-on-surface-variant">Customize every detail your way</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="text-display-medium font-expressive text-primary mb-4">Custom</div>

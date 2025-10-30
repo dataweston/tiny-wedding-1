@@ -56,8 +56,8 @@ export default function PackagesPage() {
                   Popular
                 </div>
                 <CardHeader>
-                  <CardTitle className="text-title-large font-expressive text-on-surface">Simple Package</CardTitle>
-                  <CardDescription className="text-body-medium text-on-surface-variant">
+                  <CardTitle className="font-[family-name:var(--font-patrick-hand-sc)] text-2xl text-on-surface">Simple Package</CardTitle>
+                  <CardDescription className="text-sm text-on-surface-variant">
                     All-inclusive, stress-free planning
                   </CardDescription>
                 </CardHeader>
@@ -122,8 +122,8 @@ export default function PackagesPage() {
               {/* Build Your Own */}
               <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-3 transition-shadow duration-[var(--md-sys-motion-duration-medium-2)] ease-emphasized">
                 <CardHeader>
-                  <CardTitle className="text-title-large font-expressive text-on-surface">Build Your Own</CardTitle>
-                  <CardDescription className="text-body-medium text-on-surface-variant">
+                  <CardTitle className="font-[family-name:var(--font-patrick-hand-sc)] text-2xl text-on-surface">Build Your Own</CardTitle>
+                  <CardDescription className="text-sm text-on-surface-variant">
                     Customize every detail your way
                   </CardDescription>
                 </CardHeader>
