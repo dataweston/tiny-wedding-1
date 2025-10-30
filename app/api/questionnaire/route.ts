@@ -5,8 +5,18 @@ export async function POST(request: Request) {
   try {
     const { bookingId, questionnaireData } = await request.json()
 
+    if (typeof bookingId !== 'string' || !bookingId.trim()) {
+      return NextResponse.json({ error: 'Missing bookingId' }, { status: 400 })
+    }
+
+    if (typeof questionnaireData !== 'object' || questionnaireData === null) {
+      return NextResponse.json({ error: 'Invalid questionnaire data' }, { status: 400 })
+    }
+
+    const normalizedBookingId = bookingId.trim()
+
     const booking = await prisma.booking.findUnique({
-      where: { id: bookingId },
+      where: { id: normalizedBookingId },
       include: { client: true }
     })
 
@@ -16,7 +26,7 @@ export async function POST(request: Request) {
 
     // Check if dashboard already exists
     let dashboard = await prisma.clientDashboard.findUnique({
-      where: { bookingId }
+      where: { bookingId: normalizedBookingId }
     })
 
     if (dashboard) {

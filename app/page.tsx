@@ -22,7 +22,7 @@ export default function Home() {
           maxSize={1.2}
           particleDensity={80}
           className="absolute inset-0 w-full h-full"
-          particleColor="var(--md-sys-color-tertiary)"
+          particleColor="#f97316"
           speed={0.6}
         />
         <div className="relative z-10 max-w-7xl mx-auto text-center">
@@ -34,7 +34,7 @@ export default function Home() {
             Intimate, Beautiful, Unforgettable
           </p>
           <p className="text-body-large text-on-surface/80 mb-8 max-w-2xl mx-auto">
-            All-inclusive wedding packages at Tiny Diner for celebrations that matter most
+            Providing small, elegant, and tasteful wedding ceremonies in Minneapolis, MN. Build your own vendor package.
           </p>
           <Link href="/packages">
             <Button size="lg" className="md-state-layer md-state-layer-primary bg-primary-container text-primary-container-foreground hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-4)] ease-emphasized text-title-medium px-8 py-6">
@@ -47,7 +47,7 @@ export default function Home() {
       {/* Feature Image - M3 XL Shape */}
       <section className="px-4 sm:px-6 lg:px-8 bg-surface py-8">
         <div className="max-w-5xl mx-auto overflow-hidden rounded-[28px] shadow-elevation-2">
-          <div className="relative aspect-[16/9]">
+          <div className="relative aspect-[4/3] sm:aspect-[16/9]">
             <Image
               src={heroImage}
               alt="Couple celebrating their Tiny Wedding"
@@ -68,47 +68,47 @@ export default function Home() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" data-scroll-reveal>
-            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized">
+            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized group">
               <CardHeader>
-                <Spark className="w-10 h-10 mb-2 text-tertiary" />
+                <Spark className="w-10 h-10 mb-2 text-tertiary/70 group-hover:text-tertiary transition-colors duration-200" />
                 <CardTitle className="text-title-large font-baseline">Event Design</CardTitle>
                 <CardDescription className="text-body-medium text-on-surface-variant">Professional coordination by Alyssa Andes</CardDescription>
               </CardHeader>
             </Card>
 
-            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized">
+            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized group">
               <CardHeader>
-                <Group className="w-10 h-10 mb-2 text-tertiary" />
+                <Group className="w-10 h-10 mb-2 text-secondary/70 group-hover:text-secondary transition-colors duration-200" />
                 <CardTitle className="text-title-large font-baseline">Perfect Little Venues</CardTitle>
                 <CardDescription className="text-body-medium text-on-surface-variant">Proud to work with Tiny Diner in Minneapolis</CardDescription>
               </CardHeader>
             </Card>
 
-            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized">
+            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized group">
               <CardHeader>
-                <OrganicFood className="w-10 h-10 mb-2 text-tertiary" />
+                <OrganicFood className="w-10 h-10 mb-2 text-tertiary/70 group-hover:text-tertiary transition-colors duration-200" />
                 <CardTitle className="text-title-large font-baseline">Catering</CardTitle>
                 <CardDescription className="text-body-medium text-on-surface-variant">Seasonal hors d&apos;oeuvres by Local Effort</CardDescription>
               </CardHeader>
             </Card>
 
-            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized">
+            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized group">
               <CardHeader>
-                <GlassHalf className="w-10 h-10 mb-2 text-tertiary" />
+                <GlassHalf className="w-10 h-10 mb-2 text-secondary/70 group-hover:text-secondary transition-colors duration-200" />
                 <CardTitle className="text-title-large font-baseline">Bar Service</CardTitle>
                 <CardDescription className="text-body-medium text-on-surface-variant">Curated drinks & pro bartender</CardDescription>
               </CardHeader>
             </Card>
 
-            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized">
+            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized group">
               <CardHeader>
-                <Flower className="w-10 h-10 mb-2 text-tertiary" />
+                <Flower className="w-10 h-10 mb-2 text-tertiary/70 group-hover:text-tertiary transition-colors duration-200" />
                 <CardTitle className="text-title-large font-baseline">Florals</CardTitle>
                 <CardDescription className="text-body-medium text-on-surface-variant">Seasonal ceremony design & bouquet</CardDescription>
               </CardHeader>
             </Card>
 
-            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized">
+            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized group">
               <CardHeader>
                 <BeehiveIcon className="w-10 h-10 mb-2 text-primary" />
                 <CardTitle className="text-title-large font-baseline">Officiant</CardTitle>
@@ -116,17 +116,17 @@ export default function Home() {
               </CardHeader>
             </Card>
 
-            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized">
+            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized group">
               <CardHeader>
-                <Camera className="w-10 h-10 mb-2 text-tertiary" />
+                <Camera className="w-10 h-10 mb-2 text-secondary/70 group-hover:text-secondary transition-colors duration-200" />
                 <CardTitle className="text-title-large font-baseline">Photography</CardTitle>
                 <CardDescription className="text-body-medium text-on-surface-variant">Ceremony & portraits included</CardDescription>
               </CardHeader>
             </Card>
 
-            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized">
+            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized group">
               <CardHeader>
-                <Check className="w-10 h-10 mb-2 text-tertiary" />
+                <Check className="w-10 h-10 mb-2 text-tertiary/70 group-hover:text-tertiary transition-colors duration-200" />
                 <CardTitle className="text-title-large font-baseline">All-Inclusive</CardTitle>
                 <CardDescription className="text-body-medium text-on-surface-variant">No hidden fees or surprises</CardDescription>
               </CardHeader>

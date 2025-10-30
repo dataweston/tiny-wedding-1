@@ -16,8 +16,8 @@ import heroPackages from '@/lib/resource/IMG_7064.jpg'
 
 export default function PackagesPage() {
   return (
-    <main className="min-h-screen bg-white">
-      <section className="relative overflow-hidden bg-gradient-to-b from-rose-50 via-amber-50 to-white">
+    <main className="min-h-screen bg-surface">
+      <section className="relative overflow-hidden bg-gradient-to-b from-surface-container-low via-primary-container/10 to-surface">
         <SparklesCore
           background="transparent"
           minSize={0.4}
@@ -28,91 +28,91 @@ export default function PackagesPage() {
           speed={0.6}
         />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="flex justify-center mb-12">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16">
+          <div className="flex justify-center mb-8 md:mb-12">
             <Image
               src={heroPackages}
               alt="Vertical view of the Tiny Weddings celebration"
               width={675}
               height={900}
-              className="h-[450px] w-auto object-contain"
+              className="h-[300px] sm:h-[400px] md:h-[450px] w-auto object-contain"
               priority
             />
           </div>
 
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl font-bold mb-4">Choose Your Package</h1>
-            <p className="text-xl text-gray-600">
+            <h1 className="text-display-large font-expressive text-foreground mb-4">Choose Your Package</h1>
+            <p className="text-body-large text-on-surface/80">
               Select the perfect option for your celebration. Both packages require a
               $1,000 deposit to hold your date.
             </p>
           </div>
 
-          <div className="mt-12">
-            <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="mt-8 md:mt-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
               {/* Simple Package */}
-              <Card className="border-2 border-rose-500 relative">
-                <div className="absolute top-4 right-4 bg-rose-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+              <Card className="md-state-layer md-state-layer-tertiary bg-surface-container-high border-2 border-tertiary hover:shadow-elevation-3 transition-shadow duration-[var(--md-sys-motion-duration-medium-2)] ease-emphasized relative">
+                <div className="absolute top-4 right-4 bg-tertiary text-on-tertiary px-3 py-1 rounded-full text-sm font-semibold">
                   Popular
                 </div>
                 <CardHeader>
-                  <CardTitle className="text-3xl">Simple Package</CardTitle>
-                  <CardDescription className="text-lg">
+                  <CardTitle className="text-title-large font-expressive text-on-surface">Simple Package</CardTitle>
+                  <CardDescription className="text-body-medium text-on-surface-variant">
                     All-inclusive, stress-free planning
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div>
-                    <div className="text-5xl font-bold text-rose-600 mb-2">$5,000</div>
-                    <p className="text-gray-600">$1,000 deposit - $4,000 balance</p>
+                    <div className="text-display-medium font-expressive text-tertiary mb-2">$5,000</div>
+                    <p className="text-body-medium text-on-surface-variant">$1,000 deposit - $4,000 balance</p>
                   </div>
 
                   <div className="space-y-3">
-                    <h3 className="font-semibold text-lg">What&apos;s Included:</h3>
+                    <h3 className="text-title-medium font-baseline font-semibold text-on-surface">What&apos;s Included:</h3>
                     <ul className="space-y-2">
                       <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                        <span>Event coordination & design by Alyssa Andes</span>
+                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
+                        <span className="text-body-medium text-on-surface">Event coordination & design by Alyssa Andes</span>
                       </li>
                       <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                        <span>Exclusive use of Tiny Diner (ceremony + cocktail hour)</span>
+                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
+                        <span className="text-body-medium text-on-surface">Exclusive use of Tiny Diner (ceremony + cocktail hour)</span>
                       </li>
                       <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                        <span>Ceremony & cocktail hour furniture plus setup</span>
+                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
+                        <span className="text-body-medium text-on-surface">Ceremony & cocktail hour furniture plus setup</span>
                       </li>
                       <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                        <span>Seasonal hors d&apos;oeuvres by Local Effort</span>
+                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
+                        <span className="text-body-medium text-on-surface">Seasonal hors d&apos;oeuvres by Local Effort</span>
                       </li>
                       <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                        <span>Curated beverage package plus professional bar staff</span>
+                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
+                        <span className="text-body-medium text-on-surface">Curated beverage package plus professional bar staff</span>
                       </li>
                       <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                        <span>Seasonal florals (installation, bouquet, boutonniere)</span>
+                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
+                        <span className="text-body-medium text-on-surface">Seasonal florals (installation, bouquet, boutonniere)</span>
                       </li>
                       <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                        <span>Licensed officiant services</span>
+                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
+                        <span className="text-body-medium text-on-surface">Licensed officiant services</span>
                       </li>
                       <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                        <span>Photography coverage (ceremony, cocktails, portraits)</span>
+                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
+                        <span className="text-body-medium text-on-surface">Photography coverage (ceremony, cocktails, portraits)</span>
                       </li>
                     </ul>
                   </div>
 
                   <div className="pt-4 space-y-3">
                     <Link href="/calendar?package=fast">
-                      <Button className="w-full" size="lg">
+                      <Button className="w-full md-state-layer md-state-layer-primary bg-tertiary-container text-tertiary-container-foreground hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-4)] ease-emphasized" size="lg">
                         <Calendar className="w-5 h-5 mr-2" />
                         Check Availability
                       </Button>
                     </Link>
-                    <p className="text-sm text-gray-500 text-center">
+                    <p className="text-body-small text-on-surface-variant text-center">
                       Perfect for up to 35 guests
                     </p>
                   </div>
@@ -120,65 +120,65 @@ export default function PackagesPage() {
               </Card>
 
               {/* Build Your Own */}
-              <Card>
+              <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-3 transition-shadow duration-[var(--md-sys-motion-duration-medium-2)] ease-emphasized">
                 <CardHeader>
-                  <CardTitle className="text-3xl">Build Your Own</CardTitle>
-                  <CardDescription className="text-lg">
+                  <CardTitle className="text-title-large font-expressive text-on-surface">Build Your Own</CardTitle>
+                  <CardDescription className="text-body-medium text-on-surface-variant">
                     Customize every detail your way
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div>
-                    <div className="text-5xl font-bold text-gray-900 mb-2">Custom</div>
-                    <p className="text-gray-600">$1,000 deposit - variable balance</p>
+                    <div className="text-display-medium font-expressive text-primary mb-2">Custom</div>
+                    <p className="text-body-medium text-on-surface-variant">$1,000 deposit - variable balance</p>
                   </div>
 
                   <div className="space-y-3">
-                    <h3 className="font-semibold text-lg">What You Get:</h3>
+                    <h3 className="text-title-medium font-baseline font-semibold text-on-surface">What You Get:</h3>
                     <ul className="space-y-2">
                       <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                        <span>Select your preferred vendors</span>
+                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
+                        <span className="text-body-medium text-on-surface">Select your preferred vendors</span>
                       </li>
                       <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                        <span>Choose specific services you need</span>
+                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
+                        <span className="text-body-medium text-on-surface">Choose specific services you need</span>
                       </li>
                       <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                        <span>Interactive dashboard with real-time pricing</span>
+                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
+                        <span className="text-body-medium text-on-surface">Interactive dashboard with real-time pricing</span>
                       </li>
                       <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                        <span>Direct messaging with vendors</span>
+                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
+                        <span className="text-body-medium text-on-surface">Direct messaging with vendors</span>
                       </li>
                       <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                        <span>Add or remove services anytime</span>
+                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
+                        <span className="text-body-medium text-on-surface">Add or remove services anytime</span>
                       </li>
                       <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                        <span>Autosave so you never lose progress</span>
+                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
+                        <span className="text-body-medium text-on-surface">Autosave so you never lose progress</span>
                       </li>
                       <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                        <span>Admin visibility for support</span>
+                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
+                        <span className="text-body-medium text-on-surface">Admin visibility for support</span>
                       </li>
                       <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                        <span>Flexible guest count</span>
+                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
+                        <span className="text-body-medium text-on-surface">Flexible guest count</span>
                       </li>
                     </ul>
                   </div>
 
                   <div className="pt-4 space-y-3">
                     <Link href="/calendar?package=custom">
-                      <Button variant="outline" className="w-full" size="lg">
+                      <Button variant="outline" className="w-full md-state-layer md-state-layer-primary border-2 border-primary text-primary hover:bg-primary-container/20 transition-colors duration-[var(--md-sys-motion-duration-short-4)] ease-emphasized" size="lg">
                         <Calendar className="w-5 h-5 mr-2" />
                         Check Availability
                       </Button>
                     </Link>
-                    <p className="text-sm text-gray-500 text-center">
+                    <p className="text-body-small text-on-surface-variant text-center">
                       Perfect for up to 85 guests
                     </p>
                   </div>
@@ -186,9 +186,9 @@ export default function PackagesPage() {
               </Card>
             </div>
 
-            <div className="mt-12 text-center">
+            <div className="mt-8 md:mt-12 text-center">
               <Link href="/">
-                <Button variant="ghost">
+                <Button variant="ghost" className="text-on-surface hover:bg-surface-container-high">
                   <ArrowRight className="w-4 h-4 mr-2" />
                   Back to Home
                 </Button>

@@ -11,7 +11,9 @@
       "Bash(npm run build:*)",
       "Bash(test:*)",
       "Bash(del \"c:\\Users\\user\\tiny-wedding\\lib\\motion-interactions.ts\")",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(tree:*)",
+      "Bash(timeout 10 tail:*)"
     ],
     "deny": [],
     "ask": []

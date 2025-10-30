@@ -2,6 +2,9 @@
 @import '../theme/material3.css';
 @import '../theme/states.css';
 
+/* Original Brand Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -103,39 +106,16 @@
   }
   body {
     @apply bg-background text-foreground;
-    /* M3 Body typography - Roboto Baseline for readability */
-    font-family: var(--md-sys-typescale-body-large-font);
-    font-size: var(--md-sys-typescale-body-large-size);
-    line-height: var(--md-sys-typescale-body-large-line-height);
-    font-weight: var(--md-sys-typescale-body-large-weight);
-    letter-spacing: var(--md-sys-typescale-body-large-tracking);
+    font-family: 'Funnel Sans', 'Inter', sans-serif;
   }
   h1 {
-    /* M3 Expressive - Display Large */
-    font-family: var(--md-sys-typescale-display-large-font);
-    font-size: var(--md-sys-typescale-display-large-size);
-    line-height: var(--md-sys-typescale-display-large-line-height);
-    font-weight: var(--md-sys-typescale-display-large-weight);
-    letter-spacing: var(--md-sys-typescale-display-large-tracking);
-    font-variation-settings: 'opsz' 144; /* Maximum optical size for display */
+    font-family: var(--font-tangerine), 'Tangerine', cursive;
+    letter-spacing: 0.01em;
   }
-  h2 {
-    /* M3 Expressive - Headline Large */
-    font-family: var(--md-sys-typescale-headline-large-font);
-    font-size: var(--md-sys-typescale-headline-large-size);
-    line-height: var(--md-sys-typescale-headline-large-line-height);
-    font-weight: var(--md-sys-typescale-headline-large-weight);
-    letter-spacing: var(--md-sys-typescale-headline-large-tracking);
-    font-variation-settings: 'opsz' 72;
-  }
+  h2,
   h3 {
-    /* M3 Title Large */
-    font-family: var(--md-sys-typescale-title-large-font);
-    font-size: var(--md-sys-typescale-title-large-size);
-    line-height: var(--md-sys-typescale-title-large-line-height);
-    font-weight: var(--md-sys-typescale-title-large-weight);
-    letter-spacing: var(--md-sys-typescale-title-large-tracking);
-    font-variation-settings: 'opsz' 32;
+    font-family: var(--font-patrick-hand-sc), 'Patrick Hand SC', cursive;
+    letter-spacing: 0.01em;
   }
 }
 

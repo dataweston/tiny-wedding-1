@@ -41,6 +41,11 @@ function QuestionnaireContent() {
   })
 
   const handleSubmit = async () => {
+    if (!bookingId) {
+      console.error('Missing booking ID for questionnaire submission')
+      return
+    }
+
     try {
       const response = await fetch('/api/questionnaire', {
         method: 'POST',
