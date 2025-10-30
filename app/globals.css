@@ -103,17 +103,22 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-funnel), var(--font-inter), 'Inter', sans-serif;
+    font-family: 'Funnel Sans', sans-serif;
   }
   h1 {
-    font-family: var(--font-tangerine), 'Tangerine', cursive;
+    font-family: var(--font-tangerine), cursive;
     font-size: 3.5rem;
     line-height: 1.2;
     letter-spacing: 0.01em;
   }
-  h2,
+  h2 {
+    font-family: var(--font-patrick-hand-sc), cursive;
+    font-size: 2rem;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+  }
   h3 {
-    font-family: var(--font-patrick-hand-sc), 'Patrick Hand SC', cursive;
+    font-family: var(--font-patrick-hand-sc), cursive;
     letter-spacing: 0.01em;
   }
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import { Tangerine, Caveat, Patrick_Hand_SC, Inter, Funnel_Display } from 'next/font/google'
+import { Tangerine, Caveat, Patrick_Hand_SC } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 import { Navigation } from '@/components/navigation'
 
@@ -21,17 +22,6 @@ const patrickHandSc = Patrick_Hand_SC({
   variable: '--font-patrick-hand-sc',
 })
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-})
-
-const funnelDisplay = Funnel_Display({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-funnel',
-})
-
 export const metadata: Metadata = {
   title: 'Tiny Weddings - Intimate Wedding Packages at Tiny Diner',
   description:
@@ -45,7 +35,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${funnelDisplay.variable} ${tangerine.variable} ${caveat.variable} ${patrickHandSc.variable}`}>
+      <head>
+        <link href="https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+      </head>
+      <body className={`${tangerine.variable} ${caveat.variable} ${patrickHandSc.variable}`}>
         <Navigation />
         <main className="min-h-screen">{children}</main>
       </body>
