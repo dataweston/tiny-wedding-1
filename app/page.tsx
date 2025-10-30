@@ -27,13 +27,13 @@ export default function Home() {
         />
         <div className="relative z-10 max-w-7xl mx-auto text-center">
           <BeehiveIcon className="w-16 h-16 mx-auto mb-6 text-primary" />
-          <h1 className="text-display-large font-expressive text-foreground mb-6">
+          <h1 className="text-foreground mb-6">
             Tiny Weddings
           </h1>
-          <p className="text-title-large font-expressive text-on-surface mb-4 max-w-3xl mx-auto">
+          <p className="text-2xl text-on-surface mb-4 max-w-3xl mx-auto">
             Intimate, Beautiful, Unforgettable
           </p>
-          <p className="text-body-large text-on-surface/80 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-on-surface/80 mb-8 max-w-2xl mx-auto">
             Providing small, elegant, and tasteful wedding ceremonies in Minneapolis, MN. Build your own vendor package.
           </p>
           <Link href="/packages">
@@ -62,8 +62,8 @@ export default function Home() {
       {/* Services Section - M3 Surface Containers */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-surface-container-low">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-headline-large font-expressive text-foreground text-center mb-4">What We Offer</h2>
-          <p className="text-body-large text-on-surface/80 text-center mb-12 max-w-2xl mx-auto">
+          <h2 className="text-foreground text-center mb-4">What We Offer</h2>
+          <p className="text-lg text-on-surface/80 text-center mb-12 max-w-2xl mx-auto">
             Everything you need for your perfect intimate wedding
           </p>
 
@@ -140,8 +140,8 @@ export default function Home() {
       {/* Pricing Preview - M3 Surface Container Ladder */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-surface">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-headline-large font-expressive text-foreground text-center mb-4">Our Packages</h2>
-          <p className="text-body-large text-on-surface/80 text-center mb-12">
+          <h2 className="text-foreground text-center mb-4">Our Packages</h2>
+          <p className="text-lg text-on-surface/80 text-center mb-12">
             Choose the perfect fit for your celebration
           </p>
 

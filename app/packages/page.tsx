@@ -41,8 +41,8 @@ export default function PackagesPage() {
           </div>
 
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-display-large font-expressive text-foreground mb-4">Choose Your Package</h1>
-            <p className="text-body-large text-on-surface/80">
+            <h1 className="text-foreground mb-4">Choose Your Package</h1>
+            <p className="text-lg text-on-surface/80">
               Select the perfect option for your celebration. Both packages require a
               $1,000 deposit to hold your date.
             </p>
