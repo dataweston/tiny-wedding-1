@@ -5,6 +5,11 @@
 
 import { animate, scroll, inView, stagger } from 'motion'
 
+type AnimateTarget = Parameters<typeof animate>[0]
+type AnimateKeyframes = Parameters<typeof animate>[1]
+type AnimateOptions = Parameters<typeof animate>[2]
+type InViewOptionsType = NonNullable<Parameters<typeof inView>[2]>
+
 // M3 Emphasized Easing Curves
 export const EASING = {
   emphasized: [0.2, 0, 0, 1],
@@ -40,49 +45,55 @@ export const DURATION = {
  * Fade in animation with emphasized easing
  */
 export function fadeIn(
-  element: Element | Element[],
+  element: AnimateTarget,
   options?: {
     duration?: number
     delay?: number
   }
 ) {
-  return animate(
-    element,
-    { opacity: [0, 1] },
-    {
-      duration: options?.duration ?? DURATION.medium2,
-      delay: options?.delay,
-      easing: EASING.emphasized,
-    }
-  )
+  const keyframes: AnimateKeyframes = [
+    { opacity: 0 },
+    { opacity: 1 },
+  ]
+
+  const animateOptions: AnimateOptions = {
+    duration: options?.duration ?? DURATION.medium2,
+    delay: options?.delay,
+    ease: EASING.emphasized,
+  }
+
+  return animate(element, keyframes, animateOptions)
 }
 
 /**
  * Fade out animation
  */
 export function fadeOut(
-  element: Element | Element[],
+  element: AnimateTarget,
   options?: {
     duration?: number
     delay?: number
   }
 ) {
-  return animate(
-    element,
-    { opacity: [1, 0] },
-    {
-      duration: options?.duration ?? DURATION.medium2,
-      delay: options?.delay,
-      easing: EASING.emphasized,
-    }
-  )
+  const keyframes: AnimateKeyframes = [
+    { opacity: 1 },
+    { opacity: 0 },
+  ]
+
+  const animateOptions: AnimateOptions = {
+    duration: options?.duration ?? DURATION.medium2,
+    delay: options?.delay,
+    ease: EASING.emphasized,
+  }
+
+  return animate(element, keyframes, animateOptions)
 }
 
 /**
  * Slide up reveal with emphasized decelerate
  */
 export function slideUpReveal(
-  element: Element | Element[],
+  element: AnimateTarget,
   options?: {
     distance?: number
     duration?: number
@@ -91,25 +102,25 @@ export function slideUpReveal(
 ) {
   const distance = options?.distance ?? 40
 
-  return animate(
-    element,
-    {
-      opacity: [0, 1],
-      transform: [`translateY(${distance}px)`, 'translateY(0)'],
-    },
-    {
-      duration: options?.duration ?? DURATION.medium4,
-      delay: options?.delay,
-      easing: EASING.emphasizedDecelerate,
-    }
-  )
+  const keyframes: AnimateKeyframes = [
+    { opacity: 0, transform: `translateY(${distance}px)` },
+    { opacity: 1, transform: 'translateY(0)' },
+  ]
+
+  const animateOptions: AnimateOptions = {
+    duration: options?.duration ?? DURATION.medium4,
+    delay: options?.delay,
+    ease: EASING.emphasizedDecelerate,
+  }
+
+  return animate(element, keyframes, animateOptions)
 }
 
 /**
  * Scale fade in (for cards, modals)
  */
 export function scaleFadeIn(
-  element: Element | Element[],
+  element: AnimateTarget,
   options?: {
     from?: number
     duration?: number
@@ -118,18 +129,18 @@ export function scaleFadeIn(
 ) {
   const from = options?.from ?? 0.9
 
-  return animate(
-    element,
-    {
-      opacity: [0, 1],
-      scale: [from, 1],
-    },
-    {
-      duration: options?.duration ?? DURATION.medium3,
-      delay: options?.delay,
-      easing: EASING.emphasizedDecelerate,
-    }
-  )
+  const keyframes: AnimateKeyframes = [
+    { opacity: 0, transform: `scale(${from})` },
+    { opacity: 1, transform: 'scale(1)' },
+  ]
+
+  const animateOptions: AnimateOptions = {
+    duration: options?.duration ?? DURATION.medium3,
+    delay: options?.delay,
+    ease: EASING.emphasizedDecelerate,
+  }
+
+  return animate(element, keyframes, animateOptions)
 }
 
 /**
@@ -150,43 +161,45 @@ export function containerTransform(
   const translateX = fromRect.left - toRect.left
   const translateY = fromRect.top - toRect.top
 
-  return animate(
-    toElement,
+  const keyframes: AnimateKeyframes = [
     {
-      transform: [
-        `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`,
-        'translate(0, 0) scale(1, 1)',
-      ],
+      transform: `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`,
     },
     {
-      duration: options?.duration ?? DURATION.medium4,
-      easing: EASING.emphasized,
-    }
-  )
+      transform: 'translate(0, 0) scale(1, 1)',
+    },
+  ]
+
+  const animateOptions: AnimateOptions = {
+    duration: options?.duration ?? DURATION.medium4,
+    ease: EASING.emphasized,
+  }
+
+  return animate(toElement, keyframes, animateOptions)
 }
 
 /**
  * Stagger animation for lists/grids
  */
 export function staggerReveal(
-  elements: Element[],
+  elements: AnimateTarget,
   options?: {
     stagger?: number
     duration?: number
   }
 ) {
-  return animate(
-    elements,
-    {
-      opacity: [0, 1],
-      transform: ['translateY(20px)', 'translateY(0)'],
-    },
-    {
-      duration: options?.duration ?? DURATION.medium2,
-      delay: stagger(options?.stagger ?? 0.05),
-      easing: EASING.emphasizedDecelerate,
-    }
-  )
+  const keyframes: AnimateKeyframes = [
+    { opacity: 0, transform: 'translateY(20px)' },
+    { opacity: 1, transform: 'translateY(0)' },
+  ]
+
+  const animateOptions: AnimateOptions = {
+    duration: options?.duration ?? DURATION.medium2,
+    delay: stagger(options?.stagger ?? 0.05),
+    ease: EASING.emphasizedDecelerate,
+  }
+
+  return animate(elements, keyframes, animateOptions)
 }
 
 /**
@@ -202,26 +215,24 @@ export function scrollReveal(
 ) {
   const elements = document.querySelectorAll(selector)
   const threshold = options?.threshold ?? 0.1
-  const rootMargin = options?.rootMargin ?? '0px 0px -10% 0px'
+  const rootMargin = (options?.rootMargin ?? '0px 0px -10% 0px') as InViewOptionsType['margin']
   const animateOnce = options?.animateOnce ?? true
 
   elements.forEach((element) => {
     inView(
       element,
-      ({ target }) => {
-        slideUpReveal(target)
+      (viewElement: Element, entry: IntersectionObserverEntry) => {
+        slideUpReveal(viewElement)
 
         // Return cleanup function if we want to repeat on scroll
         if (!animateOnce) {
-          return (leaveInfo) => {
-            fadeOut(leaveInfo.target, { duration: DURATION.short4 })
-          }
+          return () => fadeOut(viewElement, { duration: DURATION.short4 })
         }
       },
       {
         amount: threshold,
         margin: rootMargin,
-      }
+      } satisfies InViewOptionsType
     )
   })
 }
@@ -239,10 +250,13 @@ export function parallaxScroll(
   const speed = options?.speed ?? 0.5
   const offset = options?.offset ?? ['0px', '100px']
 
+  const keyframes: AnimateKeyframes = [
+    { transform: `translateY(${offset[0]})` },
+    { transform: `translateY(${offset[1]})` },
+  ]
+
   scroll(
-    animate(element, {
-      transform: [`translateY(${offset[0]})`, `translateY(${offset[1]})`],
-    }),
+    animate(element, keyframes),
     {
       target: element,
       offset: ['start end', 'end start'],
@@ -264,11 +278,19 @@ export function hoverScale(
   const duration = options?.duration ?? DURATION.short3
 
   element.addEventListener('mouseenter', () => {
-    animate(element, { scale }, { duration, easing: EASING.emphasized })
+    const enterKeyframes: AnimateKeyframes = [
+      { transform: 'scale(1)' },
+      { transform: `scale(${scale})` },
+    ]
+    animate(element, enterKeyframes, { duration, ease: EASING.emphasized })
   })
 
   element.addEventListener('mouseleave', () => {
-    animate(element, { scale: 1 }, { duration, easing: EASING.emphasized })
+    const leaveKeyframes: AnimateKeyframes = [
+      { transform: `scale(${scale})` },
+      { transform: 'scale(1)' },
+    ]
+    animate(element, leaveKeyframes, { duration, ease: EASING.emphasized })
   })
 }
 

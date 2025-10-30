@@ -8,7 +8,10 @@ import {
   themeFromSourceColor,
   applyTheme,
   Scheme,
-  hexFromArgb
+  hexFromArgb,
+  Hct,
+  SchemeTonalSpot,
+  DynamicScheme
 } from '@material/material-color-utilities'
 
 // Brand seed color - wedding rose/pink
@@ -53,44 +56,69 @@ interface ColorTokens {
   surfaceContainerHighest: string
 }
 
-function schemeToTokens(scheme: Scheme): ColorTokens {
+const dynamicColorFallbacks: Partial<Record<keyof ColorTokens, (dynamicScheme: DynamicScheme) => number>> = {
+  surfaceDim: (dynamicScheme) => dynamicScheme.surfaceDim,
+  surfaceBright: (dynamicScheme) => dynamicScheme.surfaceBright,
+  surfaceContainerLowest: (dynamicScheme) => dynamicScheme.surfaceContainerLowest,
+  surfaceContainerLow: (dynamicScheme) => dynamicScheme.surfaceContainerLow,
+  surfaceContainer: (dynamicScheme) => dynamicScheme.surfaceContainer,
+  surfaceContainerHigh: (dynamicScheme) => dynamicScheme.surfaceContainerHigh,
+  surfaceContainerHighest: (dynamicScheme) => dynamicScheme.surfaceContainerHighest
+}
+
+function getSchemeArgbValue(scheme: Scheme, dynamicScheme: DynamicScheme, key: keyof ColorTokens): number {
+  const directValue = (scheme as unknown as Record<string, unknown>)[key]
+  if (typeof directValue === 'number') {
+    return directValue
+  }
+
+  const fallback = dynamicColorFallbacks[key]
+  if (fallback) {
+    return fallback(dynamicScheme)
+  }
+
+  throw new Error(`Color token "${key}" is not available on Scheme or dynamic fallbacks`)
+}
+
+function schemeToTokens(scheme: Scheme, seedArgb: number, isDark: boolean): ColorTokens {
+  const dynamicScheme = new SchemeTonalSpot(Hct.fromInt(seedArgb), isDark, 0)
   return {
-    primary: hexFromArgb(scheme.primary),
-    onPrimary: hexFromArgb(scheme.onPrimary),
-    primaryContainer: hexFromArgb(scheme.primaryContainer),
-    onPrimaryContainer: hexFromArgb(scheme.onPrimaryContainer),
-    secondary: hexFromArgb(scheme.secondary),
-    onSecondary: hexFromArgb(scheme.onSecondary),
-    secondaryContainer: hexFromArgb(scheme.secondaryContainer),
-    onSecondaryContainer: hexFromArgb(scheme.onSecondaryContainer),
-    tertiary: hexFromArgb(scheme.tertiary),
-    onTertiary: hexFromArgb(scheme.onTertiary),
-    tertiaryContainer: hexFromArgb(scheme.tertiaryContainer),
-    onTertiaryContainer: hexFromArgb(scheme.onTertiaryContainer),
-    error: hexFromArgb(scheme.error),
-    onError: hexFromArgb(scheme.onError),
-    errorContainer: hexFromArgb(scheme.errorContainer),
-    onErrorContainer: hexFromArgb(scheme.onErrorContainer),
-    background: hexFromArgb(scheme.background),
-    onBackground: hexFromArgb(scheme.onBackground),
-    surface: hexFromArgb(scheme.surface),
-    onSurface: hexFromArgb(scheme.onSurface),
-    surfaceVariant: hexFromArgb(scheme.surfaceVariant),
-    onSurfaceVariant: hexFromArgb(scheme.onSurfaceVariant),
-    outline: hexFromArgb(scheme.outline),
-    outlineVariant: hexFromArgb(scheme.outlineVariant),
-    shadow: hexFromArgb(scheme.shadow),
-    scrim: hexFromArgb(scheme.scrim),
-    inverseSurface: hexFromArgb(scheme.inverseSurface),
-    inverseOnSurface: hexFromArgb(scheme.inverseOnSurface),
-    inversePrimary: hexFromArgb(scheme.inversePrimary),
-    surfaceDim: hexFromArgb(scheme.surfaceDim),
-    surfaceBright: hexFromArgb(scheme.surfaceBright),
-    surfaceContainerLowest: hexFromArgb(scheme.surfaceContainerLowest),
-    surfaceContainerLow: hexFromArgb(scheme.surfaceContainerLow),
-    surfaceContainer: hexFromArgb(scheme.surfaceContainer),
-    surfaceContainerHigh: hexFromArgb(scheme.surfaceContainerHigh),
-    surfaceContainerHighest: hexFromArgb(scheme.surfaceContainerHighest),
+    primary: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'primary')),
+    onPrimary: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'onPrimary')),
+    primaryContainer: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'primaryContainer')),
+    onPrimaryContainer: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'onPrimaryContainer')),
+    secondary: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'secondary')),
+    onSecondary: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'onSecondary')),
+    secondaryContainer: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'secondaryContainer')),
+    onSecondaryContainer: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'onSecondaryContainer')),
+    tertiary: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'tertiary')),
+    onTertiary: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'onTertiary')),
+    tertiaryContainer: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'tertiaryContainer')),
+    onTertiaryContainer: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'onTertiaryContainer')),
+    error: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'error')),
+    onError: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'onError')),
+    errorContainer: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'errorContainer')),
+    onErrorContainer: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'onErrorContainer')),
+    background: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'background')),
+    onBackground: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'onBackground')),
+    surface: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'surface')),
+    onSurface: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'onSurface')),
+    surfaceVariant: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'surfaceVariant')),
+    onSurfaceVariant: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'onSurfaceVariant')),
+    outline: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'outline')),
+    outlineVariant: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'outlineVariant')),
+    shadow: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'shadow')),
+    scrim: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'scrim')),
+    inverseSurface: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'inverseSurface')),
+    inverseOnSurface: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'inverseOnSurface')),
+    inversePrimary: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'inversePrimary')),
+    surfaceDim: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'surfaceDim')),
+    surfaceBright: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'surfaceBright')),
+    surfaceContainerLowest: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'surfaceContainerLowest')),
+    surfaceContainerLow: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'surfaceContainerLow')),
+    surfaceContainer: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'surfaceContainer')),
+    surfaceContainerHigh: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'surfaceContainerHigh')),
+    surfaceContainerHighest: hexFromArgb(getSchemeArgbValue(scheme, dynamicScheme, 'surfaceContainerHighest')),
   }
 }
 
@@ -99,8 +127,8 @@ export function generateMaterialTheme(seedHex: string = BRAND_SEED_HEX) {
   const theme = themeFromSourceColor(seedArgb)
 
   return {
-    light: schemeToTokens(theme.schemes.light),
-    dark: schemeToTokens(theme.schemes.dark),
+    light: schemeToTokens(theme.schemes.light, seedArgb, false),
+    dark: schemeToTokens(theme.schemes.dark, seedArgb, true),
     seed: seedHex
   }
 }
