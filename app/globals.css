@@ -2,9 +2,6 @@
 @import '../theme/material3.css';
 @import '../theme/states.css';
 
-/* Original Brand Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@300;400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -106,7 +103,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Funnel Sans', var(--font-inter), 'Inter', sans-serif;
+    font-family: var(--font-funnel), var(--font-inter), 'Inter', sans-serif;
   }
   h1 {
     font-family: var(--font-tangerine), 'Tangerine', cursive;

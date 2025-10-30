@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Tangerine, Caveat, Patrick_Hand_SC, Inter } from 'next/font/google'
+import { Tangerine, Caveat, Patrick_Hand_SC, Inter, Funnel_Display } from 'next/font/google'
 import './globals.css'
 import { Navigation } from '@/components/navigation'
 
@@ -26,6 +26,12 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
+const funnelDisplay = Funnel_Display({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-funnel',
+})
+
 export const metadata: Metadata = {
   title: 'Tiny Weddings - Intimate Wedding Packages at Tiny Diner',
   description:
@@ -39,7 +45,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${tangerine.variable} ${caveat.variable} ${patrickHandSc.variable}`}>
+      <body className={`${inter.variable} ${funnelDisplay.variable} ${tangerine.variable} ${caveat.variable} ${patrickHandSc.variable}`}>
         <Navigation />
         <main className="min-h-screen">{children}</main>
       </body>
