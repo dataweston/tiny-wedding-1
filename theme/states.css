@@ -1,0 +1,163 @@
+/**
+ * Material 3 State Layers
+ * Implements hover/focus/press/drag overlays with proper opacity
+ */
+
+/* ============================================
+   STATE LAYER BASE
+   ============================================ */
+.md-state-layer {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.md-state-layer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-color: currentColor;
+  opacity: 0;
+  transition: opacity var(--md-sys-motion-duration-short-2) var(--md-sys-motion-easing-standard);
+}
+
+/* Hover State */
+.md-state-layer:hover::before {
+  opacity: var(--md-sys-state-hover-opacity);
+}
+
+/* Focus State - higher priority than hover */
+.md-state-layer:focus-visible::before {
+  opacity: var(--md-sys-state-focus-opacity);
+}
+
+/* Pressed State - highest priority */
+.md-state-layer:active::before {
+  opacity: var(--md-sys-state-pressed-opacity);
+}
+
+/* Dragged State */
+.md-state-layer[data-dragged="true"]::before {
+  opacity: var(--md-sys-state-dragged-opacity);
+}
+
+/* ============================================
+   SPECIFIC SURFACE STATE LAYERS
+   ============================================ */
+
+/* Primary Surface State */
+.md-state-layer-primary {
+  color: var(--md-sys-color-on-primary-container);
+}
+
+.md-state-layer-primary::before {
+  background-color: var(--md-sys-color-on-primary-container);
+}
+
+/* Secondary Surface State */
+.md-state-layer-secondary {
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+.md-state-layer-secondary::before {
+  background-color: var(--md-sys-color-on-secondary-container);
+}
+
+/* Tertiary Surface State - for romantic wedding accents */
+.md-state-layer-tertiary {
+  color: var(--md-sys-color-on-tertiary-container);
+}
+
+.md-state-layer-tertiary::before {
+  background-color: var(--md-sys-color-on-tertiary-container);
+}
+
+/* Surface State */
+.md-state-layer-surface {
+  color: var(--md-sys-color-on-surface);
+}
+
+.md-state-layer-surface::before {
+  background-color: var(--md-sys-color-on-surface);
+}
+
+/* ============================================
+   DISABLED STATE
+   ============================================ */
+.md-state-layer:disabled,
+.md-state-layer[disabled] {
+  pointer-events: none;
+  opacity: 0.38;
+}
+
+.md-state-layer:disabled::before,
+.md-state-layer[disabled]::before {
+  display: none;
+}
+
+/* ============================================
+   RIPPLE EFFECT (optional enhancement)
+   ============================================ */
+.md-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.md-ripple::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background-color: currentColor;
+  opacity: 0.2;
+  transform: translate(-50%, -50%);
+  transition: width var(--md-sys-motion-duration-medium-2) var(--md-sys-motion-easing-emphasized),
+              height var(--md-sys-motion-duration-medium-2) var(--md-sys-motion-easing-emphasized),
+              opacity var(--md-sys-motion-duration-medium-2) var(--md-sys-motion-easing-emphasized);
+}
+
+.md-ripple:active::after {
+  width: 200%;
+  height: 200%;
+  opacity: 0;
+}
+
+/* ============================================
+   FOCUS RING
+   ============================================ */
+.md-focus-ring {
+  outline: 2px solid var(--md-sys-color-primary);
+  outline-offset: 2px;
+  border-radius: inherit;
+}
+
+/* Only show focus ring for keyboard navigation */
+.md-state-layer:focus:not(:focus-visible)::after {
+  display: none;
+}
+
+.md-state-layer:focus-visible {
+  outline: 2px solid var(--md-sys-color-primary);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   UTILITY MIXINS (for use in components)
+   ============================================ */
+
+/*
+  Usage in CSS:
+
+  .my-button {
+    @extend .md-state-layer;
+    @extend .md-state-layer-primary;
+    background-color: var(--md-sys-color-primary-container);
+  }
+
+  Or directly in HTML:
+  <button class="md-state-layer md-state-layer-primary">Click me</button>
+*/

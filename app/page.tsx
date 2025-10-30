@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { BeehiveIcon } from '@/components/icons/beehive'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { SparklesCore } from '@/components/ui/sparkles'
+import { MotionInit } from '@/components/motion-init'
 import { Group, Camera, Flower, OrganicFood, GlassHalf, Spark, Check } from 'iconoir-react'
 import heroImage from '@/lib/resource/IMG_8412.jpg'
 import simplePackageImage from '@/lib/resource/IMG_8422.jpg'
@@ -11,40 +12,41 @@ import customPackageImage from '@/lib/resource/2S6A8682.jpg'
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-rose-50 via-amber-50 to-white py-24 px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-surface">
+      <MotionInit />
+      {/* Hero Section - M3 Expressive */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-surface-container-low via-primary-container/10 to-surface py-8 px-4 sm:px-6 lg:px-8">
         <SparklesCore
           background="transparent"
           minSize={0.4}
           maxSize={1.2}
           particleDensity={80}
           className="absolute inset-0 w-full h-full"
-          particleColor="#f97316"
+          particleColor="var(--md-sys-color-tertiary)"
           speed={0.6}
         />
         <div className="relative z-10 max-w-7xl mx-auto text-center">
-          <BeehiveIcon className="w-16 h-16 mx-auto mb-6" />
-          <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 mb-6">
+          <BeehiveIcon className="w-16 h-16 mx-auto mb-6 text-primary" />
+          <h1 className="text-display-large font-expressive text-foreground mb-6">
             Tiny Weddings
           </h1>
-          <p className="text-xl sm:text-2xl text-gray-700 mb-4 max-w-3xl mx-auto">
+          <p className="text-title-large font-expressive text-on-surface mb-4 max-w-3xl mx-auto">
             Intimate, Beautiful, Unforgettable
           </p>
-          <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-body-large text-on-surface/80 mb-8 max-w-2xl mx-auto">
             All-inclusive wedding packages at Tiny Diner for celebrations that matter most
           </p>
           <Link href="/packages">
-            <Button size="lg" className="text-lg px-8 py-6">
+            <Button size="lg" className="md-state-layer md-state-layer-primary bg-primary-container text-primary-container-foreground hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-4)] ease-emphasized text-title-medium px-8 py-6">
               Get Started
             </Button>
           </Link>
         </div>
       </section>
 
-      {/* Feature Image */}
-      <section className="px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-5xl mx-auto overflow-hidden rounded-3xl shadow-lg">
+      {/* Feature Image - M3 XL Shape */}
+      <section className="px-4 sm:px-6 lg:px-8 bg-surface py-8">
+        <div className="max-w-5xl mx-auto overflow-hidden rounded-[28px] shadow-elevation-2">
           <div className="relative aspect-[16/9]">
             <Image
               src={heroImage}
@@ -57,76 +59,76 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      {/* Services Section - M3 Surface Containers */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-surface-container-low">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4">What We Offer</h2>
-          <p className="text-xl text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+          <h2 className="text-headline-large font-expressive text-foreground text-center mb-4">What We Offer</h2>
+          <p className="text-body-large text-on-surface/80 text-center mb-12 max-w-2xl mx-auto">
             Everything you need for your perfect intimate wedding
           </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" data-scroll-reveal>
+            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized">
               <CardHeader>
-                <Spark className="w-10 h-10 mb-2 text-rose-500" />
-                <CardTitle>Event Design</CardTitle>
-                <CardDescription>Professional coordination by Alyssa Andes</CardDescription>
+                <Spark className="w-10 h-10 mb-2 text-tertiary" />
+                <CardTitle className="text-title-large font-baseline">Event Design</CardTitle>
+                <CardDescription className="text-body-medium text-on-surface-variant">Professional coordination by Alyssa Andes</CardDescription>
               </CardHeader>
             </Card>
-            
-            <Card>
+
+            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized">
               <CardHeader>
-                <Group className="w-10 h-10 mb-2 text-rose-500" />
-                <CardTitle>Perfect Little Venues</CardTitle>
-                <CardDescription>Proud to work with Tiny Diner in Minneapolis</CardDescription>
+                <Group className="w-10 h-10 mb-2 text-tertiary" />
+                <CardTitle className="text-title-large font-baseline">Perfect Little Venues</CardTitle>
+                <CardDescription className="text-body-medium text-on-surface-variant">Proud to work with Tiny Diner in Minneapolis</CardDescription>
               </CardHeader>
             </Card>
-            
-            <Card>
+
+            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized">
               <CardHeader>
-                <OrganicFood className="w-10 h-10 mb-2 text-rose-500" />
-                <CardTitle>Catering</CardTitle>
-                <CardDescription>Seasonal hors d&apos;oeuvres by Local Effort</CardDescription>
+                <OrganicFood className="w-10 h-10 mb-2 text-tertiary" />
+                <CardTitle className="text-title-large font-baseline">Catering</CardTitle>
+                <CardDescription className="text-body-medium text-on-surface-variant">Seasonal hors d&apos;oeuvres by Local Effort</CardDescription>
               </CardHeader>
             </Card>
-            
-            <Card>
+
+            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized">
               <CardHeader>
-                <GlassHalf className="w-10 h-10 mb-2 text-rose-500" />
-                <CardTitle>Bar Service</CardTitle>
-                <CardDescription>Curated drinks & pro bartender</CardDescription>
+                <GlassHalf className="w-10 h-10 mb-2 text-tertiary" />
+                <CardTitle className="text-title-large font-baseline">Bar Service</CardTitle>
+                <CardDescription className="text-body-medium text-on-surface-variant">Curated drinks & pro bartender</CardDescription>
               </CardHeader>
             </Card>
-            
-            <Card>
+
+            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized">
               <CardHeader>
-                <Flower className="w-10 h-10 mb-2 text-rose-500" />
-                <CardTitle>Florals</CardTitle>
-                <CardDescription>Seasonal ceremony design & bouquet</CardDescription>
+                <Flower className="w-10 h-10 mb-2 text-tertiary" />
+                <CardTitle className="text-title-large font-baseline">Florals</CardTitle>
+                <CardDescription className="text-body-medium text-on-surface-variant">Seasonal ceremony design & bouquet</CardDescription>
               </CardHeader>
             </Card>
-            
-            <Card>
+
+            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized">
               <CardHeader>
-                <BeehiveIcon className="w-10 h-10 mb-2" />
-                <CardTitle>Officiant</CardTitle>
-                <CardDescription>Licensed officiant services</CardDescription>
+                <BeehiveIcon className="w-10 h-10 mb-2 text-primary" />
+                <CardTitle className="text-title-large font-baseline">Officiant</CardTitle>
+                <CardDescription className="text-body-medium text-on-surface-variant">Licensed officiant services</CardDescription>
               </CardHeader>
             </Card>
-            
-            <Card>
+
+            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized">
               <CardHeader>
-                <Camera className="w-10 h-10 mb-2 text-rose-500" />
-                <CardTitle>Photography</CardTitle>
-                <CardDescription>Ceremony & portraits included</CardDescription>
+                <Camera className="w-10 h-10 mb-2 text-tertiary" />
+                <CardTitle className="text-title-large font-baseline">Photography</CardTitle>
+                <CardDescription className="text-body-medium text-on-surface-variant">Ceremony & portraits included</CardDescription>
               </CardHeader>
             </Card>
-            
-            <Card>
+
+            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-3)] ease-emphasized">
               <CardHeader>
-                <Check className="w-10 h-10 mb-2 text-rose-500" />
-                <CardTitle>All-Inclusive</CardTitle>
-                <CardDescription>No hidden fees or surprises</CardDescription>
+                <Check className="w-10 h-10 mb-2 text-tertiary" />
+                <CardTitle className="text-title-large font-baseline">All-Inclusive</CardTitle>
+                <CardDescription className="text-body-medium text-on-surface-variant">No hidden fees or surprises</CardDescription>
               </CardHeader>
             </Card>
           </div>
@@ -135,18 +137,18 @@ export default function Home() {
 
       {/* ...removed Meet Soup Sisters section... */}
 
-      {/* Pricing Preview */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      {/* Pricing Preview - M3 Surface Container Ladder */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-surface">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4">Our Packages</h2>
-          <p className="text-xl text-gray-600 text-center mb-12">
+          <h2 className="text-headline-large font-expressive text-foreground text-center mb-4">Our Packages</h2>
+          <p className="text-body-large text-on-surface/80 text-center mb-12">
             Choose the perfect fit for your celebration
           </p>
-          
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <Card className="border-2 border-rose-500">
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto" data-scroll-reveal>
+            <Card className="md-state-layer md-state-layer-tertiary bg-surface-container-high border-2 border-tertiary hover:shadow-elevation-3 transition-shadow duration-[var(--md-sys-motion-duration-medium-2)] ease-emphasized">
               <CardHeader>
-                <div className="relative mb-4 overflow-hidden rounded-xl">
+                <div className="relative mb-4 overflow-hidden rounded-[16px]">
                   <Image
                     src={simplePackageImage}
                     alt="Simple Package ceremony setup"
@@ -155,44 +157,44 @@ export default function Home() {
                     className="object-cover w-full h-52"
                   />
                 </div>
-                <CardTitle className="text-2xl">Simple Package</CardTitle>
-                <CardDescription>All-inclusive, pre-designed perfection</CardDescription>
+                <CardTitle className="text-title-large font-expressive text-on-surface">Simple Package</CardTitle>
+                <CardDescription className="text-body-medium text-on-surface-variant">All-inclusive, pre-designed perfection</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-4xl font-bold mb-4">$5,000</div>
+                <div className="text-display-medium font-expressive text-tertiary mb-4">$5,000</div>
                 <ul className="space-y-2 mb-6">
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                    <span>Event coordination & design</span>
+                    <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
+                    <span className="text-body-medium text-on-surface">Event coordination & design</span>
                   </li>
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                    <span>Exclusive venue use</span>
+                    <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
+                    <span className="text-body-medium text-on-surface">Exclusive venue use</span>
                   </li>
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                    <span>Catering & bar service</span>
+                    <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
+                    <span className="text-body-medium text-on-surface">Catering & bar service</span>
                   </li>
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                    <span>Florals & photography</span>
+                    <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
+                    <span className="text-body-medium text-on-surface">Florals & photography</span>
                   </li>
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                    <span>Officiant services</span>
+                    <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
+                    <span className="text-body-medium text-on-surface">Officiant services</span>
                   </li>
                 </ul>
                 <Link href="/packages">
-                  <Button className="w-full" size="lg">
+                  <Button className="w-full md-state-layer md-state-layer-primary bg-tertiary-container text-tertiary-container-foreground hover:shadow-elevation-2 transition-shadow duration-[var(--md-sys-motion-duration-short-4)] ease-emphasized" size="lg">
                     Keep It Simple
                   </Button>
                 </Link>
               </CardContent>
             </Card>
-            
-            <Card>
+
+            <Card className="md-state-layer md-state-layer-surface bg-surface-container hover:shadow-elevation-3 transition-shadow duration-[var(--md-sys-motion-duration-medium-2)] ease-emphasized">
               <CardHeader>
-                <div className="relative mb-4 overflow-hidden rounded-xl">
+                <div className="relative mb-4 overflow-hidden rounded-[16px]">
                   <Image
                     src={customPackageImage}
                     alt="Custom Tiny Wedding reception"
@@ -201,35 +203,35 @@ export default function Home() {
                     className="object-cover w-full h-52"
                   />
                 </div>
-                <CardTitle className="text-2xl">Build Your Own</CardTitle>
-                <CardDescription>Customize every detail your way</CardDescription>
+                <CardTitle className="text-title-large font-expressive text-on-surface">Build Your Own</CardTitle>
+                <CardDescription className="text-body-medium text-on-surface-variant">Customize every detail your way</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-4xl font-bold mb-4">Custom</div>
+                <div className="text-display-medium font-expressive text-primary mb-4">Custom</div>
                 <ul className="space-y-2 mb-6">
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                    <span>Choose your services</span>
+                    <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-body-medium text-on-surface">Choose your services</span>
                   </li>
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                    <span>Select preferred vendors</span>
+                    <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-body-medium text-on-surface">Select preferred vendors</span>
                   </li>
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                    <span>Real-time pricing</span>
+                    <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-body-medium text-on-surface">Real-time pricing</span>
                   </li>
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                    <span>Interactive dashboard</span>
+                    <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-body-medium text-on-surface">Interactive dashboard</span>
                   </li>
                   <li className="flex items-start">
-                    <Check className="w-5 h-5 mr-2 text-rose-500 flex-shrink-0 mt-0.5" />
-                    <span>Direct vendor messaging</span>
+                    <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-body-medium text-on-surface">Direct vendor messaging</span>
                   </li>
                 </ul>
                 <Link href="/packages">
-                  <Button variant="outline" className="w-full" size="lg">
+                  <Button variant="outline" className="w-full md-state-layer md-state-layer-primary border-2 border-primary text-primary hover:bg-primary-container/20 transition-colors duration-[var(--md-sys-motion-duration-short-4)] ease-emphasized" size="lg">
                     Build Your Package
                   </Button>
                 </Link>

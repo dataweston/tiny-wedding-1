@@ -16,6 +16,7 @@
     },
     "dependencies": {
         "@hookform/resolvers": "^5.2.2",
+        "@material/material-color-utilities": "^0.3.0",
         "@motionone/dom": "^10.18.0",
         "@prisma/client": "^6.18.0",
         "@radix-ui/react-slot": "^1.2.3",
