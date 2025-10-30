@@ -2,66 +2,20 @@
 
 import * as React from 'react'
 import { cn } from '@/lib/utils'
-import {
-  animateHoverEnd,
-  animateHoverStart,
-  animateTap,
-} from '@/lib/motion-interactions'
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, onMouseEnter, onMouseLeave, onMouseDown, onMouseUp, ...props }, ref) => {
-    const handleMouseEnter: React.MouseEventHandler<HTMLDivElement> =
-      React.useCallback(
-        (event) => {
-          animateHoverStart(event.currentTarget)
-          onMouseEnter?.(event)
-        },
-        [onMouseEnter]
-      )
-
-    const handleMouseLeave: React.MouseEventHandler<HTMLDivElement> =
-      React.useCallback(
-        (event) => {
-          animateHoverEnd(event.currentTarget)
-          onMouseLeave?.(event)
-        },
-        [onMouseLeave]
-      )
-
-    const handleMouseDown: React.MouseEventHandler<HTMLDivElement> =
-      React.useCallback(
-        (event) => {
-          animateTap(event.currentTarget)
-          onMouseDown?.(event)
-        },
-        [onMouseDown]
-      )
-
-    const handleMouseUp: React.MouseEventHandler<HTMLDivElement> =
-      React.useCallback(
-        (event) => {
-          onMouseUp?.(event)
-        },
-        [onMouseUp]
-      )
-
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          'rounded-xl border bg-card text-card-foreground shadow transition-transform will-change-transform',
-          className
-        )}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        {...props}
-      />
-    )
-  }
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn(
+        'rounded-xl border bg-card text-card-foreground shadow',
+        className
+      )}
+      {...props}
+    />
+  )
 )
 Card.displayName = 'Card'
 

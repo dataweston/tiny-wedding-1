@@ -7,11 +7,6 @@ import { BeehiveIcon } from '@/components/icons/beehive'
 import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
-import {
-  animateHoverEnd,
-  animateHoverStart,
-  animateTap,
-} from '@/lib/motion-interactions'
 
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -44,15 +39,15 @@ export function Navigation() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
-            <Link href="/packages" className="text-gray-700 hover:text-rose-500 transition-colors">
+            <Link href="/packages" className="text-gray-700">
               Packages
             </Link>
-            <Link href="/calendar" className="text-gray-700 hover:text-rose-500 transition-colors">
+            <Link href="/calendar" className="text-gray-700">
               Availability
             </Link>
             {user ? (
               <>
-                <Link href="/dashboard" className="text-gray-700 hover:text-rose-500 transition-colors">
+                <Link href="/dashboard" className="text-gray-700">
                   Dashboard
                 </Link>
                 <Button variant="ghost" onClick={async () => {
@@ -79,9 +74,6 @@ export function Navigation() {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden p-2"
-            onMouseEnter={(event) => animateHoverStart(event.currentTarget)}
-            onMouseLeave={(event) => animateHoverEnd(event.currentTarget)}
-            onMouseDown={(event) => animateTap(event.currentTarget)}
           >
             {mobileMenuOpen ? (
               <Xmark className="w-6 h-6" />
@@ -96,14 +88,14 @@ export function Navigation() {
           <div className="md:hidden py-4 space-y-4">
             <Link
               href="/packages"
-              className="block text-gray-700 hover:text-rose-500 transition-colors"
+              className="block text-gray-700"
               onClick={() => setMobileMenuOpen(false)}
             >
               Packages
             </Link>
             <Link
               href="/calendar"
-              className="block text-gray-700 hover:text-rose-500 transition-colors"
+              className="block text-gray-700"
               onClick={() => setMobileMenuOpen(false)}
             >
               Availability
@@ -112,7 +104,7 @@ export function Navigation() {
               <>
                 <Link
                   href="/dashboard"
-                  className="block text-gray-700 hover:text-rose-500 transition-colors"
+                  className="block text-gray-700"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Dashboard

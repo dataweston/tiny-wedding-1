@@ -147,7 +147,7 @@ function MessagesContent() {
                     <button
                       key={conversation.vendorId}
                       onClick={() => setSelectedVendor(conversation.vendorId)}
-                      className={`w-full p-4 text-left border-b hover:bg-gray-50 transition-colors ${
+                      className={`w-full p-4 text-left border-b ${
                         selectedVendor === conversation.vendorId ? 'bg-rose-50' : ''
                       }`}
                     >

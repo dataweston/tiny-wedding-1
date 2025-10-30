@@ -140,7 +140,7 @@ function EmailSignupForm() {
 
             <div className="text-center text-sm text-gray-600">
               Already have an account?{' '}
-              <Link href="/login" className="text-rose-600 hover:underline">
+              <Link href="/login" className="text-rose-600">
                 Sign in
               </Link>
             </div>

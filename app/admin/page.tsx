@@ -162,17 +162,14 @@ export default function AdminPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center" data-disable-motion>
+      <div className="min-h-screen flex items-center justify-center">
         <ShieldLoading className="w-8 h-8 animate-spin text-rose-500" />
       </div>
     )
   }
 
   return (
-    <div
-      className="min-h-screen bg-gradient-to-b from-rose-50 to-white py-12 px-4 sm:px-6 lg:px-8"
-      data-disable-motion
-    >
+    <div className="min-h-screen bg-gradient-to-b from-rose-50 to-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold mb-8">Admin Dashboard</h1>
 
@@ -248,7 +245,7 @@ export default function AdminPage() {
                     </thead>
                     <tbody>
                       {bookings.map((booking) => (
-                        <tr key={booking.id} className="border-b hover:bg-gray-50">
+                        <tr key={booking.id} className="border-b">
                           <td className="p-2">
                             {format(new Date(booking.eventDate), 'MMM d, yyyy')}
                           </td>
@@ -256,10 +253,10 @@ export default function AdminPage() {
                             <div>{booking.client.name}</div>
                             <div className="text-sm text-gray-600">{booking.client.email}</div>
                           </td>
-                          <td className="p-2 capitalize">{booking.packageType.replace('_', ' ')}</td>
+                          <td className="p-2 capitalize">{booking.packageType?.replace('_', ' ') || 'N/A'}</td>
                           <td className="p-2">
                             <span className="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">
-                              {booking.status.replace('_', ' ')}
+                              {booking.status?.replace('_', ' ') || 'N/A'}
                             </span>
                           </td>
                           <td className="p-2 text-right font-semibold">

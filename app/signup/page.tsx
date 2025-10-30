@@ -162,7 +162,7 @@ function SignupContent() {
 
           <div className="text-center text-sm text-gray-600 pt-2">
             Already have an account?{' '}
-            <Link href="/login" className="text-rose-600 hover:underline">
+            <Link href="/login" className="text-rose-600">
               Sign in
             </Link>
           </div>

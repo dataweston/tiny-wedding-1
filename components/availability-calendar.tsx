@@ -120,10 +120,9 @@ export function AvailabilityCalendar({ onSelectDate, selectedDate }: Availabilit
               onClick={() => !isDisabled && onSelectDate(day)}
               disabled={isDisabled}
               className={`
-                aspect-square p-2 rounded-lg text-sm transition-colors
+                aspect-square p-2 rounded-lg text-sm
                 ${!isCurrentMonth && 'text-gray-300'}
-                ${isCurrentMonth && !isDisabled && 'hover:bg-rose-100'}
-                ${isSelected && 'bg-rose-500 text-white hover:bg-rose-600'}
+                ${isSelected && 'bg-rose-500 text-white'}
                 ${isBooked && !isSelected && 'bg-gray-200 text-gray-400 cursor-not-allowed'}
                 ${isPast && !isBooked && !isSelected && 'text-gray-300 cursor-not-allowed'}
                 ${!isDisabled && !isSelected && 'cursor-pointer'}

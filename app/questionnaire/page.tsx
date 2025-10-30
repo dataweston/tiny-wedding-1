@@ -89,7 +89,7 @@ function QuestionnaireContent() {
               return (
                 <div key={step.id} className="flex items-center flex-1">
                   <div
-                    className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors ${
+                    className={`flex items-center justify-center w-10 h-10 rounded-full ${
                       isCompleted
                         ? 'bg-emerald-500 text-white'
                         : isActive
@@ -105,7 +105,7 @@ function QuestionnaireContent() {
                   </div>
                   {idx < steps.length - 1 && (
                     <div
-                      className={`flex-1 h-1 mx-2 transition-colors ${
+                      className={`flex-1 h-1 mx-2 ${
                         currentStep > step.id ? 'bg-rose-500' : 'bg-gray-200'
                       }`}
                     />
