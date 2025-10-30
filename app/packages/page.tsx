@@ -77,37 +77,37 @@ export default function PackagesPage() {
                   <div className="space-y-3">
                     <h3 className="text-title-medium font-baseline font-semibold text-on-surface">What&apos;s Included:</h3>
                     <ul className="space-y-2">
-                      <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
-                        <span className="text-body-medium text-on-surface">Event coordination & design by Alyssa Andes</span>
+                      <li className="flex items-center">
+                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0" />
+                        <span className="text-body-medium text-on-surface leading-5">Event coordination & design by Alyssa Andes</span>
                       </li>
-                      <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
-                        <span className="text-body-medium text-on-surface">Exclusive use of Tiny Diner (ceremony + cocktail hour)</span>
+                      <li className="flex items-center">
+                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0" />
+                        <span className="text-body-medium text-on-surface leading-5">Exclusive use of Tiny Diner (ceremony + cocktail hour)</span>
                       </li>
-                      <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
-                        <span className="text-body-medium text-on-surface">Ceremony & cocktail hour furniture plus setup</span>
+                      <li className="flex items-center">
+                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0" />
+                        <span className="text-body-medium text-on-surface leading-5">Ceremony & cocktail hour furniture plus setup</span>
                       </li>
-                      <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
-                        <span className="text-body-medium text-on-surface">Seasonal hors d&apos;oeuvres by Local Effort</span>
+                      <li className="flex items-center">
+                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0" />
+                        <span className="text-body-medium text-on-surface leading-5">Seasonal hors d&apos;oeuvres by Local Effort</span>
                       </li>
-                      <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
-                        <span className="text-body-medium text-on-surface">Curated beverage package plus professional bar staff</span>
+                      <li className="flex items-center">
+                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0" />
+                        <span className="text-body-medium text-on-surface leading-5">Curated beverage package plus professional bar staff</span>
                       </li>
-                      <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
-                        <span className="text-body-medium text-on-surface">Seasonal florals (installation, bouquet, boutonniere)</span>
+                      <li className="flex items-center">
+                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0" />
+                        <span className="text-body-medium text-on-surface leading-5">Seasonal florals (installation, bouquet, boutonniere)</span>
                       </li>
-                      <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
-                        <span className="text-body-medium text-on-surface">Licensed officiant services</span>
+                      <li className="flex items-center">
+                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0" />
+                        <span className="text-body-medium text-on-surface leading-5">Licensed officiant services</span>
                       </li>
-                      <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
-                        <span className="text-body-medium text-on-surface">Photography coverage (ceremony, cocktails, portraits)</span>
+                      <li className="flex items-center">
+                        <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0" />
+                        <span className="text-body-medium text-on-surface leading-5">Photography coverage (ceremony, cocktails, portraits)</span>
                       </li>
                     </ul>
                   </div>
@@ -143,37 +143,37 @@ export default function PackagesPage() {
                   <div className="space-y-3">
                     <h3 className="text-title-medium font-baseline font-semibold text-on-surface">What You Get:</h3>
                     <ul className="space-y-2">
-                      <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
-                        <span className="text-body-medium text-on-surface">Select your preferred vendors</span>
+                      <li className="flex items-center">
+                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0" />
+                        <span className="text-body-medium text-on-surface leading-5">Select your preferred vendors</span>
                       </li>
-                      <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
-                        <span className="text-body-medium text-on-surface">Choose specific services you need</span>
+                      <li className="flex items-center">
+                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0" />
+                        <span className="text-body-medium text-on-surface leading-5">Choose specific services you need</span>
                       </li>
-                      <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
-                        <span className="text-body-medium text-on-surface">Interactive dashboard with real-time pricing</span>
+                      <li className="flex items-center">
+                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0" />
+                        <span className="text-body-medium text-on-surface leading-5">Interactive dashboard with real-time pricing</span>
                       </li>
-                      <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
-                        <span className="text-body-medium text-on-surface">Direct messaging with vendors</span>
+                      <li className="flex items-center">
+                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0" />
+                        <span className="text-body-medium text-on-surface leading-5">Direct messaging with vendors</span>
                       </li>
-                      <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
-                        <span className="text-body-medium text-on-surface">Add or remove services anytime</span>
+                      <li className="flex items-center">
+                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0" />
+                        <span className="text-body-medium text-on-surface leading-5">Add or remove services anytime</span>
                       </li>
-                      <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
-                        <span className="text-body-medium text-on-surface">Autosave so you never lose progress</span>
+                      <li className="flex items-center">
+                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0" />
+                        <span className="text-body-medium text-on-surface leading-5">Autosave so you never lose progress</span>
                       </li>
-                      <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
-                        <span className="text-body-medium text-on-surface">Admin visibility for support</span>
+                      <li className="flex items-center">
+                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0" />
+                        <span className="text-body-medium text-on-surface leading-5">Admin visibility for support</span>
                       </li>
-                      <li className="flex items-start">
-                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
-                        <span className="text-body-medium text-on-surface">Flexible guest count</span>
+                      <li className="flex items-center">
+                        <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0" />
+                        <span className="text-body-medium text-on-surface leading-5">Flexible guest count</span>
                       </li>
                     </ul>
                   </div>

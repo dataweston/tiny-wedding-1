@@ -174,25 +174,25 @@ export default function Home() {
               <CardContent>
                 <div className="text-display-medium font-expressive text-tertiary mb-4">$5,000</div>
                 <ul className="space-y-2 mb-6">
-                  <li className="flex items-start">
-                    <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
-                    <span className="text-body-medium text-on-surface">Event coordination & design</span>
+                  <li className="flex items-center">
+                    <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0" />
+                    <span className="text-body-medium text-on-surface leading-5">Event coordination & design</span>
                   </li>
-                  <li className="flex items-start">
-                    <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
-                    <span className="text-body-medium text-on-surface">Exclusive venue use</span>
+                  <li className="flex items-center">
+                    <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0" />
+                    <span className="text-body-medium text-on-surface leading-5">Exclusive venue use</span>
                   </li>
-                  <li className="flex items-start">
-                    <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
-                    <span className="text-body-medium text-on-surface">Catering & bar service</span>
+                  <li className="flex items-center">
+                    <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0" />
+                    <span className="text-body-medium text-on-surface leading-5">Catering & bar service</span>
                   </li>
-                  <li className="flex items-start">
-                    <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
-                    <span className="text-body-medium text-on-surface">Florals & photography</span>
+                  <li className="flex items-center">
+                    <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0" />
+                    <span className="text-body-medium text-on-surface leading-5">Florals & photography</span>
                   </li>
-                  <li className="flex items-start">
-                    <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0 mt-0.5" />
-                    <span className="text-body-medium text-on-surface">Officiant services</span>
+                  <li className="flex items-center">
+                    <Check className="w-5 h-5 mr-2 text-tertiary flex-shrink-0" />
+                    <span className="text-body-medium text-on-surface leading-5">Officiant services</span>
                   </li>
                 </ul>
                 <Link href="/packages">
@@ -220,25 +220,25 @@ export default function Home() {
               <CardContent>
                 <div className="text-display-medium font-expressive text-primary mb-4">Custom</div>
                 <ul className="space-y-2 mb-6">
-                  <li className="flex items-start">
-                    <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-body-medium text-on-surface">Choose your services</span>
+                  <li className="flex items-center">
+                    <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0" />
+                    <span className="text-body-medium text-on-surface leading-5">Choose your services</span>
                   </li>
-                  <li className="flex items-start">
-                    <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-body-medium text-on-surface">Select preferred vendors</span>
+                  <li className="flex items-center">
+                    <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0" />
+                    <span className="text-body-medium text-on-surface leading-5">Select preferred vendors</span>
                   </li>
-                  <li className="flex items-start">
-                    <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-body-medium text-on-surface">Real-time pricing</span>
+                  <li className="flex items-center">
+                    <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0" />
+                    <span className="text-body-medium text-on-surface leading-5">Real-time pricing</span>
                   </li>
-                  <li className="flex items-start">
-                    <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-body-medium text-on-surface">Interactive dashboard</span>
+                  <li className="flex items-center">
+                    <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0" />
+                    <span className="text-body-medium text-on-surface leading-5">Interactive dashboard</span>
                   </li>
-                  <li className="flex items-start">
-                    <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-body-medium text-on-surface">Direct vendor messaging</span>
+                  <li className="flex items-center">
+                    <Check className="w-5 h-5 mr-2 text-primary flex-shrink-0" />
+                    <span className="text-body-medium text-on-surface leading-5">Direct vendor messaging</span>
                   </li>
                 </ul>
                 <Link href="/packages">
